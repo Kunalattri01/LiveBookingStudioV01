@@ -1,0 +1,266 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <!-- ==================== META ==================== -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+
+        <!-- ==================== SEO META PLACEHOLDERS ==================== -->
+        <title>Travel Booking Platform | Flights, Hotels, Holidays & More</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+        <meta
+            name="description"
+            content="Book flights, hotels, homestays, holiday packages, cabs, trains and more on a single premium travel platform." />
+        <meta name="keywords" content="travel, flights, hotels, holiday packages, cabs, trains, buses, visa, forex, travel insurance" />
+        <meta name="author" content="Travel Booking Platform" />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Open Graph / Social Meta Placeholders -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Travel Booking Platform | Flights, Hotels, Holidays & More" />
+        <meta
+            property="og:description"
+            content="Book flights, hotels, homestays, holiday packages, cabs, trains and more on a single premium travel platform." />
+        <meta property="og:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" />
+        <meta property="og:url" content="https://www.example.com" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Travel Booking Platform | Flights, Hotels, Holidays & More" />
+        <meta
+            name="twitter:description"
+            content="Book flights, hotels, homestays, holiday packages, cabs, trains and more on a single premium travel platform." />
+
+        <link rel="canonical" href="https://www.example.com" />
+
+        <!-- Shared font files. Keep external libraries in this base template. -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        {% block extraCSS %} {% endblock %}
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ["Poppins", "sans-serif"],
+                        },
+                        colors: {
+                            primary: {
+                                DEFAULT: "#0EA5E9",
+                                hover: "#0284C7",
+                            },
+                            secondary: "#2563EB",
+                            accent: "#F59E0B",
+                            // success: "#22C55E",
+                            success: "#16A34A",
+                            warning: "#F97316",
+                            danger: "#EF4444",
+                            info: "#06B6D4",
+                            background: "#F8FAFC",
+                            surface: "#FFFFFF",
+                            border: "#E5E7EB",
+                            "text-primary": "#0F172A",
+                            "text-secondary": "#64748B",
+                        },
+                        borderRadius: {
+                            // card: "16px",
+                            card: "20px",
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+
+    <body class="bg-background text-text-primary font-sans antialiased">
+        
+        <!-- ==================== LOADING OVERLAY ==================== -->
+        <div id="loading-overlay" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-surface/80 backdrop-blur-sm hidden" role="status" aria-live="polite" aria-label="Loading">
+            <div class="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-3"></div>
+            <span class="text-sm font-medium text-text-secondary">Please wait...</span>
+        </div>
+
+        <!-- ==================== MAIN WRAPPER ==================== -->
+        <div id="app-wrapper" class="min-h-screen flex flex-col w-full overflow-x-hidden">
+            <!-- NAVBAR -->
+            {% if not NavBar %} 
+                {% include 'components/navbar.html' %}
+            {% endif %} 
+            
+            {% comment %} {% include 'components/announcement-bar.html' %} {% endcomment %}
+            {% comment %} {% include 'components/travel-search-widget.html' %} {% endcomment %} 
+            
+            {% block content %} {% endblock %}
+
+            <!-- FOOTER -->
+            {% if not Footer %} {% include 'components/footer.html' %} {% endif %}
+        </div>
+
+        <!-- ==================== TOAST CONTAINER ==================== -->
+        <div id="toast-container" class="fixed top-5 right-5 z-[9998] flex flex-col gap-3 w-full max-w-sm pointer-events-none" aria-live="assertive" aria-atomic="true"></div>
+
+        <!-- ==================== MODAL CONTAINER ==================== -->
+        <div
+            id="modal-container"
+            class="fixed inset-0 z-[9997] hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true">
+            <div class="bg-surface border border-border rounded-card p-6 max-w-md w-full shadow-2xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-text-primary" id="modal-title">Sample Modal Window</h3>
+                    <button onclick="closeModal()" class="text-text-secondary hover:text-text-primary p-1">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-text-secondary">
+                    This modal is dynamically managed by embedded JavaScript. No local dependencies or build tools required.
+                </p>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button onclick="closeModal()" class="px-4 py-2 text-sm font-medium text-text-secondary hover:bg-slate-100 rounded-lg">
+                        Cancel
+                    </button>
+                    <button
+                        onclick="closeModal()"
+                        class="px-4 py-2 text-sm font-medium bg-primary text-white hover:bg-primary-hover rounded-lg">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BACK TO TOP BUTTON ==================== -->
+        <button
+            id="back-to-top"
+            type="button"
+            aria-label="Back to top"
+            onclick="scrollToTop()"
+            class="fixed bottom-6 right-6 z-[9996] w-12 h-12 rounded-lg bg-primary text-white shadow-lg opacity-0 invisible translate-y-4 transition-all duration-200 hover:bg-primary-hover flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+        </button>
+
+        <!-- ==================== EMBEDDED UTILITY CONTROLLER ==================== -->
+        <script>
+            // Small site-wide toast helper.
+            function showToast(message, type = "success") {
+                const container = document.getElementById("toast-container");
+                const toast = document.createElement("div");
+
+                const typeStyles = {
+                    success: "bg-success text-white",
+                    danger: "bg-danger text-white",
+                    info: "bg-info text-white",
+                    warning: "bg-warning text-white",
+                };
+
+                toast.className = `pointer-events-auto flex items-center justify-between p-4 rounded-xl shadow-lg text-sm font-medium transition-all duration-300 transform translate-y-[-10px] opacity-0 ${typeStyles[type] || typeStyles.success}`;
+
+                // Built with textContent/createElement (never innerHTML with
+                // the message) so this can safely display user-influenced
+                // text, e.g. server-side validation errors, without any
+                // risk of HTML/script injection.
+                const messageSpan = document.createElement("span");
+                messageSpan.textContent = message;
+
+                const closeButton = document.createElement("button");
+                closeButton.type = "button";
+                closeButton.className = "ml-3 hover:opacity-75";
+                closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                closeButton.addEventListener("click", () => toast.remove());
+
+                toast.appendChild(messageSpan);
+                toast.appendChild(closeButton);
+
+                container.appendChild(toast);
+
+                requestAnimationFrame(() => {
+                    toast.classList.remove("translate-y-[-10px]", "opacity-0");
+                });
+
+                setTimeout(() => {
+                    toast.classList.add("opacity-0", "translate-y-[-10px]");
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            function showDemoToast() {
+                showToast("Flight search preferences updated successfully!", "success");
+            }
+
+            // Basic modal helper.
+            function openDemoModal() {
+                const modal = document.getElementById("modal-container");
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                modal.setAttribute("aria-hidden", "false");
+            }
+
+            function closeModal() {
+                const modal = document.getElementById("modal-container");
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+                modal.setAttribute("aria-hidden", "true");
+            }
+
+            // Page loading helper.
+            function triggerLoadingDemo() {
+                const overlay = document.getElementById("loading-overlay");
+                overlay.classList.remove("hidden");
+
+                setTimeout(() => {
+                    overlay.classList.add("hidden");
+                    showToast("Found 42 flights matching your search!", "info");
+                }, 1500);
+            }
+
+            // --- BACK TO TOP BUTTON ---
+            const backToTopBtn = document.getElementById("back-to-top");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove("opacity-0", "invisible", "translate-y-4");
+                } else {
+                    backToTopBtn.classList.add("opacity-0", "invisible", "translate-y-4");
+                }
+            });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+
+            // --- SURFACE BACKEND SEARCH VALIDATION ERRORS ---
+            (function () {
+                const params = new URLSearchParams(window.location.search);
+                const searchError = params.get("search_error");
+
+                if (searchError) {
+                    showToast(searchError, "danger");
+                    params.delete("search_error");
+
+                    const cleanQuery = params.toString();
+                    const cleanUrl =
+                        window.location.pathname + (cleanQuery ? "?" + cleanQuery : "");
+
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+            })();
+        </script>
+
+        {% block extraJs %} {% endblock %}
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

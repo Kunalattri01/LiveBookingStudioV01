@@ -1,0 +1,174 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<style>
+    .hotel-page { background: #f1f5f9 }
+    .teal { color: #0d9488 }
+    .muted { color: #64748b }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px }
+    .btn { background: linear-gradient(135deg, #0d9488, #10b981); color: #fff; border-radius: 10px; padding: .7rem 1.1rem; font-weight: 800; display: inline-block; border: none; cursor: pointer; white-space: nowrap }
+    .btn[disabled] { opacity: .5; cursor: not-allowed }
+    .hidden { display: none !important }
+
+    .listing-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.25rem; align-items: start }
+    @media (max-width: 900px) { .listing-layout { grid-template-columns: 1fr } }
+
+    #hotel-filters { position: sticky; top: 88px }
+    .filters-search { position: relative; margin-bottom: 1rem }
+    .filters-search i { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: .8rem }
+    .filters-search input { width: 100%; border: 1px solid #e2e8f0; border-radius: 10px; padding: .65rem .8rem .65rem 2.1rem; font-size: .85rem; box-sizing: border-box }
+    .filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .25rem }
+    .filters-head h3 { font-size: 1rem; font-weight: 800 }
+    #hotel-filters-clear { font-size: .78rem; font-weight: 700; color: #0d9488; background: none; border: none; cursor: pointer; padding: 0 }
+    .filter-group { border-top: 1px solid #eef2f7; padding: 1rem 0 }
+    .filter-group:first-of-type { border-top: none; padding-top: .75rem }
+    .filter-group-title { font-size: .8rem; font-weight: 800; color: #0f172a; margin-bottom: .65rem }
+    .filter-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; font-size: .84rem; margin-bottom: .55rem; cursor: pointer; color: #334155 }
+    .filter-row-left { display: flex; align-items: center; gap: .55rem }
+    .filter-row input { accent-color: #0d9488; width: 15px; height: 15px }
+    .filter-row .count { color: #94a3b8; font-size: .78rem }
+    .filter-row .stars { color: #f59e0b; letter-spacing: 1px }
+
+    .sort-bar { display: flex; align-items: center; gap: 1.5rem; overflow-x: auto; border-bottom: 1px solid #e5e7eb; padding-bottom: .1rem; margin-bottom: 1.25rem }
+    .sort-tab { font-size: .85rem; font-weight: 700; color: #64748b; padding: .6rem .1rem; border-bottom: 2px solid transparent; white-space: nowrap; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none }
+    .sort-tab.is-active { color: #0d9488; border-bottom-color: #0d9488 }
+
+    .hotel-card { display: flex; flex-direction: column; gap: 0; overflow: hidden }
+    @media (min-width: 641px) { .hotel-card { flex-direction: row } }
+    .hotel-card-img { width: 100%; height: 190px; background: #f1f5f9; position: relative; overflow: hidden; flex-shrink: 0 }
+    @media (min-width: 641px) { .hotel-card-img { width: 260px; height: auto } }
+    .hotel-card-img img { width: 100%; height: 100%; object-fit: cover; display: block }
+    .hotel-card-img .placeholder-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 2.4rem }
+    .hotel-card-body { flex: 1; padding: 1.1rem 1.25rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between }
+    .hotel-card-main { min-width: 0; flex: 1 1 280px }
+    .hotel-card-stars { color: #f59e0b; font-size: .72rem; letter-spacing: 1px; margin-left: .4rem }
+    .hotel-card-loc { color: #0d9488; font-size: .8rem; font-weight: 600; margin-top: .2rem }
+    .hotel-card-highlights { margin-top: .6rem; display: flex; flex-direction: column; gap: .3rem }
+    .hotel-card-highlights span { font-size: .8rem; color: #475569; display: flex; align-items: center; gap: .4rem }
+    .hotel-card-highlights i { color: #10b981; font-size: .7rem }
+    .hotel-card-price { text-align: right; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: .6rem; min-width: 160px }
+    .hotel-card-price .amount { font-size: 1.4rem; font-weight: 800; color: #0f172a }
+    .hotel-card-price .note { font-size: .72rem; color: #94a3b8 }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hotel-page min-h-screen">
+    <section class="bg-[#042f2e] text-white pt-24 pb-8">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 flex justify-between items-center gap-4">
+            <div>
+                <p class="text-xs text-teal-200"><a href="/" class="hover:underline">Home</a> &gt; Hotels in {{ destination }}</p>
+                <h1 class="text-xl sm:text-2xl font-extrabold mt-1">Hotels in {{ destination }}</h1>
+                <p class="text-white/65 text-sm">{{ check_in|date:"d M" }} - {{ check_out|date:"d M Y" }}</p>
+            </div>
+            <a href="/" class="btn !bg-white !text-[#065f46]">Modify Search</a>
+        </div>
+    </section>
+
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 py-6">
+        <div id="hotel-listing-loading" class="card p-8 text-center">
+            <i class="fa-solid fa-circle-notch fa-spin text-2xl teal"></i>
+            <p class="muted text-sm mt-3">Searching live availability&hellip;</p>
+        </div>
+
+        <div id="hotel-listing-error" class="card p-8 text-center hidden">
+            <i class="fa-solid fa-triangle-exclamation text-2xl text-amber-500"></i>
+            <p id="hotel-listing-error-message" class="font-bold mt-3"></p>
+        </div>
+
+        <div id="hotel-listing-empty" class="card p-8 text-center hidden">
+            <i class="fa-solid fa-hotel text-2xl text-slate-400"></i>
+            <p class="font-bold mt-3">No properties available for these dates</p>
+            <p class="muted text-sm mt-1">Try different dates or a different destination.</p>
+        </div>
+
+        <div id="hotel-listing-layout" class="listing-layout hidden">
+            <aside id="hotel-filters" class="card p-4">
+                <div class="filters-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="hotel-filter-name" placeholder="Search for hotel name" />
+                </div>
+
+                <div class="filters-head">
+                    <h3>Filters</h3>
+                    <button type="button" id="hotel-filters-clear">Clear all</button>
+                </div>
+
+                <div class="filter-group">
+                    <p class="filter-group-title">Price Per Night</p>
+                    <div id="hotel-filter-price-options"></div>
+                </div>
+
+                <div class="filter-group" id="hotel-filter-star-group">
+                    <p class="filter-group-title">Star Category</p>
+                    <div id="hotel-filter-star-options"></div>
+                </div>
+
+                <div class="filter-group">
+                    <p class="filter-group-title">Cancellation</p>
+                    <div id="hotel-filter-cancellation-options"></div>
+                </div>
+
+                <div class="filter-group">
+                    <p class="filter-group-title">Meal Plan</p>
+                    <div id="hotel-filter-meal-options"></div>
+                </div>
+            </aside>
+
+            <div>
+                <div id="hotel-listing-header" class="mb-4">
+                    <b id="hotel-listing-count" class="text-xl font-extrabold"></b>
+                    <span class="muted text-sm"> Properties in {{ destination }}</span>
+                </div>
+
+                <div class="sort-bar">
+                    <button type="button" class="sort-tab is-active" data-sort="recommended">Recommended</button>
+                    <button type="button" class="sort-tab" data-sort="price_asc">Price (Low to High)</button>
+                    <button type="button" class="sort-tab" data-sort="price_desc">Price (High to Low)</button>
+                </div>
+
+                <div id="hotel-listing-nomatch" class="card p-8 text-center mb-4 hidden">
+                    <i class="fa-solid fa-filter-circle-xmark text-2xl text-slate-400"></i>
+                    <p class="font-bold mt-3">No properties match your filters</p>
+                    <p class="muted text-sm mt-1">Try clearing a filter to see more results.</p>
+                </div>
+                <div id="hotel-listing-results" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="hotel-card-template">
+    <article class="card hotel-card">
+        <div class="hotel-card-img js-hotel-img-wrap">
+            <img class="js-hotel-img hidden" alt="" loading="lazy" />
+            <span class="placeholder-icon js-hotel-img-placeholder"><i class="fa-solid fa-hotel" aria-hidden="true"></i></span>
+        </div>
+        <div class="hotel-card-body">
+            <div class="hotel-card-main">
+                <h2 class="text-lg font-extrabold inline js-hotel-name"></h2>
+                <span class="hotel-card-stars js-hotel-stars"></span>
+                <p class="hotel-card-loc js-hotel-loc"></p>
+                <div class="hotel-card-highlights js-hotel-highlights"></div>
+            </div>
+            <div class="hotel-card-price">
+                <div>
+                    <div class="amount js-hotel-price"></div>
+                    <div class="note">total, incl. taxes &amp; fees</div>
+                </div>
+                <a href="#" class="btn js-hotel-view-rooms">View Rooms</a>
+            </div>
+        </div>
+    </article>
+</template>
+{% endblock %}
+
+{% block extraJs %}
+<script>
+    /* Validated Listing request body - the exact JSON posted to
+       /api/v1/hotels/listing/. Contains only our own search fields. */
+    window.__HOTEL_SEARCH_REQUEST__ = {{ search_payload_json|default:"null"|safe }};
+</script>
+<script src="{% static 'js/hotel-listing.js' %}"></script>
+{% endblock %}

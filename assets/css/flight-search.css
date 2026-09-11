@@ -1,0 +1,915 @@
+/* =========================================================
+   FLIGHT SEARCH
+   =========================================================
+   Styles for:
+
+   - Flight search fields
+   - Location popover
+   - Date calendar
+   - Traveller selector
+   - Cabin selector
+   - Responsive behaviour
+
+   ========================================================= */
+
+
+/* =========================================================
+   1. SEARCH FIELD
+   ========================================================= */
+
+.search-field-lg {
+    position: relative;
+    width: 100%;
+    min-height: 82px;
+    padding: 15px 16px;
+    background: #ffffff;
+    border: 0;
+    transition:
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.search-field-lg:hover {
+    background: #f8fafc;
+}
+
+.search-field-lg:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: -2px;
+}
+
+
+/* =========================================================
+   2. SEARCH FIELD TEXT
+   ========================================================= */
+
+.search-field-label {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.search-field-value {
+    display: block;
+    margin-top: 5px;
+    color: #111827;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.search-field-sub {
+    display: block;
+    max-width: 100%;
+    margin-top: 4px;
+    overflow: hidden;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   3. SWAP BUTTON
+   ========================================================= */
+
+.swap-btn {
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    z-index: 20;
+
+    display: grid;
+    width: 34px;
+    height: 34px;
+
+    place-items: center;
+
+    transform: translateY(-50%);
+
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #0d9488;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, .12);
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background-color .2s ease;
+}
+
+.swap-btn:hover {
+    background: #f0fdfa;
+
+    transform:
+        translateY(-50%)
+        scale(1.06);
+
+    box-shadow:
+        0 6px 16px rgba(15, 23, 42, .16);
+}
+
+
+/* =========================================================
+   4. FLIGHT POPOVER
+   ========================================================= */
+
+.flight-popover {
+    position: fixed !important;
+    z-index: 100000 !important;
+
+    min-width: 360px;
+    max-width: calc(100vw - 24px);
+
+    overflow: hidden;
+    box-sizing: border-box;
+    isolation: isolate;
+
+    border: 1px solid rgba(15, 23, 42, .10);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, .18);
+
+    animation:
+        flightPopoverIn .15s ease-out;
+}
+
+.flight-popover.hidden {
+    display: none;
+}
+
+@keyframes flightPopoverIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   5. POPOVER HEADER
+   ========================================================= */
+
+.flight-popover-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 52px;
+
+    padding: 12px 14px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.flight-popover-header strong {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.flight-popover-header input {
+    width: 100%;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #111827;
+
+    font-size: 14px;
+}
+
+.flight-popover-header input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   6. CLOSE BUTTON
+   ========================================================= */
+
+.flight-popover-close {
+    display: grid;
+
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+
+    place-items: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #f1f5f9;
+    color: #475569;
+
+    cursor: pointer;
+}
+
+.flight-popover-close:hover {
+    background: #e2e8f0;
+}
+
+
+/* =========================================================
+   7. SECTION TITLE
+   ========================================================= */
+
+.flight-popover-section-title {
+    padding: 13px 16px 8px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .04em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   8. LOCATION LIST
+   ========================================================= */
+
+.flight-location-list {
+    max-height: 360px;
+
+    overflow-y: auto;
+
+    padding: 0 8px 8px;
+}
+
+.flight-location-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.flight-location-list::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   9. LOCATION OPTION
+   ========================================================= */
+
+.flight-location-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 10px 8px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color .15s ease;
+}
+
+.flight-location-option:hover {
+    background: #f0fdfa;
+}
+
+
+/* =========================================================
+   10. AIRPORT CODE
+   ========================================================= */
+
+.flight-location-code {
+    display: grid;
+
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+
+    place-items: center;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   11. LOCATION COPY
+   ========================================================= */
+
+.flight-location-copy {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.flight-location-copy strong {
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.flight-location-copy small {
+    overflow: hidden;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   12. EMPTY STATE
+   ========================================================= */
+
+.flight-empty-state {
+    padding: 30px 16px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   13. DATE HEADER
+   ========================================================= */
+
+.flight-date-header {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 3px;
+
+    padding-right: 48px;
+}
+
+.flight-date-header strong {
+    color: #111827;
+    font-size: 15px;
+}
+
+.flight-date-header span {
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   14. DATE CALENDAR
+   ========================================================= */
+
+.flight-calendar {
+    padding: 14px;
+}
+
+
+/* =========================================================
+   15. CALENDAR TOOLBAR
+   ========================================================= */
+
+.flight-calendar-toolbar {
+    display: grid;
+
+    grid-template-columns: 36px 1fr 1fr 36px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.flight-calendar-toolbar strong {
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   16. CALENDAR NAVIGATION
+   ========================================================= */
+
+.flight-calendar-nav {
+    display: grid;
+
+    width: 34px;
+    height: 34px;
+
+    place-items: center;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #334155;
+
+    cursor: pointer;
+}
+
+.flight-calendar-nav:hover {
+    background: #f1f5f9;
+}
+
+
+/* =========================================================
+   17. CALENDAR MONTHS
+   ========================================================= */
+
+.flight-calendar-months {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   18. MONTH
+   ========================================================= */
+
+.flight-calendar-month {
+    min-width: 0;
+}
+
+.flight-calendar-month-title {
+    margin-bottom: 12px;
+
+    color: #111827;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   19. WEEK DAYS
+   ========================================================= */
+
+.flight-calendar-weekdays {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    margin-bottom: 6px;
+}
+
+.flight-calendar-weekdays span {
+    color: #94a3b8;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   20. CALENDAR DAYS
+   ========================================================= */
+
+.flight-calendar-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 3px;
+}
+
+
+/* =========================================================
+   21. CALENDAR DAY
+   ========================================================= */
+
+.flight-calendar-day {
+    display: grid;
+
+    width: 100%;
+    aspect-ratio: 1;
+
+    place-items: center;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.flight-calendar-day:hover {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.flight-calendar-day.is-selected {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+.flight-calendar-day.is-disabled {
+    background: transparent;
+
+    color: #cbd5e1;
+
+    cursor: not-allowed;
+}
+
+.flight-calendar-empty {
+    aspect-ratio: 1;
+}
+
+
+/* =========================================================
+   22. TRAVELLER COUNTER
+   ========================================================= */
+
+.flight-counter-list {
+    padding: 4px 16px 10px;
+}
+
+.flight-counter-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+.flight-counter-row:last-child {
+    border-bottom: 0;
+}
+
+.flight-counter-row strong,
+.flight-counter-row small {
+    display: block;
+}
+
+.flight-counter-row strong {
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.flight-counter-row small {
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   23. COUNTER BUTTONS
+   ========================================================= */
+
+.flight-counter {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.flight-counter button {
+    display: grid;
+
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+
+    place-items: center;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #0f766e;
+
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.flight-counter button:hover {
+    background: #f0fdfa;
+}
+
+.flight-counter span {
+    min-width: 20px;
+
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   24. TRAVELLER FOOTER
+   ========================================================= */
+
+.flight-date-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 12px 16px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.flight-traveller-note {
+    margin-right: auto;
+
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   25. BUTTONS
+   ========================================================= */
+
+.flight-primary-btn,
+.flight-secondary-btn {
+    border: 0;
+    border-radius: 8px;
+
+    padding: 9px 16px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.flight-primary-btn {
+    background: #0d9488;
+    color: #ffffff;
+}
+
+.flight-primary-btn:hover {
+    background: #0f766e;
+}
+
+.flight-secondary-btn {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+
+/* =========================================================
+   26. CABIN OPTIONS
+   ========================================================= */
+
+.flight-cabin-list {
+    max-height: 420px;
+
+    overflow-y: auto;
+
+    padding: 10px 12px;
+}
+
+.flight-cabin-option {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    width: 100%;
+
+    margin-bottom: 8px;
+
+    padding: 13px;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        border-color .15s ease,
+        background-color .15s ease;
+}
+
+.flight-cabin-option:last-child {
+    margin-bottom: 0;
+}
+
+.flight-cabin-option:hover,
+.flight-cabin-option.is-selected {
+    border-color: #0ea5e9;
+
+    background: #f0f9ff;
+}
+
+
+/* =========================================================
+   27. CABIN RADIO
+   ========================================================= */
+
+.flight-cabin-radio {
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+
+    border: 2px solid #94a3b8;
+    border-radius: 50%;
+}
+
+.flight-cabin-option.is-selected
+.flight-cabin-radio {
+    border: 5px solid #0ea5e9;
+}
+
+
+/* =========================================================
+   28. CABIN COPY
+   ========================================================= */
+
+.flight-cabin-copy {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.flight-cabin-copy strong {
+    color: #111827;
+
+    font-size: 13px;
+}
+
+.flight-cabin-copy small {
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+.flight-cabin-option > i {
+    color: #0ea5e9;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   29. MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .flight-popover {
+        position: fixed !important;
+        left: 12px !important;
+        width: calc(100vw - 24px) !important;
+        min-width: 0;
+        max-width: none;
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .flight-calendar-months {
+        grid-template-columns: 1fr;
+    }
+
+    .flight-calendar-month:nth-child(2) {
+        display: none;
+    }
+
+    .flight-traveller-note {
+        display: none;
+    }
+
+    .flight-field-value {
+        font-size: 18px;
+    }
+
+    .search-field-lg {
+        min-height: 72px;
+    }
+
+    .search-field-value {
+        font-size: 19px;
+    }
+
+    .swap-btn {
+        right: 50%;
+        top: auto;
+        bottom: -17px;
+
+        transform:
+            translateX(50%);
+    }
+
+    .swap-btn:hover {
+        transform:
+            translateX(50%)
+            scale(1.06);
+    }
+}
+
+
+/* =========================================================
+   30. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .flight-popover {
+        animation: none;
+    }
+
+    .swap-btn,
+    .flight-location-option,
+    .flight-cabin-option,
+    .flight-calendar-day {
+        transition: none;
+    }
+}

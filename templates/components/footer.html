@@ -1,0 +1,289 @@
+{% load static %}
+<footer id="footer" class="bg-surface border-t border-border" role="contentinfo">
+
+    <!-- ------------------- NEWSLETTER STRIP ------------------- -->
+    <div class="border-b border-border">
+        <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6 py-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-6 bg-background rounded-card p-6 lg:p-8">
+                <div class="text-center lg:text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-1">Get travel deals in your inbox</h3>
+                    <p class="text-sm text-text-secondary">Exclusive offers, price drops and curated holiday ideas — no spam.</p>
+                </div>
+                <form class="w-full lg:w-auto flex flex-col sm:flex-row items-stretch gap-3" aria-label="Newsletter signup">
+                    <label for="footer-newsletter-email" class="sr-only">Email address</label>
+                    <input id="footer-newsletter-email" type="email" required placeholder="Enter your email address" class="w-full sm:w-72 px-4 py-3 rounded-full border border-border bg-surface text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 transition-base">
+                    <button type="submit" class="footer-subscribe-btn">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------- MAIN FOOTER LINKS ------------------- -->
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6 py-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+
+            <!-- Company / Brand -->
+            <div class="col-span-2 md:col-span-3 lg:col-span-2">
+                <a href="/" class="flex items-center gap-2 mb-4" aria-label="Travel Booking Platform — Home">
+                    <img src="/static/images/logo.webp" alt="Logo" class="w-32 h-10">
+                </a>
+                <p class="text-sm text-text-secondary leading-relaxed mb-5 max-w-xs">
+                    A premium travel platform bringing flights, stays, holidays and experiences together — designed for effortless booking.
+                </p>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-3">
+                    <a href="#" class="footer-social-btn bg-blue-500" aria-label="Follow us on Facebook">
+                        <i class="fa-brands fa-facebook-f text-white" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="footer-social-btn bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600" aria-label="Follow us on Instagram">
+                        <i class="fa-brands fa-instagram text-white" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="footer-social-btn bg-black" aria-label="Follow us on X (Twitter)">
+                        <i class="fa-brands fa-x-twitter text-white" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="footer-social-btn bg-blue-500" aria-label="Follow us on LinkedIn">
+                        <i class="fa-brands fa-linkedin-in text-white" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="footer-social-btn bg-red-500" aria-label="Subscribe on YouTube">
+                        <i class="fa-brands fa-youtube text-white" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- About -->
+            <nav aria-label="About">
+                <h4 class="footer-heading">About</h4>
+                <ul class="space-y-2.5">
+                    <li>
+                        <a href="/about" class="footer-link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="/careers" class="footer-link">Careers</a>
+                    </li>
+                    <li>
+                        <a href="/press" class="footer-link">Press &amp; Media</a>
+                    </li>
+                    <li>
+                        <a href="/partner" class="footer-link">Become a Partner</a>
+                    </li>
+                    <li>
+                        <a href="/blog" class="footer-link">Travel Blog</a>
+                    </li>
+                    <li>
+                        <a href="/investor-relations" class="footer-link">Investor Relations</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Support -->
+            <nav aria-label="Support">
+                <h4 class="footer-heading">Support</h4>
+                <ul class="space-y-2.5">
+                    <li>
+                        <a href="/support" class="footer-link">Help Center</a>
+                    </li>
+                    <li>
+                        <a href="/contact" class="footer-link">Contact Us</a>
+                    </li>
+                    <li>
+                        <a href="/bookings/manage" class="footer-link">Manage Booking</a>
+                    </li>
+                    <li>
+                        <a href="/cancellation" class="footer-link">Cancellation</a>
+                    </li>
+                    <li>
+                        <a href="/faqs" class="footer-link">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="/feedback" class="footer-link">Feedback</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Travel Products -->
+            <nav aria-label="Travel products">
+                <h4 class="footer-heading">Travel Products</h4>
+                <ul class="space-y-2.5">
+                    <li>
+                        <a href="/flights" class="footer-link">Flights</a>
+                    </li>
+                    <li>
+                        <a href="/hotels" class="footer-link">Hotels</a>
+                    </li>
+                    <li>
+                        <a href="/homestays" class="footer-link">Homestays &amp; Villas</a>
+                    </li>
+                    <li>
+                        <a href="/holiday-packages" class="footer-link">Holiday Packages</a>
+                    </li>
+                    <li>
+                        <a href="/trains" class="footer-link">Trains</a>
+                    </li>
+                    <li>
+                        <a href="/buses" class="footer-link">Buses</a>
+                    </li>
+                    <li>
+                        <a href="/cabs" class="footer-link">Cabs</a>
+                    </li>
+                    <li>
+                        <a href="/visa" class="footer-link">Visa Services</a>
+                    </li>
+                    <li>
+                        <a href="/forex" class="footer-link">Forex</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Destinations -->
+            <nav aria-label="Popular destinations">
+                <h4 class="footer-heading">Destinations</h4>
+                <ul class="space-y-2.5">
+                    <li>
+                        <a href="/destinations/dubai" class="footer-link">Dubai</a>
+                    </li>
+                    <li>
+                        <a href="/destinations/bali" class="footer-link">Bali</a>
+                    </li>
+                    <li>
+                        <a href="/destinations/singapore" class="footer-link">Singapore</a>
+                    </li>
+                    <li>
+                        <a href="/destinations/paris" class="footer-link">Paris</a>
+                    </li>
+                    <li>
+                        <a href="/destinations/maldives" class="footer-link">Maldives</a>
+                    </li>
+                    <li>
+                        <a href="/destinations/goa" class="footer-link">Goa</a>
+                    </li>
+                    <li>
+                        <a href="/destinations" class="footer-link font-medium text-primary">View All Destinations</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- ------------------- POLICIES ROW ------------------- -->
+        <div class="mt-10 pt-6 border-t border-border">
+            <h4 class="footer-heading mb-3">Policies</h4>
+            <div class="flex flex-wrap gap-x-6 gap-y-2">
+                <a href="{% url 'TermsConditionPage' %}" class="footer-link">
+                    Terms &amp; Conditions
+                </a>
+                <a href="{% url 'PrivacyPolicyPage' %}" class="footer-link">
+                    Privacy Policy
+                </a>
+                <a href="{% url 'RefundPolicyPage' %}" class="footer-link">
+                    Refund Policy
+                </a>
+                <a href="{% url 'UserAgreementPage' %}" class="footer-link">
+                    User Agreement
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------- APP DOWNLOAD + PAYMENTS + TRUST ------------------- -->
+    <div class="border-t border-border">
+        <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6 py-7">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Download App -->
+                <div>
+                    <h4 class="footer-heading mb-3">Download the App</h4>
+                    <p class="text-sm text-text-secondary mb-4">Book faster and manage trips on the go.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#" class="footer-app-badge" aria-label="Download on the App Store">
+                            <i class="fa-brands fa-apple text-xl" aria-hidden="true"></i>
+                            <span>
+                                <span class="block text-[10px] text-white/70 leading-none">Download on the</span>
+                                <span class="block text-sm font-semibold leading-tight">App Store</span>
+                            </span>
+                        </a>
+                        <a href="#" class="footer-app-badge" aria-label="Get it on Google Play">
+                            <i class="fa-brands fa-google-play text-lg" aria-hidden="true"></i>
+                            <span>
+                                <span class="block text-[10px] text-white/70 leading-none">Get it on</span>
+                                <span class="block text-sm font-semibold leading-tight">Google Play</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Accepted Payments -->
+                <div>
+                    <h4 class="footer-heading mb-3">Accepted Payments</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="footer-payment-badge" aria-label="Visa">
+                            <i class="fa-brands fa-cc-visa" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="Mastercard">
+                            <i class="fa-brands fa-cc-mastercard" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="American Express">
+                            <i class="fa-brands fa-cc-amex" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="PayPal">
+                            <i class="fa-brands fa-cc-paypal" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="Google Pay">
+                            <i class="fa-brands fa-google-pay" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="Apple Pay">
+                            <i class="fa-brands fa-apple-pay" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="UPI">
+                            <i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-payment-badge" aria-label="Net Banking">
+                            <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div>
+                    <h4 class="footer-heading mb-3">Why Book With Us</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="footer-trust-badge">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            <span>Secure Payments</span>
+                        </div>
+                        <div class="footer-trust-badge">
+                            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                        <div class="footer-trust-badge">
+                            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                            <span>Free Cancellation</span>
+                        </div>
+                        <div class="footer-trust-badge">
+                            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+                            <span>Best Price Guarantee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------- COPYRIGHT BAR ------------------- -->
+    <div class="border-t border-border">
+        <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-text-secondary text-center sm:text-left">
+                &copy; <span id="footer-year"></span> Sea Of Seats. All rights reserved.
+            </p>
+            <div class="flex items-center gap-4">
+                <a href="/sitemap" class="footer-link text-xs">Sitemap</a>
+                <a href="/accessibility" class="footer-link text-xs">Accessibility</a>
+                <span class="flex items-center gap-1.5 text-xs text-text-secondary">
+                    <i class="fa-solid fa-earth-americas" aria-hidden="true"></i> English (India)
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>

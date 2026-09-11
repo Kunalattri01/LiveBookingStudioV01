@@ -1,0 +1,858 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/flight-search.css' %}" />
+
+<section id="hero" class="relative overflow-hidden pb-10 lg:pt-8 lg:pb-14" aria-label="Search and book your next trip">
+    <!-- ===================== BACKGROUND (now a real photo instead of gradients) ===================== -->
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <!-- Sharp ocean background -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url(&quot;https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=2400&q=90&quot;);"></div>
+
+        <!-- Subtle teal overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#042F2E]/25 via-[#0F3B36]/25 to-[#0D9488]/25"></div>
+
+        <!-- Bottom fade -->
+        <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+    </div>
+
+    <div class="container-2xl mx-auto max-w-[1500px] px-4 sm:px-6 pt-20 relative">
+        <!-- ---------- CATEGORY TABS ---------- -->
+        <div class="hero-category-wrapper">
+            <div class="hero-tab-bar-themed hero-category-tabs">
+                <button type="button" class="hero-tab is-active" role="tab" aria-selected="true" data-tab="flights">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    <span>Flights</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="hotels">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>
+                    <span>Hotels</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="villas">
+                    <i class="fa-solid fa-house-chimney" aria-hidden="true"></i>
+                    <span>Villas &amp;<br class="hero-tab-break" />Homestays</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="packages">
+                    <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+                    <span>Holiday<br class="hero-tab-break" />Packages</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="train">
+                    <i class="fa-solid fa-train-subway" aria-hidden="true"></i>
+                    <span>Trains</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="bus">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    <span>Buses</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="cab">
+                    <i class="fa-solid fa-taxi" aria-hidden="true"></i>
+                    <span>Cabs</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="activities">
+                    <i class="fa-solid fa-person-hiking" aria-hidden="true"></i>
+                    <span>Tours &amp;<br class="hero-tab-break" />Attractions</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="visa">
+                    <i class="fa-solid fa-passport" aria-hidden="true"></i>
+                    <span>Visa</span>
+                </button>
+
+                <button type="button" class="hero-tab relative" role="tab" aria-selected="false" data-tab="cruise">
+                    <span class="hero-tab-badge">new</span>
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    <span>Cruise</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="forex">
+                    <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+                    <span>Forex Card<br class="hero-tab-break" />&amp; Currency</span>
+                </button>
+
+                <button type="button" class="hero-tab" role="tab" aria-selected="false" data-tab="insurance">
+                    <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                    <span>Travel<br class="hero-tab-break" />Insurance</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===================== SEARCH CARD ===================== -->
+        <div class="hero-search-wrapper animate-fade-in-up" style="animation-delay: 80ms">
+            <div class="hero-tab-bar-themed search-card-themed rounded-card shadow-xl">
+                <div class="p-4 sm:p-5">
+                    
+                    <!-- PANEL: FLIGHTS ---------- -->
+                    <div class="hero-panel" data-panel="flights" role="tabpanel">
+                        <!-- Trip type + info link -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                            <div class="flex items-center gap-5" role="radiogroup" aria-label="Trip type">
+                                <label class="trip-type-option">
+                                    <input type="radio" name="trip-type" value="oneway" checked />
+                                    <span class="trip-type-dot"></span>
+                                    <span class="font-semibold">One Way</span>
+                                </label>
+                                <label class="trip-type-option">
+                                    <input type="radio" name="trip-type" value="roundtrip" />
+                                    <span class="trip-type-dot"></span>
+                                    <span>Round Trip</span>
+                                </label>
+                                <label class="trip-type-option">
+                                    <input type="radio" name="trip-type" value="multicity" />
+                                    <span class="trip-type-dot"></span>
+                                    <span>Multi City</span>
+                                </label>
+                            </div>
+
+                            <a href="/flights" class="text-primary text-xs sm:text-sm font-semibold hover:text-primary-hover transition-base"> Book International and Domestic Flights </a>
+                        </div>
+
+                        <!-- ===================== FLIGHT SEARCH FIELDS (One Way / Round Trip) ===================== -->
+                        <div class="relative" id="single-trip-fields">
+                            <div class="grid grid-cols-1 md:grid-cols-12 border border-border rounded-2xl overflow-visible bg-white">
+                                <!-- From / To -->
+                                <div class="md:col-span-4 relative grid grid-cols-2 divide-x divide-border border-b md:border-b-0 border-border">
+                                    <button type="button" class="search-field-lg text-left cursor-pointer" data-flight-popover="location" data-location-type="from" aria-expanded="false">
+                                        <span class="search-field-label">From</span>
+                                        <span class="search-field-value" id="flight-from-value">New Delhi</span>
+                                        <span class="search-field-sub" id="flight-from-sub">DEL, Indira Gandhi International Airport</span>
+                                    </button>
+
+                                    <button type="button" class="search-field-lg text-left cursor-pointer" data-flight-popover="location" data-location-type="to" aria-expanded="false">
+                                        <span class="search-field-label">To</span>
+                                        <span class="search-field-value" id="flight-to-value">Bengaluru</span>
+                                        <span class="search-field-sub" id="flight-to-sub">BLR, Kempegowda International Airport</span>
+                                    </button>
+
+                                    <button type="button" id="swap-locations" class="swap-btn" aria-label="Swap departure and arrival locations">
+                                        <i class="fa-solid fa-right-left" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Departure -->
+                                <button type="button" class="md:col-span-2 search-field-lg text-left cursor-pointer border-b md:border-b-0 md:border-l border-border" data-flight-popover="date" data-date-type="departure" aria-expanded="false">
+                                    <span class="search-field-label">Departure <i class="fa-solid fa-chevron-down text-[10px] text-primary" aria-hidden="true"></i></span>
+                                    <span class="search-field-value" id="flight-departure-value">--</span>
+                                    <span class="search-field-sub" id="flight-departure-sub">Select departure date</span>
+                                </button>
+
+                                <!-- Return -->
+                                <button type="button" class="md:col-span-2 search-field-lg text-left cursor-pointer border-b md:border-b-0 md:border-l border-border" data-flight-popover="date" data-date-type="return" aria-expanded="false">
+                                    <span class="search-field-label">Return <i class="fa-solid fa-chevron-down text-[10px] text-primary" aria-hidden="true"></i></span>
+                                    <span class="font-bold text-black text-sm leading-snug block pt-1" id="flight-return-value">Add return date</span>
+                                    <span class="search-field-sub" id="flight-return-sub">For bigger discounts</span>
+                                </button>
+
+                                <!-- Travellers -->
+                                <button type="button" class="md:col-span-2 search-field-lg text-left cursor-pointer border-b md:border-b-0 md:border-l border-border" data-flight-popover="travellers" aria-expanded="false">
+                                    <span class="search-field-label">Travellers <i class="fa-solid fa-chevron-down text-[10px] text-primary" aria-hidden="true"></i></span>
+                                    <span class="flex items-center gap-3 mt-1.5" id="flight-traveller-summary">
+                                        <span class="traveller-count"><i class="fa-solid fa-user" aria-hidden="true"></i><span data-count="adults">1</span></span>
+                                        <span class="traveller-count"><i class="fa-solid fa-child" aria-hidden="true"></i><span data-count="children">0</span></span>
+                                        <span class="traveller-count"><i class="fa-solid fa-person-cane" aria-hidden="true"></i><span data-count="infants">0</span></span>
+                                    </span>
+                                </button>
+
+                                <!-- Cabin Class -->
+                                <button type="button" class="md:col-span-2 search-field-lg text-left cursor-pointer md:border-l border-border" data-flight-popover="cabin" aria-expanded="false">
+                                    <span class="search-field-label">Cabin Class <i class="fa-solid fa-chevron-down text-[10px] text-primary" aria-hidden="true"></i></span>
+                                    <span class="font-bold text-black text-sm leading-snug block pt-1" id="flight-cabin-value">Economy</span>
+                                </button>
+                            </div>
+
+                            <!-- Interactive flight popovers -->
+                            <div
+                                id="flight-popover"
+                                class="flight-popover hidden"
+                                role="dialog"
+                                aria-modal="false"
+                                aria-live="polite"
+                                aria-label="Flight search options"
+                            ></div>
+
+                            <!-- Search state sent to Django -->
+                            <input type="hidden" id="flight-origin-code" value="DEL" />
+                            <input type="hidden" id="flight-destination-code" value="BLR" />
+                            <input type="hidden" id="flight-departure-date" value="" />
+                            <input type="hidden" id="flight-return-date" value="" />
+                            <input type="hidden" id="flight-trip-type" value="oneway" />
+                            <input type="hidden" id="flight-adults" value="1" />
+                            <input type="hidden" id="flight-children" value="0" />
+                            <input type="hidden" id="flight-infants" value="0" />
+                            <input type="hidden" id="flight-cabin" value="economy" />
+                        </div>
+
+                        <!-- ===================== MULTI CITY SEGMENTS ===================== -->
+                        <div id="multicity-fields" class="hidden">
+                            <div id="multicity-segment-list" class="space-y-3"></div>
+
+                            <div class="mt-3 flex items-center justify-between">
+                                <button type="button" id="multicity-add-segment" class="text-primary text-sm font-semibold hover:text-primary-hover transition-base">
+                                    <i class="fa-solid fa-plus mr-1" aria-hidden="true"></i> Add another flight
+                                </button>
+                                <span class="text-xs text-text-secondary">Up to 6 flights</span>
+                            </div>
+                        </div>
+
+                        <template id="multicity-segment-template">
+                            <div class="multicity-segment grid grid-cols-1 md:grid-cols-12 border border-border rounded-2xl overflow-visible bg-white" data-segment-row>
+                                <div class="md:col-span-4 relative">
+                                    <div class="search-field-lg text-left">
+                                        <span class="search-field-label">From</span>
+                                        <input type="text" class="mc-airport-input w-full outline-none font-bold text-black text-sm bg-transparent" data-mc-field="origin" placeholder="City or airport" autocomplete="off" />
+                                    </div>
+                                    <div class="mc-airport-list hidden" data-mc-list="origin"></div>
+                                </div>
+
+                                <div class="md:col-span-4 relative border-t md:border-t-0 md:border-l border-border">
+                                    <div class="search-field-lg text-left">
+                                        <span class="search-field-label">To</span>
+                                        <input type="text" class="mc-airport-input w-full outline-none font-bold text-black text-sm bg-transparent" data-mc-field="destination" placeholder="City or airport" autocomplete="off" />
+                                    </div>
+                                    <div class="mc-airport-list hidden" data-mc-list="destination"></div>
+                                </div>
+
+                                <div class="md:col-span-3 border-t md:border-t-0 md:border-l border-border">
+                                    <div class="search-field-lg text-left">
+                                        <span class="search-field-label">Date</span>
+                                        <input type="date" class="mc-date-input w-full outline-none font-bold text-black text-sm bg-transparent" data-mc-field="date" />
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-1 flex items-center justify-center border-t md:border-t-0 md:border-l border-border">
+                                    <button type="button" class="mc-remove-segment text-danger hover:text-red-700 p-2" title="Remove this flight" aria-label="Remove this flight">
+                                        <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Special fares + Quick tools -->
+                        <div class="flex flex-col lg:flex-row gap-6 mt-5">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-text-primary mb-2">Select a special fare</p>
+                                <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Special fare">
+                                    <label class="fare-chip is-active">
+                                        <input type="radio" name="special-fare" value="regular" checked />
+                                        <span class="fare-chip-title">Regular</span>
+                                        <span class="fare-chip-sub">Regular fares</span>
+                                    </label>
+                                    <label class="fare-chip">
+                                        <input type="radio" name="special-fare" value="student" />
+                                        <span class="fare-chip-title">Student</span>
+                                        <span class="fare-chip-sub">Extra discounts/baggage</span>
+                                    </label>
+                                    <label class="fare-chip">
+                                        <input type="radio" name="special-fare" value="armed-forces" />
+                                        <span class="fare-chip-title">Armed Forces</span>
+                                        <span class="fare-chip-sub">Up to ₹ 600 off</span>
+                                    </label>
+                                    <label class="fare-chip">
+                                        <input type="radio" name="special-fare" value="gst" />
+                                        <span class="fare-chip-title">Have a GST number? <span class="fare-chip-new">new</span></span>
+                                        <span class="fare-chip-sub">Upto 10% Extra Savings!</span>
+                                    </label>
+                                    <label class="fare-chip">
+                                        <input type="radio" name="special-fare" value="senior-citizen" />
+                                        <span class="fare-chip-title">Senior Citizen</span>
+                                        <span class="fare-chip-sub">Up to ₹ 600 off</span>
+                                    </label>
+                                    <label class="fare-chip">
+                                        <input type="radio" name="special-fare" value="doctors-nurses" />
+                                        <span class="fare-chip-title">Doctor and Nurses</span>
+                                        <span class="fare-chip-sub">Up to ₹ 600 off</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="lg:w-44 lg:border-l lg:border-border lg:pl-6">
+                                <p class="text-sm font-semibold text-text-primary mb-2">Quick Tools</p>
+                                <button type="button" class="quick-tool-btn">
+                                    <i class="fa-solid fa-plane-circle-check text-primary" aria-hidden="true"></i>
+                                    Flight Tracker
+                                </button>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- Price drop protection -->
+                        <label class="price-protection-bar">
+                            <input type="checkbox" id="price-drop-protection" />
+                            <span class="price-protection-check"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                            <span class="flex-1 text-sm">
+                                <span class="font-semibold text-text-primary">Add Price Drop Protection</span>
+                                <span class="text-text-secondary"> If the price drops, we'll refund the difference.</span>
+                                <a href="#" class="text-primary font-semibold hover:underline">View Details</a>
+                            </span>
+                            <i class="fa-solid fa-shield-halved text-primary text-lg" aria-hidden="true"></i>
+                        </label>
+
+                        <!-- Search button -->
+                        <div class="mt-5 flex justify-center">
+                            <button type="button" id="flight-search-submit" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: HOTELS ---------- -->
+                    <div class="hero-panel hidden" data-panel="hotels" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="hotel-dest">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="hotel-dest"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="City, hotel, or area"
+                                        aria-label="Hotel destination" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="hotel-checkin">Check-in</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="hotel-checkin" type="date" class="search-input" aria-label="Check-in date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="hotel-checkout">Check-out</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-check text-primary" aria-hidden="true"></i>
+                                    <input id="hotel-checkout" type="date" class="search-input" aria-label="Check-out date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="hotel-guests">Guests &amp; Rooms</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="hotel-guests" class="search-input" aria-label="Guests and rooms">
+                                        <option>2 Guests, 1 Room</option>
+                                        <option>4 Guests, 2 Rooms</option>
+                                        <option>1 Guest, 1 Room</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" id="hotel-search-submit" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: VILLAS & HOMESTAYS ---------- -->
+                    <div class="hero-panel hidden" data-panel="villas" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="villa-dest">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-house-chimney text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="villa-dest"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="City or locality"
+                                        aria-label="Villa destination" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="villa-checkin">Check-in</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="villa-checkin" type="date" class="search-input" aria-label="Villa check-in date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="villa-checkout">Check-out</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-check text-primary" aria-hidden="true"></i>
+                                    <input id="villa-checkout" type="date" class="search-input" aria-label="Villa check-out date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="villa-guests">Guests</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="villa-guests" class="search-input" aria-label="Villa guests">
+                                        <option>6 Guests</option>
+                                        <option>10 Guests</option>
+                                        <option>2 Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: HOLIDAY PACKAGES ---------- -->
+                    <div class="hero-panel hidden" data-panel="packages" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-5 search-field">
+                                <label class="search-label" for="pkg-dest">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-earth-asia text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="pkg-dest"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Where do you want to go?"
+                                        aria-label="Package destination" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="pkg-month">Travel Month</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="pkg-month" type="month" class="search-input" aria-label="Travel month" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="pkg-travellers">Travellers</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="pkg-travellers" class="search-input" aria-label="Package travellers">
+                                        <option>2 Adults</option>
+                                        <option>2 Adults, 2 Children</option>
+                                        <option>Solo Traveller</option>
+                                        <option>Group (5+)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: TRAIN ---------- -->
+                    <div class="hero-panel hidden" data-panel="train" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="train-from">From</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-train-subway text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="train-from"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Departure station"
+                                        aria-label="Train departure station" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="train-to">To</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-train-subway text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="train-to"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Arrival station"
+                                        aria-label="Train arrival station" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="train-date">Date</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="train-date" type="date" class="search-input" aria-label="Train travel date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="train-class">Class</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-chair text-primary" aria-hidden="true"></i>
+                                    <select id="train-class" class="search-input" aria-label="Train class">
+                                        <option>Sleeper</option>
+                                        <option>AC 3 Tier</option>
+                                        <option>AC 2 Tier</option>
+                                        <option>AC First Class</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: BUS ---------- -->
+                    <div class="hero-panel hidden" data-panel="bus" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="bus-from">From</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="bus-from"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Departure city"
+                                        aria-label="Bus departure city" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="bus-to">To</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="bus-to"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Arrival city"
+                                        aria-label="Bus arrival city" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="bus-date">Date of Journey</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="bus-date" type="date" class="search-input" aria-label="Bus journey date" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: CAB ---------- -->
+                    <div class="hero-panel hidden" data-panel="cab" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="cab-pickup">Pickup Location</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-crosshairs text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="cab-pickup"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Enter pickup address"
+                                        aria-label="Cab pickup location" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="cab-drop">Drop Location</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="cab-drop"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Enter drop address"
+                                        aria-label="Cab drop location" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="cab-date">Date</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="cab-date" type="date" class="search-input" aria-label="Cab date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="cab-time">Time</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-primary" aria-hidden="true"></i>
+                                    <input id="cab-time" type="time" class="search-input" aria-label="Cab pickup time" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: TOURS & ATTRACTIONS ---------- -->
+                    <div class="hero-panel hidden" data-panel="activities" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-5 search-field">
+                                <label class="search-label" for="activity-dest">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-person-hiking text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="activity-dest"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="Where are you exploring?"
+                                        aria-label="Activity destination" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="activity-date">Date</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="activity-date" type="date" class="search-input" aria-label="Activity date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="activity-guests">Guests</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="activity-guests" class="search-input" aria-label="Activity guests">
+                                        <option>2 Guests</option>
+                                        <option>1 Guest</option>
+                                        <option>4 Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: VISA ---------- -->
+                    <div class="hero-panel hidden" data-panel="visa" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-5 search-field">
+                                <label class="search-label" for="visa-country">Destination Country</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-passport text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="visa-country"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="e.g. United Arab Emirates"
+                                        aria-label="Visa destination country" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="visa-date">Planned Travel Date</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="visa-date" type="date" class="search-input" aria-label="Planned travel date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="visa-travellers">Applicants</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="visa-travellers" class="search-input" aria-label="Number of applicants">
+                                        <option>1 Applicant</option>
+                                        <option>2 Applicants</option>
+                                        <option>Family (4)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: CRUISE ---------- -->
+                    <div class="hero-panel hidden" data-panel="cruise" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="cruise-dest">Departure Port</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-ship text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="cruise-dest"
+                                        type="text"
+                                        class="search-input"
+                                        placeholder="e.g. Mumbai, Singapore"
+                                        aria-label="Cruise departure port" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="cruise-date">Sail Date</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="cruise-date" type="date" class="search-input" aria-label="Cruise sail date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="cruise-nights">Duration</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-moon text-primary" aria-hidden="true"></i>
+                                    <select id="cruise-nights" class="search-input" aria-label="Cruise duration">
+                                        <option>2-3 Nights</option>
+                                        <option>4-6 Nights</option>
+                                        <option>7+ Nights</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="cruise-guests">Guests</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="cruise-guests" class="search-input" aria-label="Cruise guests">
+                                        <option>2 Guests</option>
+                                        <option>4 Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: FOREX CARD & CURRENCY ---------- -->
+                    <div class="hero-panel hidden" data-panel="forex" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="forex-currency">Currency</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-sack-dollar text-primary" aria-hidden="true"></i>
+                                    <select id="forex-currency" class="search-input" aria-label="Currency">
+                                        <option>US Dollar (USD)</option>
+                                        <option>Euro (EUR)</option>
+                                        <option>UAE Dirham (AED)</option>
+                                        <option>Singapore Dollar (SGD)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="forex-amount">Amount</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-indian-rupee-sign text-primary" aria-hidden="true"></i>
+                                    <input
+                                        id="forex-amount"
+                                        type="number"
+                                        class="search-input"
+                                        placeholder="Enter amount"
+                                        aria-label="Amount" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="forex-product">Product</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-credit-card text-primary" aria-hidden="true"></i>
+                                    <select id="forex-product" class="search-input" aria-label="Forex product">
+                                        <option>Multi-Currency Card</option>
+                                        <option>Currency Notes</option>
+                                        <option>Demand Draft</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL: TRAVEL INSURANCE ---------- -->
+                    <div class="hero-panel hidden" data-panel="insurance" role="tabpanel">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                            <div class="md:col-span-4 search-field">
+                                <label class="search-label" for="ins-destination">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-earth-americas text-primary" aria-hidden="true"></i>
+                                    <select id="ins-destination" class="search-input" aria-label="Insurance destination">
+                                        <option>Worldwide</option>
+                                        <option>Schengen</option>
+                                        <option>USA &amp; Canada</option>
+                                        <option>Domestic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="ins-start">Trip Start</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-primary" aria-hidden="true"></i>
+                                    <input id="ins-start" type="date" class="search-input" aria-label="Trip start date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-3 search-field">
+                                <label class="search-label" for="ins-end">Trip End</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-check text-primary" aria-hidden="true"></i>
+                                    <input id="ins-end" type="date" class="search-input" aria-label="Trip end date" />
+                                </div>
+                            </div>
+                            <div class="md:col-span-2 search-field">
+                                <label class="search-label" for="ins-travellers">Travellers</label>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-user-group text-primary" aria-hidden="true"></i>
+                                    <select id="ins-travellers" class="search-input" aria-label="Insurance travellers">
+                                        <option>1 Traveller</option>
+                                        <option>2 Travellers</option>
+                                        <option>Family</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center md:justify-end">
+                            <button type="button" class="search-submit-btn">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===================== TRUST BADGES ===================== -->
+            <div class="mt-6 lg:mt-8 w-full max-w-[1400px] mx-auto animate-fade-in-up" style="animation-delay: 160ms">
+                <div class="premium-trust-bar">
+                    <div class="premium-trust-item">
+                        <span class="premium-trust-icon">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                        </span>
+
+                        <div class="premium-trust-content">
+                            <span class="premium-trust-text">Secure Payments</span>
+                            <span class="premium-trust-subtext">Safe &amp; encrypted</span>
+                        </div>
+                    </div>
+
+                    <div class="premium-trust-item">
+                        <span class="premium-trust-icon">
+                            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                        </span>
+
+                        <div class="premium-trust-content">
+                            <span class="premium-trust-text">24/7 Support</span>
+                            <span class="premium-trust-subtext">We're here to help</span>
+                        </div>
+                    </div>
+
+                    <div class="premium-trust-item">
+                        <span class="premium-trust-icon">
+                            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                        </span>
+
+                        <div class="premium-trust-content">
+                            <span class="premium-trust-text">Free Cancellation</span>
+                            <span class="premium-trust-subtext">Flexible booking</span>
+                        </div>
+                    </div>
+
+                    <div class="premium-trust-item">
+                        <span class="premium-trust-icon">
+                            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+                        </span>
+
+                        <div class="premium-trust-content">
+                            <span class="premium-trust-text">Best Price Guarantee</span>
+                            <span class="premium-trust-subtext">Great value, always</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------- EXPLORE MORE ---------- -->
+            <div class="flex items-center justify-center gap-2 mt-3 text-white/80 text-xs font-medium">
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                <span>Explore Further</span>
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    /* Local airport/city master data, rendered from the backend.
+       This is our own application data, not TripJack data. */
+    window.__FLIGHT_AIRPORTS_SEED__ = {{ airports_json|default:"[]"|safe }};
+</script>
+<script src="{% static 'js/flight-search.js' %}"></script>
+<script src="{% static 'js/multicity-search.js' %}"></script>
+<script src="{% static 'js/hotel-search.js' %}"></script>

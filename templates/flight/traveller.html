@@ -1,0 +1,63 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<link rel="stylesheet" href="{% static 'css/flight-traveller.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="traveller-page">
+    <div class="traveller-shell">
+        <div class="booking-steps" aria-label="Booking progress">
+            <div class="booking-step is-complete"><span>1</span><strong>Search</strong></div>
+            <div class="booking-step is-complete"><span>2</span><strong>Flight & fare</strong></div>
+            <div class="booking-step is-active"><span>3</span><strong>Traveller details</strong></div>
+            <div class="booking-step"><span>4</span><strong>Seats</strong></div>
+        </div>
+
+        <header class="traveller-header">
+            <div>
+                <p class="traveller-eyebrow">PASSENGER INFORMATION</p>
+                <h1>Who is travelling?</h1>
+                <p>Enter the details exactly as they appear on the traveller's travel document. We only ask for fields needed for this booking.</p>
+            </div>
+            <div class="traveller-secure"><i class="fa-solid fa-shield-halved"></i> Secure checkout</div>
+        </header>
+
+        <form id="traveller-form" class="traveller-grid">
+            <section class="traveller-main">
+                <div id="traveller-list" class="traveller-list"></div>
+
+                <section class="traveller-card">
+                    <div class="traveller-card-title">
+                        <div class="traveller-card-icon"><i class="fa-regular fa-address-card"></i></div>
+                        <div><h2>Contact details</h2><p>Booking updates and your confirmation will be sent here.</p></div>
+                    </div>
+                    <div class="traveller-fields">
+                        <label>Email address<input required name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+                        <label>Mobile number<input required name="mobile" type="tel" autocomplete="tel" placeholder="+91 98765 43210"></label>
+                    </div>
+                </section>
+
+                <p id="traveller-error" class="hidden traveller-error"></p>
+            </section>
+
+            <aside class="traveller-summary">
+                <div class="traveller-summary-inner">
+                    <p class="traveller-eyebrow">YOUR TRIP</p>
+                    <h2>Booking review</h2>
+                    <div id="traveller-trip-summary" class="trip-summary">Selected flight</div>
+                    <div class="summary-note"><i class="fa-solid fa-circle-info"></i><span>Some airlines may request additional identity or passport details. Those fields should be shown only when the supplier requires them.</span></div>
+                    <button class="traveller-continue" type="submit">Continue to seat selection <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </aside>
+        </form>
+    </div>
+</main>
+<script>
+window.__FLIGHT_REVIEW__ = {{ review_json|safe }};
+window.__FLIGHT_SEARCH_REQUEST__ = {{ search_request_json|safe }};
+window.__FLIGHT_IS_INTERNATIONAL__ = {{ is_international_json|safe }};
+</script>
+<script src="{% static 'js/flight-traveller.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'base/public_base.html' %}
+
+{% block content %}
+<section class="bg-background min-h-screen">
+
+    <!-- HERO -->
+    <div class="relative overflow-hidden bg-slate-950 text-white">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950"></div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-24 text-center">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/10 text-xs font-semibold mb-5">
+                <i class="fa-solid fa-headset text-sky-300"></i>
+                We're here to help
+            </span>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold">How can we help you?</h1>
+
+            <p class="text-white/65 mt-4 text-sm sm:text-base">Find answers, manage your booking or connect with our support team.</p>
+
+            <div class="max-w-2xl mx-auto mt-8">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="search" placeholder="Search for flights, bookings, cancellations..." class="w-full pl-14 pr-5 py-4 rounded-2xl bg-white text-text-primary outline-none shadow-2xl text-sm" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <!-- QUICK HELP -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <h3 class="font-bold">My Booking</h3>
+                <p class="text-sm text-text-secondary mt-2">Manage, modify or check your booking status.</p>
+                <i class="fa-solid fa-arrow-right text-primary mt-4"></i>
+            </a>
+
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-sky-50 text-primary flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-plane"></i>
+                </div>
+
+                <h3 class="font-bold">Flight Help</h3>
+                <p class="text-sm text-text-secondary mt-2">Check-in, baggage, delays and flight information.</p>
+                <i class="fa-solid fa-arrow-right text-primary mt-4"></i>
+            </a>
+
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </div>
+
+                <h3 class="font-bold">Cancellation & Refund</h3>
+                <p class="text-sm text-text-secondary mt-2">Understand cancellation policies and refund status.</p>
+                <i class="fa-solid fa-arrow-right text-primary mt-4"></i>
+            </a>
+
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-green-50 text-success flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <h3 class="font-bold">Payments</h3>
+                <p class="text-sm text-text-secondary mt-2">Payment failures, refunds and transaction issues.</p>
+            </a>
+
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-hotel"></i>
+                </div>
+
+                <h3 class="font-bold">Hotel & Stay</h3>
+                <p class="text-sm text-text-secondary mt-2">Reservations, check-in and property-related questions.</p>
+            </a>
+
+            <a href="#" class="bg-white border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-xl bg-rose-50 text-danger flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <h3 class="font-bold">Account & Security</h3>
+                <p class="text-sm text-text-secondary mt-2">Password, profile and account security assistance.</p>
+            </a>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="mb-5">
+            <h2 class="text-2xl font-extrabold">Still need help?</h2>
+            <p class="text-sm text-text-secondary mt-1">Our support team is ready to assist you.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <div class="bg-white border border-border rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-comments text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Live Chat</h3>
+                <p class="text-sm text-text-secondary mt-2">Chat with our travel support team in real time.</p>
+                <button class="mt-5 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold">Start Chat</button>
+            </div>
+
+            <div class="bg-white border border-border rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-green-50 text-success flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-phone text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Call Us</h3>
+                <p class="text-sm text-text-secondary mt-2">Speak directly with our customer support team.</p>
+                <button class="mt-5 px-5 py-2.5 border border-border rounded-xl text-sm font-semibold">Contact Support</button>
+            </div>
+
+            <div class="bg-white border border-border rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mb-5">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                </div>
+
+                <h3 class="font-bold text-lg">Email Support</h3>
+                <p class="text-sm text-text-secondary mt-2">Send us your question and we'll get back to you.</p>
+                <button class="mt-5 px-5 py-2.5 border border-border rounded-xl text-sm font-semibold">Send Email</button>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mt-14">
+            <h2 class="text-2xl font-extrabold mb-5">Frequently Asked Questions</h2>
+
+            <div class="bg-white border border-border rounded-2xl divide-y divide-border">
+                <details class="p-5 group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-sm">
+                        How can I check my booking?
+                        <i class="fa-solid fa-chevron-down text-xs transition group-open:rotate-180"></i>
+                    </summary>
+
+                    <p class="text-sm text-text-secondary mt-4 leading-relaxed">
+                        You can view your booking from your account dashboard using your booking reference.
+                    </p>
+                </details>
+
+                <details class="p-5 group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-sm">
+                        How do I cancel a booking?
+                        <i class="fa-solid fa-chevron-down text-xs transition group-open:rotate-180"></i>
+                    </summary>
+
+                    <p class="text-sm text-text-secondary mt-4 leading-relaxed">
+                        Open your booking details and select the cancellation option if your booking is eligible.
+                    </p>
+                </details>
+
+                <details class="p-5 group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-sm">
+                        Where can I find my refund status?
+                        <i class="fa-solid fa-chevron-down text-xs transition group-open:rotate-180"></i>
+                    </summary>
+
+                    <p class="text-sm text-text-secondary mt-4 leading-relaxed">
+                        Refund information can be viewed from your booking details and payment history.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

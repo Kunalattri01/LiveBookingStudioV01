@@ -1,0 +1,70 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<style>
+    .hotel-page { background: #f8fafc }
+    .teal { color: #0d9488 }
+    .muted { color: #64748b }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 18px; box-shadow: 0 6px 22px rgba(15, 23, 42, .05) }
+    .btn { background: linear-gradient(135deg, #0d9488, #10b981); color: #fff; border-radius: 12px; padding: .7rem 1rem; font-weight: 800; display: inline-block; border: none; cursor: pointer }
+    .btn[disabled] { opacity: .5; cursor: not-allowed }
+    .soft { background: #ecfdf5; border: 1px solid #a7f3d0 }
+    .tag { font-size: .68rem; letter-spacing: .02em; text-transform: uppercase; font-weight: 700; padding: .28rem .6rem; border-radius: 999px }
+    .hidden { display: none !important }
+    .option-row.selected { outline: 2px solid #0d9488 }
+    .hotel-hero-img { width: 100%; height: 260px; border-radius: 18px; object-fit: cover; background: #f1f5f9 }
+    .hotel-hero-stars { color: #f59e0b; letter-spacing: 2px; font-size: .9rem }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hotel-page min-h-screen">
+    <div class="max-w-[1000px] mx-auto px-4 sm:px-8 pt-24 pb-10">
+        <img id="hotel-detail-img" class="hotel-hero-img mb-5 hidden" alt="" />
+        <p id="hotel-detail-dates" class="muted text-sm mb-2">{{ check_in|date:"d M Y" }} - {{ check_out|date:"d M Y" }}</p>
+        <h1 id="hotel-detail-name" class="text-2xl sm:text-3xl font-semibold mb-1 inline">&nbsp;</h1>
+        <span id="hotel-detail-stars" class="hotel-hero-stars"></span>
+        <div class="mb-5"></div>
+
+        <div id="hotel-detail-loading" class="card p-8 text-center">
+            <i class="fa-solid fa-circle-notch fa-spin text-2xl teal"></i>
+            <p class="muted text-sm mt-3">Loading room availability&hellip;</p>
+        </div>
+
+        <div id="hotel-detail-error" class="card p-8 text-center hidden">
+            <i class="fa-solid fa-triangle-exclamation text-2xl text-amber-500"></i>
+            <p id="hotel-detail-error-message" class="font-bold mt-3"></p>
+        </div>
+
+        <div id="hotel-detail-options" class="space-y-4"></div>
+    </div>
+</div>
+
+<template id="hotel-option-template">
+    <div class="card option-row p-5 sm:p-6">
+        <div class="flex flex-wrap justify-between gap-4">
+            <div>
+                <h3 class="text-lg font-bold js-option-room"></h3>
+                <p class="muted text-xs mt-1 js-option-meal"></p>
+                <div class="flex flex-wrap gap-2 mt-2 js-option-tags"></div>
+            </div>
+            <div class="text-right">
+                <span class="muted text-xs">Total price</span>
+                <div class="text-xl font-extrabold js-option-price"></div>
+                <p class="muted text-xs js-option-price-breakup"></p>
+                <button type="button" class="btn mt-3 js-option-select">Select &amp; Continue</button>
+            </div>
+        </div>
+    </div>
+</template>
+{% endblock %}
+
+{% block extraJs %}
+<script>
+    /* Validated Dynamic Detail (Pricing) request body - posted to
+       /api/v1/hotels/pricing/. */
+    window.__HOTEL_DETAIL_REQUEST__ = {{ detail_payload_json|default:"null"|safe }};
+</script>
+<script src="{% static 'js/hotel-detail.js' %}"></script>
+{% endblock %}

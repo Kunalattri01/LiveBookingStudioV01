@@ -1,0 +1,325 @@
+
+<div id="travel-search-widget" class="tsw bg-surface rounded-card shadow-lg border border-border p-4 sm:p-5" data-component="travel-search-widget">
+    
+    <!-- ===================== TABS ===================== -->
+    <div class="flex items-center gap-1 overflow-x-auto no-horizontal-scroll pb-3 mb-4 border-b border-border" role="tablist" aria-label="Booking category">
+        <button type="button" class="tsw-tab is-active" role="tab" aria-selected="true" aria-controls="tsw-panel-flights" id="tsw-tabbtn-flights" data-tab="flights">
+            <i class="fa-solid fa-plane-departure" aria-hidden="true"></i> Flights
+        </button>
+        <button type="button" class="tsw-tab" role="tab" aria-selected="false" aria-controls="tsw-panel-hotels" id="tsw-tabbtn-hotels" data-tab="hotels">
+            <i class="fa-solid fa-hotel" aria-hidden="true"></i> Hotels
+        </button>
+        <button type="button" class="tsw-tab" role="tab" aria-selected="false" aria-controls="tsw-panel-trains" id="tsw-tabbtn-trains" data-tab="trains">
+            <i class="fa-solid fa-train-subway" aria-hidden="true"></i> Trains
+        </button>
+        <button type="button" class="tsw-tab" role="tab" aria-selected="false" aria-controls="tsw-panel-buses" id="tsw-tabbtn-buses" data-tab="buses">
+            <i class="fa-solid fa-bus" aria-hidden="true"></i> Buses
+        </button>
+        <button type="button" class="tsw-tab" role="tab" aria-selected="false" aria-controls="tsw-panel-cabs" id="tsw-tabbtn-cabs" data-tab="cabs">
+            <i class="fa-solid fa-taxi" aria-hidden="true"></i> Cabs
+        </button>
+        <button type="button" class="tsw-tab" role="tab" aria-selected="false" aria-controls="tsw-panel-packages" id="tsw-tabbtn-packages" data-tab="packages">
+            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i> Packages
+        </button>
+    </div>
+
+    <!-- ===================== PANEL: FLIGHTS ===================== -->
+    <div class="tsw-panel" id="tsw-panel-flights" role="tabpanel" aria-labelledby="tsw-tabbtn-flights" data-panel="flights">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <!-- From / To with Swap -->
+            <div class="md:col-span-4 relative grid grid-cols-2 gap-3">
+                <div class="tsw-field" data-field="from">
+                    <label class="tsw-label" for="tsw-from">From</label>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-plane-departure text-primary" aria-hidden="true"></i>
+                        <input id="tsw-from" type="text" class="tsw-input" placeholder="City or Airport" required aria-required="true" aria-describedby="tsw-error-from" />
+                    </div>
+                </div>
+                <div class="tsw-field" data-field="to">
+                    <label class="tsw-label" for="tsw-to">To</label>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-plane-arrival text-primary" aria-hidden="true"></i>
+                        <input id="tsw-to" type="text" class="tsw-input" placeholder="City or Airport" required aria-required="true" aria-describedby="tsw-error-to" />
+                    </div>
+                </div>
+                <button type="button" id="tsw-swap" class="tsw-swap-btn" aria-label="Swap departure and arrival locations">
+                    <i class="fa-solid fa-right-left" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!-- Departure Date (Custom Date Picker) -->
+            <div class="md:col-span-2 tsw-field relative" data-field="departure">
+                <label class="tsw-label" for="tsw-departure">Departure</label>
+                <button type="button" id="tsw-departure" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false" aria-describedby="tsw-error-departure">
+                    <i class="fa-solid fa-calendar-days text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-departure" role="dialog" aria-label="Choose departure date"></div>
+            </div>
+
+            <!-- Return Date (Custom Date Picker) -->
+            <div class="md:col-span-2 tsw-field relative" data-field="return">
+                <label class="tsw-label" for="tsw-return">Return</label>
+                <button type="button" id="tsw-return" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-check text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Add date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-return" role="dialog" aria-label="Choose return date"></div>
+            </div>
+
+            <!-- Traveller Selector + Cabin Class -->
+            <div class="md:col-span-4 tsw-field relative" data-field="travellers">
+                <label class="tsw-label" for="tsw-traveller-trigger">Travellers &amp; Class</label>
+                <button type="button" id="tsw-traveller-trigger" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-user-group text-primary mr-2" aria-hidden="true"></i>
+                    <span id="tsw-traveller-summary">1 Adult, Economy</span>
+                </button>
+
+                <!-- Traveller Dropdown Panel -->
+                <div id="tsw-traveller-panel" class="tsw-datepicker hidden" role="dialog" aria-label="Select travellers and cabin class">
+                    <div class="p-4 space-y-4 w-72 max-w-[85vw]">
+                        <!-- Adults -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Adults</p>
+                                <p class="text-xs text-text-secondary">12+ years</p>
+                            </div>
+                            <div class="tsw-counter" data-counter="adults" data-min="1" data-max="9">
+                                <button type="button" class="tsw-counter-btn" data-action="decrement" aria-label="Decrease adults"> − </button>
+                                <span class="tsw-counter-value" data-value>1</span>
+                                <button type="button" class="tsw-counter-btn" data-action="increment" aria-label="Increase adults"> + </button>
+                            </div>
+                        </div>
+
+                        <!-- Children -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Children</p>
+                                <p class="text-xs text-text-secondary">2–11 years</p>
+                            </div>
+                            <div class="tsw-counter" data-counter="children" data-min="0" data-max="9">
+                                <button type="button" class="tsw-counter-btn" data-action="decrement" aria-label="Decrease children"> − </button>
+                                <span class="tsw-counter-value" data-value>0</span>
+                                <button type="button" class="tsw-counter-btn" data-action="increment" aria-label="Increase children"> + </button>
+                            </div>
+                        </div>
+
+                        <!-- Infants -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Infants</p>
+                                <p class="text-xs text-text-secondary">Under 2 years</p>
+                            </div>
+                            <div class="tsw-counter" data-counter="infants" data-min="0" data-max="9">
+                                <button type="button" class="tsw-counter-btn" data-action="decrement" aria-label="Decrease infants"> − </button>
+                                <span class="tsw-counter-value" data-value>0</span>
+                                <button type="button" class="tsw-counter-btn" data-action="increment" aria-label="Increase infants"> + </button>
+                            </div>
+                        </div>
+
+                        <div class="tsw-divider"></div>
+
+                        <!-- Cabin Class -->
+                        <div>
+                            <p class="text-sm font-medium text-text-primary mb-2">Cabin Class</p>
+                            <div class="grid grid-cols-2 gap-2" role="radiogroup" aria-label="Cabin class">
+                                <button type="button" class="tsw-class-btn is-active" data-class="Economy" role="radio" aria-checked="true">
+                                    Economy
+                                </button>
+                                <button type="button" class="tsw-class-btn" data-class="Premium Economy" role="radio" aria-checked="false">
+                                    Premium
+                                </button>
+                                <button type="button" class="tsw-class-btn" data-class="Business" role="radio" aria-checked="false">
+                                    Business
+                                </button>
+                                <button type="button" class="tsw-class-btn" data-class="First Class" role="radio" aria-checked="false">
+                                    First
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="button" id="tsw-traveller-apply" class="tsw-apply-btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p id="tsw-error-from" class="tsw-error hidden" role="alert">Please enter a departure city.</p>
+        <p id="tsw-error-to" class="tsw-error hidden" role="alert">Please enter a destination city.</p>
+        <p id="tsw-error-departure" class="tsw-error hidden" role="alert">Please select a departure date.</p>
+    </div>
+
+    <!-- ===================== PANEL: HOTELS ===================== -->
+    <div class="tsw-panel hidden" id="tsw-panel-hotels" role="tabpanel" aria-labelledby="tsw-tabbtn-hotels" data-panel="hotels">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <div class="md:col-span-5 tsw-field">
+                <label class="tsw-label" for="tsw-hotel-dest">Destination</label>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-primary" aria-hidden="true"></i>
+                    <input id="tsw-hotel-dest" type="text" class="tsw-input" placeholder="City, hotel or area" required aria-required="true" />
+                </div>
+            </div>
+            <div class="md:col-span-3 tsw-field relative">
+                <label class="tsw-label" for="tsw-checkin">Check-in</label>
+                <button type="button" id="tsw-checkin" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-days text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-checkin" role="dialog" aria-label="Choose check-in date"></div>
+            </div>
+            <div class="md:col-span-3 tsw-field relative">
+                <label class="tsw-label" for="tsw-checkout">Check-out</label>
+                <button type="button" id="tsw-checkout" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-check text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-checkout" role="dialog" aria-label="Choose check-out date"></div>
+            </div>
+            <div class="md:col-span-1 tsw-field">
+                <label class="tsw-label" for="tsw-rooms">Rooms</label>
+                <select id="tsw-rooms" class="tsw-input">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== PANEL: TRAINS ===================== -->
+    <div class="tsw-panel hidden" id="tsw-panel-trains" role="tabpanel" aria-labelledby="tsw-tabbtn-trains" data-panel="trains">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-train-from">From</label>
+                <input id="tsw-train-from" type="text" class="tsw-input" placeholder="Departure station" required aria-required="true" />
+            </div>
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-train-to">To</label>
+                <input id="tsw-train-to" type="text" class="tsw-input" placeholder="Arrival station" required aria-required="true" />
+            </div>
+            <div class="md:col-span-2 tsw-field relative">
+                <label class="tsw-label" for="tsw-train-date">Date</label>
+                <button type="button" id="tsw-train-date" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-days text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-train-date" role="dialog" aria-label="Choose travel date"></div>
+            </div>
+            <div class="md:col-span-2 tsw-field">
+                <label class="tsw-label" for="tsw-train-class">Class</label>
+                <select id="tsw-train-class" class="tsw-input">
+                    <option>Sleeper</option>
+                    <option>AC 3 Tier</option>
+                    <option>AC 2 Tier</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== PANEL: BUSES ===================== -->
+    <div class="tsw-panel hidden" id="tsw-panel-buses" role="tabpanel" aria-labelledby="tsw-tabbtn-buses" data-panel="buses">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-bus-from">From</label>
+                <input id="tsw-bus-from" type="text" class="tsw-input" placeholder="Departure city" required aria-required="true" />
+            </div>
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-bus-to">To</label>
+                <input id="tsw-bus-to" type="text" class="tsw-input" placeholder="Arrival city" required aria-required="true" />
+            </div>
+            <div class="md:col-span-4 tsw-field relative">
+                <label class="tsw-label" for="tsw-bus-date">Date of Journey</label>
+                <button type="button" id="tsw-bus-date" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-days text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-bus-date" role="dialog" aria-label="Choose journey date"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== PANEL: CABS ===================== -->
+    <div class="tsw-panel hidden" id="tsw-panel-cabs" role="tabpanel" aria-labelledby="tsw-tabbtn-cabs" data-panel="cabs">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-cab-pickup">Pickup Location</label>
+                <input id="tsw-cab-pickup" type="text" class="tsw-input" placeholder="Enter pickup address" required aria-required="true" />
+            </div>
+            <div class="md:col-span-4 tsw-field">
+                <label class="tsw-label" for="tsw-cab-drop">Drop Location</label>
+                <input id="tsw-cab-drop" type="text" class="tsw-input" placeholder="Enter drop address" required aria-required="true" />
+            </div>
+            <div class="md:col-span-2 tsw-field relative">
+                <label class="tsw-label" for="tsw-cab-date">Date</label>
+                <button type="button" id="tsw-cab-date" class="tsw-input tsw-date-trigger text-left" aria-haspopup="dialog" aria-expanded="false">
+                    <i class="fa-solid fa-calendar-days text-primary mr-2" aria-hidden="true"></i>
+                    <span data-date-label>Select date</span>
+                </button>
+                <div class="tsw-datepicker hidden" data-datepicker-for="tsw-cab-date" role="dialog" aria-label="Choose cab date"></div>
+            </div>
+            <div class="md:col-span-2 tsw-field">
+                <label class="tsw-label" for="tsw-cab-time">Time</label>
+                <input id="tsw-cab-time" type="time" class="tsw-input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== PANEL: PACKAGES ===================== -->
+    <div class="tsw-panel hidden" id="tsw-panel-packages" role="tabpanel" aria-labelledby="tsw-tabbtn-packages" data-panel="packages">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            <div class="md:col-span-6 tsw-field">
+                <label class="tsw-label" for="tsw-pkg-dest">Destination</label>
+                <input id="tsw-pkg-dest" type="text" class="tsw-input" placeholder="Where do you want to go?" required aria-required="true" />
+            </div>
+            <div class="md:col-span-3 tsw-field">
+                <label class="tsw-label" for="tsw-pkg-month">Travel Month</label>
+                <input id="tsw-pkg-month" type="month" class="tsw-input" />
+            </div>
+            <div class="md:col-span-3 tsw-field">
+                <label class="tsw-label" for="tsw-pkg-travellers">Travellers</label>
+                <select id="tsw-pkg-travellers" class="tsw-input">
+                    <option>2 Adults</option>
+                    <option>2 Adults, 2 Children</option>
+                    <option>Solo Traveller</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== SEARCH BUTTON ===================== -->
+    <div class="mt-4 flex justify-center md:justify-end">
+        <button type="button" id="tsw-search-btn" class="tsw-search-btn">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            Search
+        </button>
+    </div>
+
+    <!-- ===================== RECENT SEARCHES ===================== -->
+    <div id="tsw-recent-wrapper" class="mt-5 pt-4 border-t border-border hidden">
+        <div class="flex items-center justify-between mb-2">
+            <p class="text-xs font-semibold uppercase tracking-wide text-text-secondary">Recent Searches</p>
+            <button type="button" id="tsw-clear-recent" class="text-xs text-primary font-medium hover:text-primary-hover transition-base">
+                Clear
+            </button>
+        </div>
+        <div id="tsw-recent-list" class="flex flex-wrap gap-2"></div>
+    </div>
+
+    <!-- ===================== POPULAR SEARCHES ===================== -->
+    <div class="mt-5 pt-4 border-t border-border">
+        <p class="text-xs font-semibold uppercase tracking-wide text-text-secondary mb-2">Popular Searches</p>
+        <div class="flex flex-wrap gap-2">
+            <button type="button" class="tsw-chip" data-popular="Delhi → Dubai">
+                <i class="fa-solid fa-plane" aria-hidden="true"></i> Delhi → Dubai
+            </button>
+            <button type="button" class="tsw-chip" data-popular="Mumbai → Singapore">
+                <i class="fa-solid fa-plane" aria-hidden="true"></i> Mumbai → Singapore
+            </button>
+            <button type="button" class="tsw-chip" data-popular="Goa Holiday Package">
+                <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i> Goa Holiday Package
+            </button>
+            <button type="button" class="tsw-chip" data-popular="Bangalore → Chennai Train">
+                <i class="fa-solid fa-train-subway" aria-hidden="true"></i> Bangalore → Chennai
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div id="announcement-bar" class="sticky top-0 z-[1015] w-full bg-text-primary text-white text-sm" role="region" aria-label="Announcements and quick settings">
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div class="flex items-center justify-between gap-4 h-10">
+            <!-- ===================== LEFT: ROTATING OFFERS ===================== -->
+            <div class="flex-1 min-w-0 overflow-hidden">
+                <div id="announcement-track" class="flex items-center gap-8 whitespace-nowrap animate-fade-in" aria-live="polite">
+                    <!-- Flash Sale -->
+                    <div class="flex items-center gap-2 shrink-0" data-announcement-item>
+                        <span class="badge bg-danger/15 text-danger">
+                            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                            Flash Sale
+                        </span>
+                        <span class="text-white/90 hidden sm:inline"> Up to 40% off on Flights &amp; Hotels — ends tonight </span>
+                    </div>
+
+                    <!-- Travel Offer -->
+                    <div class="items-center gap-2 shrink-0 hidden md:flex" data-announcement-item>
+                        <span class="badge bg-accent/15 text-accent">
+                            <i class="fa-solid fa-plane" aria-hidden="true"></i>
+                            Travel Offer
+                        </span>
+                        <span class="text-white/90"> International holiday packages starting ₹24,999 </span>
+                    </div>
+
+                    <!-- Bank Offer -->
+                    <div class="items-center gap-2 shrink-0 hidden lg:flex" data-announcement-item>
+                        <span class="badge bg-info/15 text-info">
+                            <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
+                            Bank Offer
+                        </span>
+                        <span class="text-white/90"> Extra 12% instant discount with select bank cards </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== RIGHT: UTILITY CONTROLS ===================== -->
+            <div class="flex items-center gap-4 shrink-0">
+                <!-- Support Number -->
+                <a href="tel:+911234567890" class="hidden md:flex items-center gap-2 text-white/90 hover:text-white transition-base" aria-label="Call support at +91 12345 67890">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                    <span>+91 12345 67890</span>
+                </a>
+
+                <span class="hidden md:block w-px h-4 bg-white/20" aria-hidden="true"></span>
+
+                <!-- Language Selector -->
+                <div class="relative" data-dropdown>
+                    <button type="button" data-dropdown-trigger class="flex items-center gap-1.5 text-white/90 hover:text-white transition-base focus:outline-none focus:ring-2 focus:ring-white/40 rounded-sm" aria-label="Select language">
+                        <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                        <span class="hidden sm:inline">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] opacity-70" aria-hidden="true"></i>
+                    </button>
+                    <div data-dropdown-menu class="hidden absolute right-0 mt-2 w-40 bg-surface text-text-primary rounded-md shadow-lg border border-border overflow-hidden z-[1020]" role="menu">
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> English </button>
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> हिन्दी </button>
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> Español </button>
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> العربية </button>
+                    </div>
+                </div>
+
+                <!-- Currency Selector -->
+                <div class="relative hidden sm:block" data-dropdown>
+                    <button type="button" data-dropdown-trigger class="flex items-center gap-1.5 text-white/90 hover:text-white transition-base focus:outline-none focus:ring-2 focus:ring-white/40 rounded-sm" aria-label="Select currency">
+                        <i class="fa-solid fa-coins" aria-hidden="true"></i>
+                        <span>INR</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] opacity-70" aria-hidden="true"></i>
+                    </button>
+                    <div data-dropdown-menu class="hidden absolute right-0 mt-2 w-32 bg-surface text-text-primary rounded-md shadow-lg border border-border overflow-hidden z-[1020]" role="menu">
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> INR ₹ </button>
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> USD $ </button>
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> EUR € </button> 
+                        <button type="button" class="w-full text-left px-4 py-2 text-sm hover:bg-background transition-base" role="menuitem"> GBP £ </button>
+                    </div>
+                </div>
+
+                <span class="w-px h-4 bg-white/20" aria-hidden="true"></span>
+
+                <!-- Close Button -->
+                <button type="button" id="announcement-close" class="text-white/70 hover:text-white transition-base focus:outline-none focus:ring-2 focus:ring-white/40 rounded-sm" aria-label="Dismiss announcement bar">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,368 @@
+{
+    "searchResult": {
+        "tripInfos": {
+            "ONWARD": [
+                {
+                    "sI": [
+                        {
+                            "id": "142",
+                            "fD": {
+                                "aI": {
+                                    "code": "6E",
+                                    "name": "IndiGo",
+                                    "isLcc": true
+                                },
+                                "fN": "5341",
+                                "eT": "321"
+                            },
+                            "stops": 0,
+                            "so": [],
+                            "duration": 150,
+                            "da": {
+                                "code": "DEL",
+                                "name": "Delhi Indira Gandhi Intl",
+                                "cityCode": "DEL",
+                                "city": "Delhi",
+                                "country": "India",
+                                "countryCode": "IN",
+                                "terminal": "Terminal 3"
+                            },
+                            "aa": {
+                                "code": "GOI",
+                                "name": "Dabolim Arpt",
+                                "cityCode": "GOI",
+                                "city": "Goa In",
+                                "country": "India",
+                                "countryCode": "IN"
+                            },
+                            "dt": "2026-09-21T05:10",
+                            "at": "2026-09-21T07:40",
+                            "iand": false,
+                            "isRs": false,
+                            "sN": 0
+                        }
+                    ],
+                    "totalPriceList": [
+                        {
+                            "fd": {
+                                "ADULT": {
+                                    "fC": {
+                                        "NF": 9910.50,
+                                        "TAF": 2585.50,
+                                        "TF": 9910.50,
+                                        "BF": 7325.00
+                                    },
+                                    "afC": {
+                                        "TAF": {
+                                            "OT": 2497.00,
+                                            "MFT": 13.50,
+                                            "MF": 75.00
+                                        }
+                                    },
+                                    "sR": 9,
+                                    "bI": {
+                                        "iB": "15 Kg (01 Piece only)",
+                                        "cB": "7 Kg"
+                                    },
+                                    "rT": 1,
+                                    "cc": "ECONOMY",
+                                    "cB": "O",
+                                    "fB": "RLIP",
+                                    "mI": false
+                                }
+                            },
+                            "fareIdentifier": "UPFRONT",
+                            "id": "5-0019138363_0DELGOI6E5341~1211081761086558",
+                            "msri": [],
+                            "messages": [],
+                            "tai": {
+                                "tbi": {
+                                    "142": [
+                                        {
+                                            "ADULT": {
+                                                "iB": "15 Kg (01 Piece only)",
+                                                "cB": "7 Kg"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "cci": {
+                                    "142": {
+                                        "ADULT": "ECONOMY"
+                                    }
+                                }
+                            },
+                            "icca": false
+                        },
+                        {
+                            "fd": {
+                                "ADULT": {
+                                    "fC": {
+                                        "NF": 6297.50,
+                                        "TAF": 2297.50,
+                                        "TF": 6297.50,
+                                        "BF": 4000.00
+                                    },
+                                    "afC": {
+                                        "TAF": {
+                                            "OT": 2209.00,
+                                            "MFT": 13.50,
+                                            "MF": 75.00
+                                        }
+                                    },
+                                    "sR": 9,
+                                    "bI": {
+                                        "iB": "15 Kg (01 Piece only)",
+                                        "cB": "7 Kg"
+                                    },
+                                    "rT": 1,
+                                    "cc": "ECONOMY",
+                                    "cB": "R",
+                                    "fB": "R0IP",
+                                    "mI": false
+                                }
+                            },
+                            "fareIdentifier": "PUBLISHED",
+                            "id": "5-0019138363_0DELGOI6E5341~1211081761087268",
+                            "msri": [],
+                            "messages": [],
+                            "tai": {
+                                "tbi": {
+                                    "142": [
+                                        {
+                                            "ADULT": {
+                                                "iB": "15 Kg (01 Piece only)",
+                                                "cB": "7 Kg"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "cci": {
+                                    "142": {
+                                        "ADULT": "ECONOMY"
+                                    }
+                                }
+                            },
+                            "icca": false
+                        },
+                        {
+                            "fd": {
+                                "ADULT": {
+                                    "fC": {
+                                        "NF": 6379.50,
+                                        "TAF": 2304.50,
+                                        "TF": 6379.50,
+                                        "BF": 4075.00
+                                    },
+                                    "afC": {
+                                        "TAF": {
+                                            "OT": 2216.00,
+                                            "MFT": 13.50,
+                                            "MF": 75.00
+                                        }
+                                    },
+                                    "sR": 9,
+                                    "bI": {
+                                        "iB": "15 Kg (01 Piece only)",
+                                        "cB": "7 Kg"
+                                    },
+                                    "rT": 1,
+                                    "cc": "ECONOMY",
+                                    "cB": "F",
+                                    "fB": "R0CRP",
+                                    "mI": false
+                                }
+                            },
+                            "fareIdentifier": "CORPORATE",
+                            "id": "5-0019138363_0DELGOI6E5341~1211081761087698",
+                            "msri": [],
+                            "messages": [],
+                            "tai": {
+                                "tbi": {
+                                    "142": [
+                                        {
+                                            "ADULT": {
+                                                "iB": "15 Kg (01 Piece only)",
+                                                "cB": "7 Kg"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "cci": {
+                                    "142": {
+                                        "ADULT": "ECONOMY"
+                                    }
+                                }
+                            },
+                            "icca": false
+                        },
+                        {
+                            "fd": {
+                                "ADULT": {
+                                    "fC": {
+                                        "NF": 6379.50,
+                                        "TAF": 2304.50,
+                                        "TF": 6379.50,
+                                        "BF": 4075.00
+                                    },
+                                    "afC": {
+                                        "TAF": {
+                                            "OT": 2216.00,
+                                            "MFT": 13.50,
+                                            "MF": 75.00
+                                        }
+                                    },
+                                    "sR": 9,
+                                    "bI": {
+                                        "iB": "15 Kg (01 Piece only)",
+                                        "cB": "7 Kg"
+                                    },
+                                    "rT": 1,
+                                    "cc": "ECONOMY",
+                                    "cB": "M",
+                                    "fB": "RMIP",
+                                    "mI": false
+                                }
+                            },
+                            "fareIdentifier": "SME",
+                            "id": "5-0019138363_0DELGOI6E5341~1211081761087848",
+                            "msri": [],
+                            "messages": [],
+                            "tai": {
+                                "tbi": {
+                                    "142": [
+                                        {
+                                            "ADULT": {
+                                                "iB": "15 Kg (01 Piece only)",
+                                                "cB": "7 Kg"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "cci": {
+                                    "142": {
+                                        "ADULT": "ECONOMY"
+                                    }
+                                }
+                            },
+                            "icca": false
+                        }
+                    ],
+                    "airFlowType": "SEARCH",
+                    "ipm": "",
+                    "issf": false,
+                    "icafdgca": false,
+                    "isWarCrisisFlow": false,
+                    "isFullRefundViaCancellation": false
+                },
+                {
+                    "sI": [
+                        {
+                            "id": "441",
+                            "fD": {
+                                "aI": {
+                                    "code": "AI",
+                                    "name": "Air India",
+                                    "isLcc": false
+                                },
+                                "fN": "1734",
+                                "eT": "32N"
+                            },
+                            "stops": 0,
+                            "so": [],
+                            "duration": 160,
+                            "da": {
+                                "code": "DEL",
+                                "name": "Delhi Indira Gandhi Intl",
+                                "cityCode": "DEL",
+                                "city": "Delhi",
+                                "country": "India",
+                                "countryCode": "IN",
+                                "terminal": "Terminal 2"
+                            },
+                            "aa": {
+                                "code": "GOX",
+                                "name": "Goa arpt",
+                                "cityCode": "GOX",
+                                "city": "Goa in",
+                                "country": "India",
+                                "countryCode": "IN"
+                            },
+                            "oaa": "GOI",
+                            "dt": "2026-09-21T18:25",
+                            "at": "2026-09-21T21:05",
+                            "iand": false,
+                            "isRs": false,
+                            "sN": 0
+                        }
+                    ],
+                    "totalPriceList": [
+                        {
+                            "fd": {
+                                "ADULT": {
+                                    "fC": {
+                                        "NF": 6339.50,
+                                        "TAF": 1913.50,
+                                        "TF": 6339.50,
+                                        "BF": 4426.00
+                                    },
+                                    "afC": {
+                                        "TAF": {
+                                            "YR": 170.00,
+                                            "AGST": 258.00,
+                                            "OT": 848.00,
+                                            "MFT": 13.50,
+                                            "YQ": 549.00,
+                                            "MF": 75.00
+                                        }
+                                    },
+                                    "sR": 9,
+                                    "bI": {
+                                        "iB": "15 Kg",
+                                        "cB": "7 Kg"
+                                    },
+                                    "rT": 0,
+                                    "cc": "ECONOMY",
+                                    "cB": "U",
+                                    "fB": "UU1YXRII"
+                                }
+                            },
+                            "fareIdentifier": "PUBLISHED",
+                            "id": "32-15-2-10-0019138363_0DELGOXAI1734~1211085760242548",
+                            "msri": [],
+                            "messages": [],
+                            "tai": {
+                                "tbi": {
+                                    "441": [
+                                        {
+                                            "ADULT": {
+                                                "iB": "15 Kg",
+                                                "cB": "7 Kg"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "cci": {
+                                    "441": {
+                                        "ADULT": "ECONOMY"
+                                    }
+                                }
+                            },
+                            "icca": false
+                        }
+                    ],
+                    "airFlowType": "SEARCH",
+                    "ipm": "",
+                    "issf": false,
+                    "icafdgca": false,
+                    "isWarCrisisFlow": false,
+                    "isFullRefundViaCancellation": false
+                }
+            ]
+        }
+    },
+    "status": {
+        "success": true,
+        "httpStatus": 200
+    }
+}

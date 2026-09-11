@@ -1,0 +1,1340 @@
+{% load static %}
+
+<!-- ===================== NAVBAR ===================== -->
+<header
+    id="navbar"
+    class="navbar fixed top-0 left-0 w-full z-[1020] transition-base
+           {% if request.path == '/' %}navbar-home{% endif %}"
+    role="banner">
+
+    <nav
+        class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6"
+        aria-label="Primary navigation">
+
+        <div class="flex items-center justify-between h-16 lg:h-20">
+
+            <!-- ===================== LOGO ===================== -->
+            <a
+                href="/"
+                class="flex items-center gap-2 shrink-0 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm"
+                aria-label="Travel Booking Platform — Home">
+
+                <img
+                    id="navbar-logo"
+                    src="{% static 'images/logo.webp' %}"
+                    alt="Logo"
+                    class="w-32 h-10 transition-all duration-300" />
+            </a>
+
+
+            <!-- ===================== DESKTOP PRIMARY NAV ===================== -->
+            <div class="hidden lg:flex items-center gap-1 flex-1 justify-center">
+
+                <!-- Flights -->
+                <a href="/flights" class="navbar-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Flights
+                </a>
+
+                <!-- Hotels -->
+                <a href="/hotels" class="navbar-link">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>
+                    Hotels
+                </a>
+
+                <!-- Holidays -->
+                <a href="/holiday-packages" class="navbar-link">
+                    <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+                    Holidays
+                </a>
+
+
+                <!-- ===================== EXPLORE MORE ===================== -->
+                <div class="relative" data-dropdown>
+
+                    <button
+                        type="button"
+                        data-dropdown-trigger
+                        class="navbar-link"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+
+                        <i class="fa-solid fa-grip" aria-hidden="true"></i>
+                        Explore More
+
+                        <i
+                            class="fa-solid fa-chevron-down text-[10px] opacity-60 ml-0.5"
+                            aria-hidden="true">
+                        </i>
+                    </button>
+
+
+                    <!-- Mega Menu Panel -->
+                    <div
+                        data-dropdown-menu
+                        class="hidden absolute left-1/2 -translate-x-1/2 mt-3 w-[720px] max-w-[90vw]
+                               bg-surface rounded-card shadow-xl border border-border p-6 z-[1025]"
+                        role="menu"
+                        aria-label="Explore more travel services">
+
+                        <div class="grid grid-cols-3 gap-6">
+
+                            <!-- ===================== TRAVEL ===================== -->
+                            <div>
+
+                                <p
+                                    class="text-xs font-semibold uppercase tracking-wide
+                                           text-text-secondary mb-3">
+                                    Travel
+                                </p>
+
+                                <ul class="space-y-1">
+
+                                    <li>
+                                        <a
+                                            href="/trains"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-train-subway"
+                                                aria-hidden="true">
+                                            </i>
+                                            Trains
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/buses"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-bus"
+                                                aria-hidden="true">
+                                            </i>
+                                            Buses
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/cabs"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-taxi"
+                                                aria-hidden="true">
+                                            </i>
+                                            Cabs
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/airport-transfers"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-shuttle-van"
+                                                aria-hidden="true">
+                                            </i>
+                                            Airport Transfers
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/cruises"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-ship"
+                                                aria-hidden="true">
+                                            </i>
+                                            Cruises
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+
+                            <!-- ===================== STAY ===================== -->
+                            <div>
+
+                                <p
+                                    class="text-xs font-semibold uppercase tracking-wide
+                                           text-text-secondary mb-3">
+                                    Stay
+                                </p>
+
+                                <ul class="space-y-1">
+
+                                    <li>
+                                        <a
+                                            href="/homestays"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-house-chimney"
+                                                aria-hidden="true">
+                                            </i>
+                                            Homestays
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/villas"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-house-flag"
+                                                aria-hidden="true">
+                                            </i>
+                                            Villas
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/resorts"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-umbrella-beach"
+                                                aria-hidden="true">
+                                            </i>
+                                            Resorts
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/activities"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-person-hiking"
+                                                aria-hidden="true">
+                                            </i>
+                                            Activities
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+
+                            <!-- ===================== SERVICES ===================== -->
+                            <div>
+
+                                <p
+                                    class="text-xs font-semibold uppercase tracking-wide
+                                           text-text-secondary mb-3">
+                                    Services
+                                </p>
+
+                                <ul class="space-y-1">
+
+                                    <li>
+                                        <a
+                                            href="/visa"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-passport"
+                                                aria-hidden="true">
+                                            </i>
+                                            Visa Services
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/insurance"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-shield-heart"
+                                                aria-hidden="true">
+                                            </i>
+                                            Travel Insurance
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="/forex"
+                                            class="mega-menu-link">
+                                            <i
+                                                class="fa-solid fa-money-bill-transfer"
+                                                aria-hidden="true">
+                                            </i>
+                                            Forex
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ===================== PROMO STRIP ===================== -->
+                        <div
+                            class="mt-5 pt-5 border-t border-border
+                                   flex items-center justify-between gap-4">
+
+                            <div class="flex items-center gap-3">
+
+                                <span
+                                    class="w-10 h-10 rounded-lg bg-accent/15
+                                           flex items-center justify-center">
+
+                                    <i
+                                        class="fa-solid fa-gift text-accent"
+                                        aria-hidden="true">
+                                    </i>
+
+                                </span>
+
+                                <div>
+
+                                    <p
+                                        class="text-sm font-semibold text-text-primary">
+                                        Refer &amp; Earn Wallet Credits
+                                    </p>
+
+                                    <p
+                                        class="text-xs text-text-secondary">
+                                        Invite friends and get travel rewards
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <a
+                                href="/rewards"
+                                class="btn-secondary-sm">
+                                Learn More
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- ===================== OFFERS ===================== -->
+                <a href="/offers" class="navbar-link">
+
+                    <i
+                        class="fa-solid fa-tags"
+                        aria-hidden="true">
+                    </i>
+
+                    Offers
+
+                    <span
+                        class="badge bg-danger/15 text-danger ml-1 text-[10px]">
+                        Hot
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- ===================== RIGHT ACTIONS ===================== -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+
+                <!-- ===================== SEARCH ===================== -->
+                <button
+                    type="button"
+                    id="navbar-search-toggle"
+                    class="navbar-icon-btn"
+                    aria-label="Search"
+                    aria-expanded="false">
+
+                    <i
+                        class="fa-solid fa-magnifying-glass"
+                        aria-hidden="true">
+                    </i>
+
+                </button>
+
+
+                <!-- ===================== WISHLIST ===================== -->
+                <a
+                    href="{% url 'WishlistPage' %}"
+                    class="navbar-icon-btn hidden sm:inline-flex"
+                    aria-label="Wishlist">
+
+                    <i
+                        class="fa-regular fa-heart"
+                        aria-hidden="true">
+                    </i>
+
+                </a>
+
+
+                <!-- ===================== NOTIFICATIONS ===================== -->
+                <div class="relative" data-dropdown>
+
+                    <button
+                        type="button"
+                        data-dropdown-trigger
+                        class="navbar-icon-btn hidden sm:inline-flex relative"
+                        aria-label="Notifications"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+
+                        <i
+                            class="fa-regular fa-bell"
+                            aria-hidden="true">
+                        </i>
+
+                        <span
+                            class="absolute top-1 right-1 w-2 h-2 rounded-full bg-danger"
+                            aria-hidden="true">
+                        </span>
+
+                    </button>
+
+
+                    <!-- Notifications Dropdown -->
+                    <div
+                        data-dropdown-menu
+                        class="hidden absolute right-0 mt-3 w-80 max-w-[90vw]
+                               bg-surface rounded-card shadow-xl border border-border
+                               overflow-hidden z-[1025]"
+                        role="menu"
+                        aria-label="Notifications">
+
+                        <div
+                            class="px-4 py-3 border-b border-border">
+
+                            <p class="font-semibold text-sm">
+                                Notifications
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="max-h-72 overflow-y-auto divide-y divide-border">
+
+                            <a
+                                href="#"
+                                class="block px-4 py-3 hover:bg-background transition-base"
+                                role="menuitem">
+
+                                <p class="text-sm text-text-primary">
+                                    Your flight booking is confirmed
+                                </p>
+
+                                <p class="text-xs text-text-secondary mt-0.5">
+                                    2 hours ago
+                                </p>
+
+                            </a>
+
+
+                            <a
+                                href="#"
+                                class="block px-4 py-3 hover:bg-background transition-base"
+                                role="menuitem">
+
+                                <p class="text-sm text-text-primary">
+                                    Price drop alert on your saved hotel
+                                </p>
+
+                                <p class="text-xs text-text-secondary mt-0.5">
+                                    1 day ago
+                                </p>
+
+                            </a>
+
+                        </div>
+
+
+                        <a
+                            href="/notifications"
+                            class="block text-center text-sm text-primary
+                                   font-medium py-3 hover:bg-background transition-base"
+                            role="menuitem">
+
+                            View all
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ===================== SUPPORT ===================== -->
+                <a
+                    href="{% url 'SupportPage' %}"
+                    class="navbar-icon-btn hidden sm:inline-flex"
+                    aria-label="Support">
+
+                    <i
+                        class="fa-solid fa-headset"
+                        aria-hidden="true">
+                    </i>
+
+                </a>
+
+
+                <!-- Divider -->
+                <span
+                    class="hidden md:block w-px h-6 bg-border"
+                    aria-hidden="true">
+                </span>
+
+
+                <!-- ===================== AUTH: LOGGED OUT ===================== -->
+                <div
+                    id="navbar-auth-guest"
+                    class="hidden md:flex items-center gap-2">
+
+                    <a
+                        href="{% url 'LoginPage' %}"
+                        class="btn-outline-sm">
+                        Login
+                    </a>
+
+                    <a
+                        href="{% url 'RegisterPage' %}"
+                        class="btn-primary-sm">
+                        Register
+                    </a>
+
+                </div>
+
+
+                <!-- ===================== AUTH: LOGGED IN ===================== -->
+                <div
+                    id="navbar-auth-user"
+                    class="relative hidden"
+                    data-dropdown>
+
+                    <button
+                        type="button"
+                        data-dropdown-trigger
+                        class="flex items-center gap-2 rounded-full
+                               focus:outline-none focus:ring-2 focus:ring-primary"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        aria-label="Account menu">
+
+                        <i
+                            class="fa-solid fa-chevron-down text-[10px]
+                                   text-text-secondary hidden lg:inline"
+                            aria-hidden="true">
+                        </i>
+
+                    </button>
+
+
+                    <!-- Account Dropdown -->
+                    <div
+                        data-dropdown-menu
+                        class="hidden absolute right-0 mt-3 w-56 bg-surface
+                               rounded-card shadow-xl border border-border
+                               overflow-hidden z-[1025]"
+                        role="menu"
+                        aria-label="Account">
+
+                        <div
+                            class="px-4 py-3 border-b border-border">
+
+                            <p
+                                class="text-sm font-semibold text-text-primary">
+                                Aarav Sharma
+                            </p>
+
+                            <p
+                                class="text-xs text-text-secondary">
+                                aarav@example.com
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="/dashboard"
+                            class="profile-menu-link"
+                            role="menuitem">
+
+                            <i
+                                class="fa-solid fa-gauge"
+                                aria-hidden="true">
+                            </i>
+
+                            Dashboard
+
+                        </a>
+
+
+                        <a
+                            href="/bookings"
+                            class="profile-menu-link"
+                            role="menuitem">
+
+                            <i
+                                class="fa-solid fa-ticket"
+                                aria-hidden="true">
+                            </i>
+
+                            My Bookings
+
+                        </a>
+
+
+                        <a
+                            href="/wallet"
+                            class="profile-menu-link"
+                            role="menuitem">
+
+                            <i
+                                class="fa-solid fa-wallet"
+                                aria-hidden="true">
+                            </i>
+
+                            Travel Wallet
+
+                        </a>
+
+
+                        <a
+                            href="/saved-travellers"
+                            class="profile-menu-link"
+                            role="menuitem">
+
+                            <i
+                                class="fa-solid fa-users"
+                                aria-hidden="true">
+                            </i>
+
+                            Saved Travellers
+
+                        </a>
+
+
+                        <div class="border-t border-border">
+
+                            <a
+                                href="/logout"
+                                class="profile-menu-link text-danger"
+                                role="menuitem">
+
+                                <i
+                                    class="fa-solid fa-right-from-bracket"
+                                    aria-hidden="true">
+                                </i>
+
+                                Logout
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ===================== MOBILE MENU TOGGLE ===================== -->
+                <button
+                    type="button"
+                    id="mobile-menu-toggle"
+                    class="navbar-icon-btn lg:hidden"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+
+                    <i
+                        class="fa-solid fa-bars"
+                        aria-hidden="true">
+                    </i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================== EXPANDABLE SEARCH BAR ===================== -->
+        <div
+            id="navbar-search-panel"
+            class="hidden overflow-hidden border-t border-border/60 py-4"
+            role="search">
+
+            <div
+                class="flex items-center gap-3 bg-background rounded-full
+                       px-5 py-3 border border-border">
+
+                <i
+                    class="fa-solid fa-magnifying-glass text-text-secondary"
+                    aria-hidden="true">
+                </i>
+
+                <input
+                    type="text"
+                    class="flex-1 bg-transparent outline-none text-sm
+                           placeholder:text-text-secondary"
+                    placeholder="Search flights, hotels, holiday packages, activities..."
+                    aria-label="Search the platform" />
+
+                <button
+                    type="button"
+                    class="text-text-secondary hover:text-text-primary transition-base"
+                    id="navbar-search-close"
+                    aria-label="Close search">
+
+                    <i
+                        class="fa-solid fa-xmark"
+                        aria-hidden="true">
+                    </i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================== DESKTOP ACCOUNT ACTIONS ===================== -->
+        <div class="hidden md:flex items-center gap-2">
+
+            {% if request.user.is_authenticated %}
+
+                <a
+                    href="{% url 'ProfilePage' %}"
+                    class="px-3 py-2 text-sm font-semibold">
+                    Account
+                </a>
+
+                <form
+                    method="post"
+                    action="{% url 'LogoutPage' %}">
+
+                    {% csrf_token %}
+
+                    <button
+                        class="px-3 py-2 text-sm font-semibold text-text-secondary">
+                        Logout
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <!-- Login handled by navbar auth section -->
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- ===================== MOBILE DRAWER ===================== -->
+<div
+    id="mobile-menu"
+    class="hidden fixed inset-0 z-[1030] lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation menu">
+
+
+    <!-- Backdrop -->
+    <div
+        id="mobile-menu-backdrop"
+        class="absolute inset-0 bg-text-primary/50 backdrop-blur-sm animate-fade-in">
+    </div>
+
+
+    <!-- Drawer Panel -->
+    <div
+        class="absolute top-0 right-0 h-full w-[85%] max-w-sm
+               bg-surface shadow-xl flex flex-col animate-slide-in-right">
+
+
+        <!-- ===================== DRAWER HEADER ===================== -->
+        <div
+            class="flex items-center justify-between px-5 h-16
+                   border-b border-border shrink-0">
+
+            <a
+                href="/"
+                class="flex items-center gap-2"
+                aria-label="Travel Booking Platform — Home">
+
+                <span
+                    class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary
+                           to-secondary flex items-center justify-center">
+
+                    <i
+                        class="fa-solid fa-earth-asia text-white text-sm"
+                        aria-hidden="true">
+                    </i>
+
+                </span>
+
+                <span class="font-bold text-lg">
+                    Trav<span class="text-primary">ora</span>
+                </span>
+
+            </a>
+
+
+            <button
+                type="button"
+                id="mobile-menu-close"
+                class="navbar-icon-btn"
+                aria-label="Close menu">
+
+                <i
+                    class="fa-solid fa-xmark"
+                    aria-hidden="true">
+                </i>
+
+            </button>
+
+        </div>
+
+
+        <!-- ===================== DRAWER AUTH ===================== -->
+        <div
+            class="flex items-center gap-3 px-5 py-4
+                   border-b border-border shrink-0">
+
+            <a
+                href="/login"
+                class="btn-outline-sm flex-1 text-center">
+                Login
+            </a>
+
+            <a
+                href="{% url 'RegisterPage' %}"
+                class="btn-primary-sm flex-1 text-center">
+                Register
+            </a>
+
+        </div>
+
+
+        <!-- ===================== MOBILE LINKS ===================== -->
+        <nav
+            class="flex-1 overflow-y-auto px-3 py-4"
+            aria-label="Mobile primary navigation">
+
+
+            <!-- ===================== BOOK ===================== -->
+            <p class="mobile-menu-heading">
+                Book
+            </p>
+
+            <a
+                href="/flights"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-plane-departure"
+                    aria-hidden="true">
+                </i>
+
+                Flights
+
+            </a>
+
+
+            <a
+                href="/hotels"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-hotel"
+                    aria-hidden="true">
+                </i>
+
+                Hotels
+
+            </a>
+
+
+            <a
+                href="/homestays"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-house-chimney"
+                    aria-hidden="true">
+                </i>
+
+                Homestays
+
+            </a>
+
+
+            <a
+                href="/villas"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-house-flag"
+                    aria-hidden="true">
+                </i>
+
+                Villas
+
+            </a>
+
+
+            <a
+                href="/resorts"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-umbrella-beach"
+                    aria-hidden="true">
+                </i>
+
+                Resorts
+
+            </a>
+
+
+            <a
+                href="/holiday-packages"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-suitcase-rolling"
+                    aria-hidden="true">
+                </i>
+
+                Holiday Packages
+
+            </a>
+
+
+            <a
+                href="/cruises"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-ship"
+                    aria-hidden="true">
+                </i>
+
+                Cruises
+
+            </a>
+
+
+            <!-- ===================== TRAVEL ===================== -->
+            <p class="mobile-menu-heading">
+                Travel
+            </p>
+
+
+            <a
+                href="/trains"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-train-subway"
+                    aria-hidden="true">
+                </i>
+
+                Trains
+
+            </a>
+
+
+            <a
+                href="/buses"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-bus"
+                    aria-hidden="true">
+                </i>
+
+                Buses
+
+            </a>
+
+
+            <a
+                href="/cabs"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-taxi"
+                    aria-hidden="true">
+                </i>
+
+                Cabs
+
+            </a>
+
+
+            <a
+                href="/airport-transfers"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-shuttle-van"
+                    aria-hidden="true">
+                </i>
+
+                Airport Transfers
+
+            </a>
+
+
+            <!-- ===================== SERVICES ===================== -->
+            <p class="mobile-menu-heading">
+                Services
+            </p>
+
+
+            <a
+                href="/visa"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-passport"
+                    aria-hidden="true">
+                </i>
+
+                Visa Services
+
+            </a>
+
+
+            <a
+                href="/insurance"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-shield-heart"
+                    aria-hidden="true">
+                </i>
+
+                Travel Insurance
+
+            </a>
+
+
+            <a
+                href="/forex"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-money-bill-transfer"
+                    aria-hidden="true">
+                </i>
+
+                Forex
+
+            </a>
+
+
+            <a
+                href="/activities"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-person-hiking"
+                    aria-hidden="true">
+                </i>
+
+                Activities
+
+            </a>
+
+
+            <!-- ===================== MORE ===================== -->
+            <p class="mobile-menu-heading">
+                More
+            </p>
+
+
+            <a
+                href="/offers"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-tags"
+                    aria-hidden="true">
+                </i>
+
+                Offers
+
+            </a>
+
+
+            <a
+                href="{% url 'WishlistPage' %}"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-regular fa-heart"
+                    aria-hidden="true">
+                </i>
+
+                Wishlist
+
+            </a>
+
+
+            <a
+                href="/notifications"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-regular fa-bell"
+                    aria-hidden="true">
+                </i>
+
+                Notifications
+
+            </a>
+
+
+            <a
+                href="/partner"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-handshake"
+                    aria-hidden="true">
+                </i>
+
+                Become a Partner
+
+            </a>
+
+
+            <a
+                href="{% url 'SupportPage' %}"
+                class="mobile-menu-link">
+
+                <i
+                    class="fa-solid fa-headset"
+                    aria-hidden="true">
+                </i>
+
+                Support
+
+            </a>
+
+
+            <!-- ===================== MOBILE ACCOUNT ===================== -->
+            <div class="hidden md:flex items-center gap-2">
+
+                {% if request.user.is_authenticated %}
+
+                    <a
+                        href="{% url 'ProfilePage' %}"
+                        class="px-3 py-2 text-sm font-semibold">
+                        Account
+                    </a>
+
+                    <form
+                        method="post"
+                        action="{% url 'LogoutPage' %}">
+
+                        {% csrf_token %}
+
+                        <button
+                            class="px-3 py-2 text-sm font-semibold text-text-secondary">
+                            Logout
+                        </button>
+
+                    </form>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'LoginPage' %}"
+                        class="px-3 py-2 text-sm font-semibold">
+                        Login
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR HOME / SCROLL STYLES -->
+<!-- ========================================================= -->
+
+<style>
+
+    /*
+     * Default navbar state.
+     *
+     * This applies to every page.
+     * Non-home pages will ALWAYS have:
+     * - White background
+     * - Black navbar links
+     * - Black navbar icons
+     * - Normal logo
+     */
+
+    #navbar {
+        background-color: #ffffff;
+    }
+
+
+    #navbar .navbar-link,
+    #navbar .navbar-icon-btn {
+        color: #111827;
+    }
+
+
+    /*
+     * HOME PAGE
+     *
+     * At the top of the homepage:
+     * - Transparent navbar
+     * - White links
+     * - White icons
+     * - White logo
+     */
+
+    #navbar.navbar-home {
+        background-color: transparent;
+    }
+
+
+    #navbar.navbar-home:not(.navbar-scrolled) .navbar-link,
+    #navbar.navbar-home:not(.navbar-scrolled) .navbar-icon-btn {
+        color: #ffffff;
+    }
+
+
+    #navbar.navbar-home:not(.navbar-scrolled) #navbar-logo {
+        filter: brightness(0) invert(1);
+    }
+
+
+    /*
+     * HOME PAGE AFTER SCROLL
+     *
+     * Once the user scrolls:
+     * - White background
+     * - Black links
+     * - Black icons
+     * - Normal logo
+     */
+
+    #navbar.navbar-home.navbar-scrolled {
+        background-color: #ffffff;
+    }
+
+
+    #navbar.navbar-home.navbar-scrolled .navbar-link,
+    #navbar.navbar-home.navbar-scrolled .navbar-icon-btn {
+        color: #111827;
+    }
+
+
+    #navbar.navbar-home.navbar-scrolled #navbar-logo {
+        filter: none;
+    }
+
+
+    /*
+     * NON-HOME PAGES
+     *
+     * These rules ensure that the navbar never becomes white-on-transparent
+     * on other pages, even if scroll-related JavaScript runs elsewhere.
+     */
+
+    #navbar:not(.navbar-home) {
+        background-color: #ffffff;
+    }
+
+
+    #navbar:not(.navbar-home) .navbar-link,
+    #navbar:not(.navbar-home) .navbar-icon-btn {
+        color: #111827;
+    }
+
+
+    #navbar:not(.navbar-home) #navbar-logo {
+        filter: none;
+    }
+
+</style>
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR HOME / SCROLL JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const navbar = document.getElementById("navbar");
+
+        /*
+         * Only execute the scroll behavior when the navbar
+         * belongs to the homepage.
+         *
+         * On every other page this code does nothing.
+         */
+        if (!navbar || !navbar.classList.contains("navbar-home")) {
+            return;
+        }
+
+
+        /*
+         * Change navbar state after scrolling.
+         */
+        function handleNavbarScroll() {
+
+            if (window.scrollY > 20) {
+
+                navbar.classList.add("navbar-scrolled");
+
+            } else {
+
+                navbar.classList.remove("navbar-scrolled");
+
+            }
+
+        }
+
+
+        /*
+         * Run once immediately.
+         *
+         * This handles cases where the page loads already
+         * at a scroll position greater than 20px.
+         */
+        handleNavbarScroll();
+
+
+        /*
+         * Listen for scrolling.
+         */
+        window.addEventListener(
+            "scroll",
+            handleNavbarScroll,
+            { passive: true }
+        );
+
+    });
+
+</script>

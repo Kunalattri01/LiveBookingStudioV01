@@ -1,0 +1,1 @@
+from .vw_wishlist import *

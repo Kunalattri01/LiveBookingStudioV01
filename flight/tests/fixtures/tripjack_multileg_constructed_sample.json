@@ -1,0 +1,86 @@
+{
+  "_NOTE": "This file is CONSTRUCTED for testing only - it is NOT a real captured TripJack response. It reuses the verified per-itinerary structure from tripjack_air_search_all_sample.json under a second, assumed leg key ('RETURN') purely to exercise TripJackNormalizer's generic key-iteration logic. The real key name TripJack uses for a return/multi-city leg is UNVERIFIED - see docs/tripjack-integration.md.",
+  "searchResult": {
+    "tripInfos": {
+      "ONWARD": [
+        {
+          "sI": [
+            {
+              "id": "142",
+              "fD": {
+                "aI": { "code": "6E", "name": "IndiGo", "isLcc": true },
+                "fN": "5341",
+                "eT": "321"
+              },
+              "stops": 0,
+              "so": [],
+              "duration": 150,
+              "da": { "code": "DEL", "city": "Delhi", "terminal": "Terminal 3" },
+              "aa": { "code": "GOI", "city": "Goa In" },
+              "dt": "2026-09-21T05:10",
+              "at": "2026-09-21T07:40"
+            }
+          ],
+          "totalPriceList": [
+            {
+              "fd": {
+                "ADULT": {
+                  "fC": { "NF": 9910.50, "TAF": 2585.50, "TF": 9910.50, "BF": 7325.00 },
+                  "sR": 9,
+                  "bI": { "iB": "15 Kg", "cB": "7 Kg" },
+                  "rT": 1,
+                  "cc": "ECONOMY",
+                  "cB": "O",
+                  "fB": "RLIP",
+                  "mI": false
+                }
+              },
+              "fareIdentifier": "UPFRONT",
+              "id": "5-0019138363_0DELGOI6E5341~1211081761086558"
+            }
+          ]
+        }
+      ],
+      "RETURN": [
+        {
+          "sI": [
+            {
+              "id": "899",
+              "fD": {
+                "aI": { "code": "6E", "name": "IndiGo", "isLcc": true },
+                "fN": "6201",
+                "eT": "321"
+              },
+              "stops": 0,
+              "so": [],
+              "duration": 155,
+              "da": { "code": "GOI", "city": "Goa In" },
+              "aa": { "code": "DEL", "city": "Delhi", "terminal": "Terminal 3" },
+              "dt": "2026-09-28T19:00",
+              "at": "2026-09-28T21:35"
+            }
+          ],
+          "totalPriceList": [
+            {
+              "fd": {
+                "ADULT": {
+                  "fC": { "NF": 10555.00, "TAF": 2700.00, "TF": 10555.00, "BF": 7855.00 },
+                  "sR": 6,
+                  "bI": { "iB": "15 Kg", "cB": "7 Kg" },
+                  "rT": 1,
+                  "cc": "ECONOMY",
+                  "cB": "O",
+                  "fB": "RLIP",
+                  "mI": false
+                }
+              },
+              "fareIdentifier": "UPFRONT",
+              "id": "5-0019138363_0GOIDEL6E6201~1211081761099999"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": { "success": true, "httpStatus": 200 }
+}

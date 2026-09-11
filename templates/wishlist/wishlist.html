@@ -1,0 +1,142 @@
+{% extends 'base/public_base.html' %}
+
+{% block content %}
+<section class="min-h-screen py-48">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- HEADER -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8">
+            <div>
+                <div class="flex items-center gap-2 text-primary text-sm font-semibold mb-2">
+                    <i class="fa-regular fa-heart"></i>
+                    SAVED FOR LATER
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold">Your Wishlist</h1>
+                <p class="text-text-secondary mt-2 text-sm">Places and experiences you've saved for your next adventure.</p>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button class="px-4 py-2.5 rounded-xl bg-white border border-border text-sm font-semibold">
+                    <i class="fa-solid fa-sliders mr-2"></i> Filter 
+                </button>
+            </div>
+        </div>
+
+        <!-- CATEGORY TABS -->
+        <div class="bg-white rounded-2xl border border-border p-2 flex gap-2 overflow-x-auto mb-8">
+            <button class="px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold whitespace-nowrap">All</button>
+
+            <button class="px-5 py-2.5 rounded-xl hover:bg-slate-50 text-text-secondary text-sm font-semibold whitespace-nowrap">
+                <i class="fa-solid fa-hotel mr-2"></i> Hotels 
+            </button>
+
+            <button class="px-5 py-2.5 rounded-xl hover:bg-slate-50 text-text-secondary text-sm font-semibold whitespace-nowrap">
+                <i class="fa-solid fa-plane mr-2"></i> Flights 
+            </button>
+
+            <button class="px-5 py-2.5 rounded-xl hover:bg-slate-50 text-text-secondary text-sm font-semibold whitespace-nowrap">
+                <i class="fa-solid fa-suitcase-rolling mr-2"></i> Holidays 
+            </button>
+
+            <button class="px-5 py-2.5 rounded-xl hover:bg-slate-50 text-text-secondary text-sm font-semibold whitespace-nowrap">
+                <i class="fa-solid fa-person-hiking mr-2"></i> Activities 
+            </button>
+        </div>
+
+        <!-- WISHLIST GRID -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- CARD -->
+            <article class="bg-white rounded-[20px] overflow-hidden border border-border shadow-sm hover:shadow-lg transition group">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=85" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Luxury hotel" />
+
+                    <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 shadow-md flex items-center justify-center text-danger">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    
+                    <span class="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-white/95 text-xs font-semibold"> HOTEL </span>
+                </div>
+
+                <div class="p-5">
+                    <div class="flex justify-between gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg">The Park Bangalore</h3>
+                            <p class="text-xs text-text-secondary mt-1">
+                                <i class="fa-solid fa-location-dot mr-1"></i>
+                                MG Road, Bengaluru
+                            </p>
+                        </div>
+                        <span class="text-xs font-bold bg-green-50 text-success px-2.5 py-1 rounded-lg h-fit"> 4.6 ★ </span>
+                    </div>
+
+                    <div class="flex items-end justify-between mt-5">
+                        <div>
+                            <p class="text-xl font-extrabold">₹7,150</p>
+                            <p class="text-xs text-text-secondary">per night</p>
+                        </div>
+                        <button class="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold">View Deal</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD -->
+            <article class="bg-white rounded-[20px] overflow-hidden border border-border shadow-sm hover:shadow-lg transition group">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=85" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Dubai" />
+
+                    <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 shadow-md flex items-center justify-center text-danger">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+
+                    <span class="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-white/95 text-xs font-semibold"> HOLIDAY </span>
+                </div>
+
+                <div class="p-5">
+                    <h3 class="font-bold text-lg">Dubai Escape</h3>
+
+                    <p class="text-xs text-text-secondary mt-1">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Dubai, UAE
+                    </p>
+
+                    <div class="flex items-end justify-between mt-5">
+                        <div>
+                            <p class="text-xl font-extrabold">₹34,999</p>
+                            <p class="text-xs text-text-secondary">per person</p>
+                        </div>
+                        <button class="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold">Explore</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD -->
+            <article class="bg-white rounded-[20px] overflow-hidden border border-border shadow-sm hover:shadow-lg transition group">
+
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Beach destination" />
+
+                    <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 shadow-md flex items-center justify-center text-danger">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    <span class="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-white/95 text-xs font-semibold"> DESTINATION </span>
+                </div>
+
+                <div class="p-5">
+                    <h3 class="font-bold text-lg">Maldives Getaway</h3>
+
+                    <p class="text-xs text-text-secondary mt-1">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Maldives
+                    </p>
+
+                    <div class="flex items-end justify-between mt-5">
+                        <div>
+                            <p class="text-xl font-extrabold">Explore</p>
+                            <p class="text-xs text-text-secondary">Dream destination</p>
+                        </div>
+                        <button class="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold">Explore</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

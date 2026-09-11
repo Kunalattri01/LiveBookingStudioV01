@@ -1,0 +1,100 @@
+.dest-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    aspect-ratio: 3 / 4;
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    padding: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.dest-card:hover {
+    transform: translateY(-3px);
+}
+
+.dest-card-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.dest-card-name {
+    position: relative;
+    z-index: 1;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.dest-card-count {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.collection-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 170px;
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    padding: 1.1rem;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.collection-card:hover {
+    transform: translateY(-3px);
+}
+
+.collection-card-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.collection-card-name {
+    position: relative;
+    z-index: 1;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.collection-card-sub {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.8rem;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border, #E2E8F0);
+    background: #FFFFFF;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-secondary, #64748B);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.section-eyebrow {
+    letter-spacing: 0.08em;
+}

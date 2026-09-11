@@ -1,0 +1,538 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-50">
+    <!-- <section class="flight-results-hero">
+<div class="flight-results-hero-inner max-w-[1440px] mx-auto px-4 sm:px-6 py-8 lg:py-10">
+
+            PAGE TITLE
+            <div class="mb-7 pt-24 lg:pt-28">
+                <div class="flex items-center gap-2 text-primary text-sm font-semibold mb-2">
+                    <i class="fa-solid fa-plane-departure"></i> FLIGHTS
+                </div>
+
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-primary">Search and book flights</h1>
+                <p class="text-text-secondary text-sm mt-2">Compare hundreds of flight options and find the right journey for you.</p>
+            </div>
+
+            SEARCH CARD
+            <div class="bg-white rounded-[22px] shadow-2xl overflow-hidden">
+
+                TRIP TYPE
+                <div class="flex items-center gap-2 px-5 pt-5">
+                    <button type="button" class="flight-trip-tab active" data-trip="oneway">
+                        <span class="w-4 h-4 rounded-full border-4 border-primary bg-white"></span>
+                        One Way
+                    </button>
+
+                    <button type="button" class="flight-trip-tab" data-trip="roundtrip">
+                        <span class="w-4 h-4 rounded-full border border-slate-300 bg-white"></span>
+                        Round Trip
+                    </button>
+
+                    <button type="button" class="flight-trip-tab" data-trip="multicity">
+                        <span class="w-4 h-4 rounded-full border border-slate-300 bg-white"></span>
+                        Multi City
+                    </button>
+                </div>
+
+                SEARCH FIELDS
+                <div class="p-5">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 border border-border rounded-2xl overflow-hidden">
+
+                        FROM
+                        <div class="lg:col-span-3 flight-search-field">
+                            <span class="flight-field-label"> FROM </span>
+
+                            <div class="flex items-center gap-3 mt-1">
+                                <i class="fa-solid fa-plane-departure text-primary"></i>
+
+                                <div>
+                                    <p class="text-lg font-bold text-text-primary">{{ origin.city|default:"—" }}</p>
+                                    <p class="text-xs text-text-secondary">{{ origin.code|default:"" }}{% if origin.airport_name %} · {{ origin.airport_name }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        SWAP
+                        <div class="relative flex items-center justify-center lg:col-span-1">
+                            <button type="button" class="absolute z-10 w-10 h-10 rounded-full bg-white border border-border shadow-md flex items-center justify-center text-primary hover:bg-primary hover:text-white transition">
+                                <i class="fa-solid fa-right-left text-sm"></i>
+                            </button>
+                        </div>
+
+
+                        TO
+                        <div class="lg:col-span-3 flight-search-field lg:border-l">
+                            <span class="flight-field-label"> TO </span>
+
+                            <div class="flex items-center gap-3 mt-1">
+                                <i class="fa-solid fa-plane-arrival text-primary"></i>
+
+                                <div>
+                                    <p class="text-lg font-bold text-text-primary">{{ destination.city|default:"—" }}</p>
+                                    <p class="text-xs text-text-secondary">{{ destination.code|default:"" }}{% if destination.airport_name %} · {{ destination.airport_name }}{% endif %}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        DEPARTURE
+                        <div class="lg:col-span-2 flight-search-field lg:border-l">
+                            <span class="flight-field-label"> DEPARTURE </span>
+
+                            <div class="flex items-center gap-3 mt-1">
+                                <i class="fa-regular fa-calendar text-primary"></i>
+
+                                <div>
+                                    <p class="text-lg font-bold">{{ departure_date|date:"d M"|default:"--" }}</p>
+                                    <p class="text-xs text-text-secondary">{{ departure_date|date:"l, Y"|default:"" }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        RETURN
+                        <div class="lg:col-span-2 flight-search-field lg:border-l">
+                            <span class="flight-field-label"> RETURN </span>
+
+                            <div class="flex items-center gap-3 mt-1">
+                                <i class="fa-regular fa-calendar text-primary"></i>
+
+                                <div>
+                                    {% if return_date %}
+                                    <p class="text-lg font-bold">{{ return_date|date:"d M" }}</p>
+                                    <p class="text-xs text-text-secondary">{{ return_date|date:"l, Y" }}</p>
+                                    {% else %}
+                                    <p class="text-sm font-semibold text-text-secondary">Add return date</p>
+                                    <p class="text-xs text-text-secondary">Save more on round trips</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        TRAVELLERS
+                        <div class="lg:col-span-2 flight-search-field lg:border-l">
+                            <span class="flight-field-label"> TRAVELLERS & CLASS </span>
+
+                            <div class="flex items-center gap-3 mt-1">
+                                <i class="fa-solid fa-user-group text-primary"></i>
+
+                                <div>
+                                    <p class="text-lg font-bold">{{ adults|add:children|add:infants }} Traveller{{ adults|add:children|add:infants|pluralize }}</p>
+                                    <p class="text-xs text-text-secondary">{{ cabin_class|capfirst }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    SPECIAL FARES
+                    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-5 mt-5">
+                        <div>
+                            <p class="text-sm font-bold text-text-primary mb-3">Special fares</p>
+
+                            <div class="flex flex-wrap gap-2">
+                                <button class="special-fare active"><i class="fa-solid fa-tag"></i> Regular</button>
+                                <button class="special-fare"><i class="fa-solid fa-graduation-cap"></i> Student</button>
+                                <button class="special-fare"><i class="fa-solid fa-person-cane"></i> Senior Citizen</button>
+                                <button class="special-fare"><i class="fa-solid fa-shield-halved"></i> Armed Forces</button>
+                            </div>
+                        </div>
+
+                        <button type="button" class="w-full xl:w-auto px-10 py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-sm shadow-lg shadow-primary/20 transition">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> SEARCH FLIGHTS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+    <section class="bg-white border-b border-border pt-32">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-5">
+                <div>
+                    <div class="flex items-center gap-2 text-sm">
+                        {% if trip_type == 'multicity' %}
+                            {% for segment in segments %}
+                                <span class="font-bold">{{ segment.origin }}</span>
+                                <i class="fa-solid fa-arrow-right text-primary text-xs"></i>
+                                {% if not forloop.last %}<span class="font-bold">{{ segment.destination }}</span><span class="text-text-secondary">·</span>{% else %}<span class="font-bold">{{ segment.destination }}</span>{% endif %}
+                            {% endfor %}
+                        {% else %}
+                        <span class="font-bold"> {{ origin.city|default:origin.code }} </span>
+                        <i class="fa-solid fa-arrow-right text-primary text-xs"></i>
+                        <span class="font-bold"> {{ destination.city|default:destination.code }} </span>
+                        <span class="text-text-secondary"> · </span>
+                        <span class="text-text-secondary"> {{ departure_date|date:"d M Y" }} </span>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-xs text-text-secondary mt-1">{{ adults|add:children|add:infants }} Traveller{{ adults|add:children|add:infants|pluralize }} · {{ cabin_class|capfirst }} · {% if trip_type == 'oneway' %}One Way{% elif trip_type == 'roundtrip' %}Round Trip{% else %}Multi City{% endif %}</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button type="button" id="flight-edit-search-button" class="px-4 py-2.5 rounded-xl border border-border text-sm font-semibold hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-pen-to-square mr-2"></i>
+                        Modify Search
+                    </button>
+
+                    <button class="px-4 py-2.5 rounded-xl bg-primary/10 text-primary text-sm font-semibold">
+                        <i class="fa-regular fa-bell mr-2"></i>
+                        Price Alert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         RESULTS AREA
+         ========================================================= -->
+    <section class="max-w-[1440px] mx-auto px-4 sm:px-6 py-7">
+        <div class="grid grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)] gap-6">
+            <!-- =================================================
+                 FILTER SIDEBAR (populated once real results arrive)
+                 ================================================= -->
+            <aside id="flight-filters-sidebar">
+                <button class="lg:hidden w-full mb-4 py-3 bg-white border border-border rounded-xl font-semibold text-sm" id="flight-filters-toggle">
+                    <i class="fa-solid fa-sliders mr-2 text-primary"></i>
+                    Filters & Sort
+                </button>
+
+                <div class="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
+                    <div class="flex items-center justify-between px-5 py-4 border-b border-border">
+                        <h2 class="font-bold">Filters</h2>
+                        <button type="button" id="flight-filters-clear" class="text-xs text-primary font-semibold">CLEAR ALL</button>
+                    </div>
+
+                    <!-- STOPS (populated by JS from real results) -->
+                    <div class="filter-section" id="flight-filter-stops"></div>
+
+                    <!-- AIRLINES (populated by JS from real results) -->
+                    <div class="filter-section" id="flight-filter-airlines"></div>
+
+                    <div class="filter-section" id="flight-filter-price"></div>
+                    <div class="filter-section" id="flight-filter-departure"></div>
+                    <div class="filter-section" id="flight-filter-arrival"></div>
+                    <div class="filter-section" id="flight-filter-baggage"></div>
+                    <div class="filter-section" id="flight-filter-refundable"></div>
+
+                    <div class="px-5 py-3 text-xs text-text-secondary" id="flight-filter-result-count"></div>
+                </div>
+            </aside>
+
+            <main class="lg:col-span-1">
+                <!-- LOADING STATE -->
+                <div id="flight-results-loading" class="bg-white rounded-2xl border border-border shadow-sm p-10 text-center">
+                    <div class="w-12 h-12 mx-auto mb-4 rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
+                    <p class="font-bold text-text-primary">Searching flights…</p>
+                    <p class="text-sm text-text-secondary mt-1">This can take a few seconds while we check live availability.</p>
+                </div>
+
+                <!-- NO RESULTS STATE -->
+                <div id="flight-results-empty" class="hidden bg-white rounded-2xl border border-border shadow-sm p-10 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-plane-slash text-slate-400 text-xl"></i>
+                    </div>
+                    <p class="font-bold text-text-primary">No flights found</p>
+                    <p class="text-sm text-text-secondary mt-1">Try different dates or airports.</p>
+                </div>
+
+                <!-- ERROR STATE -->
+                <div id="flight-results-error" class="hidden bg-white rounded-2xl border border-border shadow-sm p-10 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-danger/10 flex items-center justify-center">
+                        <i class="fa-solid fa-triangle-exclamation text-danger text-xl"></i>
+                    </div>
+                    <p class="font-bold text-text-primary" id="flight-results-error-title">Search is temporarily unavailable</p>
+                    <p class="text-sm text-text-secondary mt-1" id="flight-results-error-message"></p>
+                </div>
+
+                <!-- RESULT HEADER (shown once results are available) -->
+                <div id="flight-results-header" class="hidden flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+                    <div>
+                        <h2 class="text-xl font-extrabold" id="flight-results-title">Flights</h2>
+                        <p class="text-xs text-text-secondary mt-1" id="flight-results-count"></p>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-text-secondary"> Sort by </span>
+
+                        <select id="flight-sort-select" class="bg-white border border-border rounded-xl px-4 py-2.5 text-sm font-semibold outline-none">
+                            <option value="recommended">Recommended</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="duration_asc">Duration</option>
+                            <option value="departure_asc">Departure</option>
+                            <option value="arrival_asc">Arrival</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- QUICK SORT -->
+                <div id="flight-quick-sort" class="hidden grid grid-cols-2 sm:grid-cols-3 gap-2 mb-5">
+                    <button type="button" class="sort-card active" data-quick-sort="recommended">
+                        <span> Recommended </span>
+                        <strong id="flight-quick-sort-recommended">—</strong>
+                    </button>
+
+                    <button type="button" class="sort-card" data-quick-sort="price_asc">
+                        <span> Cheapest </span>
+                        <strong id="flight-quick-sort-cheapest">—</strong>
+                    </button>
+
+                    <button type="button" class="sort-card" data-quick-sort="duration_asc">
+                        <span> Fastest </span>
+                        <strong id="flight-quick-sort-fastest">—</strong>
+                    </button>
+                </div>
+
+                <!-- LIVE, NORMALIZED FLIGHT RESULTS -->
+                <div id="flight-results-list"></div>
+
+                <!-- Selected-flight summary. This is only selection state;
+                     fare review/booking is deliberately not implemented here. -->
+                <div id="flight-selection-panel" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-3xl">
+                    <div class="bg-white border border-border rounded-2xl shadow-2xl p-4 sm:p-5">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-3 mb-2">
+                                    <div>
+                                        <p class="text-xs font-bold text-primary uppercase tracking-wide">Selected flight</p>
+                                        <p class="text-xs text-text-secondary mt-0.5" id="flight-selection-progress"></p>
+                                    </div>
+                                </div>
+                                <div id="flight-selection-list"></div>
+                            </div>
+                            <button type="button" id="flight-selection-continue" disabled class="shrink-0 px-5 py-3 rounded-xl bg-primary text-white text-xs font-bold opacity-50 cursor-not-allowed">SELECT ALL LEGS</button>
+                        </div>
+                        <div id="flight-selection-confirmation" class="hidden mt-3 rounded-xl bg-sky-50 border border-sky-100 p-3">
+                            <p class="text-sm font-bold text-slate-800">Selection saved</p>
+                            <p class="text-xs text-slate-600 mt-1" id="flight-selection-confirmation-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+
+    <!-- Search editor. Changes are applied from the results page itself. -->
+    <div id="flight-edit-modal" class="flight-edit-modal hidden" aria-hidden="true">
+        <div class="flight-edit-backdrop" data-edit-modal-close></div>
+        <section class="flight-edit-dialog" role="dialog" aria-modal="true" aria-labelledby="flight-edit-title">
+            <header class="flight-edit-header">
+                <div>
+                    <p class="flight-modal-eyebrow">UPDATE SEARCH</p>
+                    <h2 id="flight-edit-title">Modify your flight search</h2>
+                    <p>Change your route, dates, travellers or cabin without leaving the results page.</p>
+                </div>
+                <button type="button" class="flight-modal-close" data-edit-modal-close aria-label="Close search editor">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </header>
+
+            <form id="flight-edit-form" class="flight-edit-form">
+                <div class="flight-edit-trip-types" role="tablist" aria-label="Trip type">
+                    <button type="button" class="flight-edit-trip active" data-edit-trip="oneway">One way</button>
+                    <button type="button" class="flight-edit-trip" data-edit-trip="roundtrip">Round trip</button>
+                    <button type="button" class="flight-edit-trip" data-edit-trip="multicity">Multi city</button>
+                </div>
+
+                <div id="flight-edit-single-fields" class="flight-edit-grid">
+                    <label>
+                        <span>From</span>
+                        <input id="flight-edit-origin" name="origin" list="flight-edit-airports" autocomplete="off" required>
+                    </label>
+                    <label>
+                        <span>To</span>
+                        <input id="flight-edit-destination" name="destination" list="flight-edit-airports" autocomplete="off" required>
+                    </label>
+                    <label>
+                        <span>Departure</span>
+                        <input id="flight-edit-departure" name="departure_date" type="date" required>
+                    </label>
+                    <label id="flight-edit-return-wrap">
+                        <span>Return</span>
+                        <input id="flight-edit-return" name="return_date" type="date">
+                    </label>
+                </div>
+
+                <div id="flight-edit-multicity-fields" class="hidden">
+                    <div id="flight-edit-segments" class="flight-edit-segments"></div>
+                    <button type="button" id="flight-edit-add-segment" class="flight-edit-add-segment">
+                        <i class="fa-solid fa-plus"></i> Add segment
+                    </button>
+                </div>
+
+                <div class="flight-edit-grid flight-edit-grid-secondary">
+                    <label>
+                        <span>Adults</span>
+                        <input id="flight-edit-adults" name="adults" type="number" min="1" max="9" required>
+                    </label>
+                    <label>
+                        <span>Children</span>
+                        <input id="flight-edit-children" name="children" type="number" min="0" max="9" required>
+                    </label>
+                    <label>
+                        <span>Infants</span>
+                        <input id="flight-edit-infants" name="infants" type="number" min="0" max="9" required>
+                    </label>
+                    <label>
+                        <span>Cabin</span>
+                        <select id="flight-edit-cabin" name="cabin_class">
+                            <option value="economy">Economy</option>
+                            <option value="premium_economy">Premium Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First Class</option>
+                        </select>
+                    </label>
+                </div>
+
+                <datalist id="flight-edit-airports"></datalist>
+                <p id="flight-edit-error" class="flight-edit-error hidden" role="alert"></p>
+
+                <footer class="flight-edit-footer">
+                    <button type="button" class="flight-edit-cancel" data-edit-modal-close>Cancel</button>
+                    <button type="submit" class="flight-edit-submit">Search updated flights</button>
+                </footer>
+            </form>
+        </section>
+    </div>
+
+    <!-- Fare selection modal. The user chooses a fare without leaving the results page. -->
+    <div id="flight-fare-modal" class="flight-fare-modal hidden" aria-hidden="true">
+        <div class="flight-fare-backdrop" data-fare-modal-close></div>
+        <section class="flight-fare-dialog" role="dialog" aria-modal="true" aria-labelledby="flight-fare-modal-title">
+            <header class="flight-fare-dialog-header">
+                <div>
+                    <p class="flight-modal-eyebrow">NEXT STEP</p>
+                    <h2 id="flight-fare-modal-title">Choose your fare</h2>
+                    <p id="flight-fare-modal-subtitle">Compare baggage, flexibility and price before continuing.</p>
+                </div>
+                <button type="button" class="flight-modal-close" data-fare-modal-close aria-label="Close fare selection">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </header>
+            <div id="flight-fare-modal-body" class="flight-fare-dialog-body"></div>
+            <footer class="flight-fare-dialog-footer">
+                <div>
+                    <span class="text-xs text-text-secondary">Selected fare</span>
+                    <strong id="flight-fare-modal-total" class="block text-lg">—</strong>
+                </div>
+                <div class="flex items-center gap-3">
+                    <p id="flight-fare-modal-error" class="hidden text-xs text-danger max-w-xs"></p>
+                    <button type="button" id="flight-fare-modal-continue" disabled class="flight-modal-continue">
+                        Continue
+                    </button>
+                </div>
+            </footer>
+        </section>
+    </div>
+
+    <template id="flight-card-template">
+        <div class="flight-card bg-white border border-border rounded-2xl shadow-sm hover:shadow-md transition mb-4 overflow-hidden">
+            <div class="p-5">
+                <div class="flex flex-col xl:flex-row xl:items-center gap-6">
+                    <!-- AIRLINE -->
+                    <div class="xl:w-44 flex xl:flex-col items-center xl:items-start gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-slate-50 border border-border flex items-center justify-center">
+                            <span class="font-extrabold text-xs text-slate-700 js-airline-code"></span>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm text-text-primary js-airline-name"></p>
+                            <p class="text-xs text-text-secondary mt-0.5 js-flight-number"></p>
+                        </div>
+                    </div>
+
+                    <!-- DEPARTURE -->
+                    <div class="flex-1">
+                        <p class="text-2xl font-extrabold text-text-primary js-departure-time"></p>
+                        <p class="text-sm font-bold mt-1 js-origin-code"></p>
+                        <p class="text-[11px] text-text-secondary mt-1 js-origin-city"></p>
+                    </div>
+
+                    <!-- FLIGHT PATH -->
+                    <div class="flex-1 min-w-[150px]">
+                        <div class="flex items-center justify-between text-[10px] text-text-secondary mb-2">
+                            <span class="js-duration"></span>
+                            <span class="js-stops-label"></span>
+                        </div>
+
+                        <div class="relative flex items-center">
+                            <div class="h-px bg-slate-300 flex-1"></div>
+                            <div class="mx-2 w-2.5 h-2.5 rounded-full border-2 border-primary bg-white"></div>
+                            <div class="h-px bg-slate-300 flex-1"></div>
+                        </div>
+
+                        <p class="text-[10px] text-center text-success font-semibold mt-2 js-stops-note"></p>
+                    </div>
+
+                    <!-- ARRIVAL -->
+                    <div class="flex-1 xl:text-right">
+                        <p class="text-2xl font-extrabold text-text-primary js-arrival-time"></p>
+                        <p class="text-sm font-bold mt-1 js-destination-code"></p>
+                        <p class="text-[11px] text-text-secondary mt-1 js-destination-city"></p>
+                    </div>
+
+                    <!-- PRICE -->
+                    <div class="xl:w-40 xl:border-l xl:border-border xl:pl-6">
+                        <p class="text-[10px] text-text-secondary">Starting from</p>
+                        <p class="text-2xl font-extrabold text-text-primary mt-1 js-price"></p>
+                        <p class="text-[10px] text-text-secondary">per traveller</p>
+
+                        <button type="button" class="js-select-flight mt-3 w-full py-2.5 px-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold transition">
+                            SELECT FLIGHT
+                        </button>
+                        <button type="button" class="js-flight-details mt-2 w-full text-[11px] font-semibold text-primary">Flight details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="js-flight-details-panel hidden px-5 py-4 border-t border-border bg-white">
+                <p class="text-xs font-bold uppercase tracking-wide text-text-secondary mb-2">Flight details</p>
+                <div class="js-segment-list"></div>
+            </div>
+
+            <div class="px-5 py-3 bg-slate-50 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-text-secondary">
+                    <span class="flex items-center gap-1.5 js-baggage-row">
+                        <i class="fa-solid fa-suitcase-rolling text-primary"></i>
+                        <span class="js-baggage-text"></span>
+                    </span>
+
+                    <span class="flex items-center gap-1.5 js-fare-type-row">
+                        <i class="fa-solid fa-tag text-primary"></i>
+                        <span class="js-fare-type"></span>
+                    </span>
+
+                    <span class="flex items-center gap-1.5 js-seats-row">
+                        <i class="fa-solid fa-chair text-primary"></i>
+                        <span class="js-seats-text"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>
+{% endblock %}
+
+{% block extraCSS %}
+    <link rel="stylesheet" href="{% static 'css/flights.css' %}">
+{% endblock %}
+
+{% block extraJs %}
+    <script>
+        /* Validated, generic search payload - the exact JSON body
+           posted to /api/v1/flights/search/. Contains only our own
+           search fields (trip_type/origin/destination/dates/pax/
+           cabin) - never any TripJack-specific structure. */
+        window.__FLIGHT_SEARCH_REQUEST__ = {{ search_payload_json|default:"null"|safe }};
+        window.__FLIGHT_AIRPORTS_SEED__ = {{ airport_seed_json|default:"[]"|safe }};
+    </script>
+    <script>window.__FLIGHT_RESULTS_PAGE_SIZE__ = {{ frontend_page_size|default:20 }};</script>
+<script src="{% static 'js/flight-results.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<link rel="stylesheet" href="{% static 'css/flight-seat-selection.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="seat-page">
+    <div class="seat-shell">
+        <header class="seat-header">
+            <div>
+                <p class="eyebrow">FLIGHT BOOKING · STEP 4</p>
+                <h1>Choose your seat</h1>
+                <p class="seat-intro">The map below is built from the supplier's seat data. Occupied or unavailable seats cannot be selected.</p>
+            </div>
+            <div class="seat-header-badge">
+                <span class="dot"></span>
+                Live availability
+            </div>
+        </header>
+
+        <section class="seat-summary-card">
+            <div>
+                <span class="summary-label">Reviewed itinerary</span>
+                <strong id="booking-reference">Review confirmed</strong>
+            </div>
+            <div class="summary-metrics">
+                <div><span>Total fare</span><strong id="review-total">—</strong></div>
+                <div><span>Fare inventory</span><strong id="fare-inventory">—</strong></div>
+            </div>
+        </section>
+
+        <div id="seat-error" class="seat-alert hidden"></div>
+
+        <section class="seat-layout-card">
+            <div class="seat-toolbar">
+                <div>
+                    <span class="summary-label">Seat map</span>
+                    <h2 id="aircraft-name">Loading aircraft layout…</h2>
+                    <p class="seat-map-help">Select up to one seat per traveller. Seat status is based only on the normalized live seat-map response.</p>
+                </div>
+                <div class="seat-legend" aria-label="Seat availability legend">
+                    <span><i class="legend-seat available"></i> <b>Available</b></span>
+                    <span><i class="legend-seat selected"></i> <b>Selected</b></span>
+                    <span><i class="legend-seat unavailable"></i> <b>Unavailable</b></span>
+                    <span><i class="legend-seat unknown"></i> <b>Unknown</b></span>
+                </div>
+            </div>
+
+            <div id="seat-status" class="seat-status">Loading live seat map…</div>
+            <div id="seat-passenger-picker" class="seat-passenger-picker" aria-label="Select passenger"></div>
+            <div id="seat-map" class="seat-map-wrap hidden">
+                <div class="aircraft">
+                    <div class="cockpit" aria-hidden="true"><span>FRONT</span></div>
+                    <div id="seat-grid" class="seat-grid" aria-label="Aircraft seat map"></div>
+                    <div class="aircraft-tail" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="seat-selection-bar">
+            <div>
+                <span class="summary-label">Your selection</span>
+                <div id="selected-seat-list" class="selected-seat-list">No seat selected</div>
+            </div>
+            <div class="seat-selection-actions">
+                <strong id="selected-seat-price">₹ 0</strong>
+                <button id="continue-seat" type="button" disabled>Continue</button>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<script>
+window.__FLIGHT_REVIEW__ = {{ review_json|safe }};
+window.__FLIGHT_SEARCH_REQUEST__ = {{ search_request_json|safe }};
+window.__FLIGHT_TRAVELLERS__ = {{ travellers_json|safe }};
+</script>
+<script src="{% static 'js/flight-seat-selection.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,1494 @@
+{% extends 'base/public_base.html' %} {% block extraCSS %}
+<style>
+    /* =========================================================
+       LEGAL HERO
+       ========================================================= */
+
+    .legal-hero {
+        background: linear-gradient(135deg, #0f172a 0%, #164e4c 55%, #0f766e 100%) !important;
+
+        position: relative;
+        overflow: hidden;
+    }
+
+    .legal-hero::before {
+        content: "";
+        position: absolute;
+
+        width: 520px;
+        height: 520px;
+
+        right: -180px;
+        top: -280px;
+
+        border-radius: 50%;
+
+        background: rgba(20, 184, 166, 0.14) !important;
+
+        pointer-events: none;
+    }
+
+    .legal-hero::after {
+        content: "";
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        left: -150px;
+        bottom: -200px;
+
+        border-radius: 50%;
+
+        background: rgba(45, 212, 191, 0.08) !important;
+
+        pointer-events: none;
+    }
+
+    /* =========================================================
+       HERO CONTENT
+       ========================================================= */
+
+    .legal-hero-content {
+        position: relative;
+        z-index: 5;
+    }
+
+    .legal-hero-label {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        color: #5eead4 !important;
+
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+
+        letter-spacing: 0.04em !important;
+
+        margin-bottom: 12px !important;
+    }
+
+    .legal-hero-label i {
+        color: #5eead4 !important;
+        font-size: 0.9rem !important;
+    }
+
+    .legal-hero h1 {
+        color: #ffffff !important;
+    }
+
+    .legal-hero-description {
+        color: #d1fae5 !important;
+    }
+
+    .legal-hero-date {
+        color: #99f6e4 !important;
+    }
+
+    /* =========================================================
+       LEGAL CONTENT LAYOUT
+       ========================================================= */
+
+    .legal-wrapper {
+        position: relative;
+    }
+
+    .legal-card {
+        background: #ffffff !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 18px !important;
+
+        box-shadow:
+            0 8px 25px rgba(15, 23, 42, 0.05),
+            0 2px 6px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+    .legal-sidebar {
+        overflow: hidden !important;
+    }
+
+    .legal-sidebar-title {
+        padding: 10px 12px !important;
+
+        color: #94a3b8 !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+    }
+
+    .legal-sidebar a {
+        display: block !important;
+
+        padding: 11px 13px !important;
+
+        margin: 2px 0 !important;
+
+        border-radius: 10px !important;
+
+        color: #64748b !important;
+
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+
+        text-decoration: none !important;
+
+        transition:
+            color 180ms ease,
+            background 180ms ease,
+            transform 180ms ease !important;
+    }
+
+    .legal-sidebar a:hover {
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        color: #0f766e !important;
+
+        transform: translateX(2px) !important;
+    }
+
+    .legal-sidebar a.active {
+        background: rgba(20, 184, 166, 0.12) !important;
+
+        color: #0ea5a4 !important;
+
+        font-weight: 700 !important;
+    }
+
+    .legal-sidebar a.active::before {
+        content: "";
+
+        display: inline-block;
+
+        width: 4px;
+        height: 16px;
+
+        margin-right: 8px;
+
+        vertical-align: -3px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    /* =========================================================
+       ARTICLE
+       ========================================================= */
+
+    .legal-content {
+        color: #475569 !important;
+
+        min-width: 0;
+    }
+
+    /* =========================================================
+       ARTICLE INTRO
+       ========================================================= */
+
+    .legal-intro {
+        margin-bottom: 2rem !important;
+    }
+
+    .legal-intro-title {
+        color: #0f172a !important;
+
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+
+        margin-bottom: 0.45rem !important;
+    }
+
+    .legal-intro p {
+        margin-bottom: 0.75rem !important;
+    }
+
+    /* =========================================================
+       INFORMATION NOTE
+       ========================================================= */
+
+    .legal-note {
+        display: flex !important;
+        gap: 12px !important;
+        align-items: flex-start !important;
+
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        border: 1px solid rgba(20, 184, 166, 0.22) !important;
+
+        border-left: 4px solid #0ea5a4 !important;
+
+        border-radius: 12px !important;
+
+        padding: 1rem !important;
+
+        margin-bottom: 2rem !important;
+    }
+
+    .legal-note i {
+        flex-shrink: 0;
+
+        color: #0ea5a4 !important;
+
+        margin-top: 3px;
+    }
+
+    .legal-note p {
+        margin: 0 !important;
+
+        color: #475569 !important;
+
+        font-size: 0.875rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    /* =========================================================
+       SECTION HEADINGS
+       ========================================================= */
+
+    .legal-content h2 {
+        position: relative !important;
+
+        display: flex !important;
+        align-items: flex-start !important;
+
+        font-size: 1.3rem !important;
+        line-height: 1.45 !important;
+
+        font-weight: 800 !important;
+
+        color: #0f172a !important;
+
+        margin: 2.25rem 0 0.8rem !important;
+
+        letter-spacing: -0.015em !important;
+    }
+
+    .legal-content h2:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    .legal-content h2::before {
+        content: "";
+
+        flex: 0 0 auto;
+
+        width: 4px;
+        height: 24px;
+
+        margin-right: 10px;
+        margin-top: 2px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    /* =========================================================
+       SUB HEADINGS
+       ========================================================= */
+
+    .legal-content h3 {
+        font-size: 1rem !important;
+
+        line-height: 1.5 !important;
+
+        font-weight: 700 !important;
+
+        color: #0f172a !important;
+
+        margin: 1.35rem 0 0.5rem !important;
+    }
+
+    /* =========================================================
+       PARAGRAPHS
+       ========================================================= */
+
+    .legal-content p {
+        font-size: 0.9rem !important;
+
+        line-height: 1.85 !important;
+
+        color: #475569 !important;
+
+        margin: 0 0 0.85rem !important;
+    }
+
+    /* =========================================================
+       LISTS
+       ========================================================= */
+
+    .legal-content ul,
+    .legal-content ol {
+        margin: 0.55rem 0 1rem !important;
+
+        padding-left: 1.45rem !important;
+    }
+
+    .legal-content li {
+        font-size: 0.9rem !important;
+
+        line-height: 1.8 !important;
+
+        color: #475569 !important;
+
+        margin: 0.35rem 0 !important;
+
+        padding-left: 3px !important;
+    }
+
+    .legal-content ul li::marker {
+        color: #0ea5a4 !important;
+        font-weight: 700 !important;
+    }
+
+    .legal-content ol li::marker {
+        color: #0ea5a4 !important;
+        font-weight: 700 !important;
+    }
+
+    /* =========================================================
+       ALPHABETICAL / LETTERED ITEMS
+       ========================================================= */
+
+    .legal-letter-list {
+        padding-left: 1.5rem !important;
+    }
+
+    /* =========================================================
+       HIGHLIGHTED TERMS
+       ========================================================= */
+
+    .legal-content strong {
+        color: #334155 !important;
+
+        font-weight: 700 !important;
+    }
+
+    /* =========================================================
+       LINKS
+       ========================================================= */
+
+    .legal-content a {
+        color: #0ea5a4 !important;
+
+        font-weight: 600 !important;
+
+        text-decoration: none !important;
+    }
+
+    .legal-content a:hover {
+        color: #0f766e !important;
+
+        text-decoration: underline !important;
+    }
+
+    /* =========================================================
+       CONTACT INFORMATION
+       ========================================================= */
+
+    .legal-contact-card {
+        margin-top: 1.5rem !important;
+
+        padding: 1.25rem !important;
+
+        background: #f8fafc !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 14px !important;
+    }
+
+    .legal-contact-card .contact-title {
+        color: #0f172a !important;
+
+        font-size: 1rem !important;
+
+        font-weight: 800 !important;
+
+        margin-bottom: 0.8rem !important;
+    }
+
+    .legal-contact-card p {
+        margin-bottom: 0.35rem !important;
+    }
+
+    /* =========================================================
+       FINAL DIVIDER
+       ========================================================= */
+
+    .legal-footer-note {
+        margin-top: 2.5rem !important;
+
+        padding-top: 1.5rem !important;
+
+        border-top: 1px solid #e2e8f0 !important;
+    }
+
+    .legal-footer-note p {
+        color: #94a3b8 !important;
+
+        font-size: 0.78rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1023px) {
+        .legal-sidebar {
+            position: static !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .legal-hero {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .legal-hero h1 {
+            font-size: 2rem !important;
+        }
+
+        .legal-hero-description {
+            font-size: 0.875rem !important;
+        }
+
+        .legal-content {
+            padding: 1.35rem !important;
+        }
+
+        .legal-content h2 {
+            font-size: 1.15rem !important;
+
+            margin-top: 1.8rem !important;
+        }
+
+        .legal-content h2::before {
+            width: 3px !important;
+            height: 20px !important;
+
+            margin-right: 8px !important;
+        }
+
+        .legal-content p,
+        .legal-content li {
+            font-size: 0.875rem !important;
+
+            line-height: 1.78 !important;
+        }
+
+        .legal-card {
+            border-radius: 14px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .legal-hero h1 {
+            font-size: 1.75rem !important;
+        }
+
+        .legal-sidebar a {
+            font-size: 0.82rem !important;
+
+            padding: 10px 11px !important;
+        }
+
+        .legal-note {
+            padding: 0.85rem !important;
+        }
+    }
+</style>
+{% endblock %} {% block content %}
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="legal-hero text-white py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 legal-hero-content">
+        <div class="legal-hero-label">
+            <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+
+            <span> LEGAL &amp; POLICIES </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">User Agreement</h1>
+
+        <p class="legal-hero-description mt-3 max-w-3xl text-sm sm:text-base">
+            This User Agreement governs your access to and use of the Sea of Seats platform, including bookings, payments, tickets and
+            related services.
+        </p>
+
+        <p class="legal-hero-date mt-5 text-xs">Last updated: 31 August 2026</p>
+    </div>
+</section>
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+
+<section class="py-10 sm:py-14 legal-wrapper">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[230px_minmax(0,1fr)] gap-7 items-start">
+            <!-- =================================================
+                 LEGAL SIDEBAR
+                 ================================================= -->
+
+            <aside class="legal-sidebar legal-card p-3 lg:sticky lg:top-24">
+                <div class="legal-sidebar-title">Legal Centre</div>
+
+                <a href="{% url 'PrivacyPolicyPage' %}"> Privacy Policy </a>
+
+                <a href="{% url 'TermsConditionPage' %}"> Terms &amp; Conditions </a>
+
+                <a href="{% url 'RefundPolicyPage' %}"> Refund &amp; Cancellation </a>
+
+                <a href="{% url 'UserAgreementPage' %}" class="active"> User Agreement </a>
+            </aside>
+
+            <!-- =================================================
+                 USER AGREEMENT
+                 ================================================= -->
+
+            <article class="legal-card p-6 sm:p-9 lg:p-10 legal-content">
+                <!-- =================================================
+                     INTRODUCTION
+                     ================================================= -->
+
+                <div class="legal-intro">
+                    <p>
+                        This User Agreement ("Agreement") constitutes a legally binding agreement between Sea of Seats ("Sea of Seats",
+                        "Company", "we", "us", or "our") and any individual or entity accessing, registering with, or using the Sea of Seats
+                        website, mobile application, booking platform, or related services ("Platform").
+                    </p>
+
+                    <p>The individual accessing or using the Platform is referred to as the "User", "you", or "your".</p>
+
+                    <p>
+                        By creating an account, accessing the Platform, making a booking, purchasing a ticket, making a payment, or
+                        otherwise using any Sea of Seats service, you confirm that you have read, understood and accepted this Agreement.
+                    </p>
+
+                    <p>If you do not agree to this Agreement, you must discontinue use of the Platform.</p>
+                </div>
+
+                <!-- =================================================
+                     INFORMATION NOTE
+                     ================================================= -->
+
+                <div class="legal-note">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+
+                    <p>
+                        This User Agreement should be read together with the applicable Terms &amp; Conditions, Privacy Policy, Cancellation
+                        &amp; Refund Policy, Payment Policy, Cookie Policy and any booking-specific terms displayed during a transaction.
+                    </p>
+                </div>
+
+                <!-- =================================================
+                     1. ABOUT SEA OF SEATS
+                     ================================================= -->
+
+                <h2>1. About Sea of Seats</h2>
+
+                <p>
+                    Sea of Seats is a digital ticketing and booking platform that may facilitate the discovery, reservation and purchase of
+                    tickets and services including:
+                </p>
+
+                <ul>
+                    <li>Movies and cinema tickets;</li>
+                    <li>Concerts;</li>
+                    <li>Music events;</li>
+                    <li>Sports events;</li>
+                    <li>Entertainment events;</li>
+                    <li>Theatre and cultural events;</li>
+                    <li>Travel and transportation;</li>
+                    <li>Airline tickets;</li>
+                    <li>Railway and metro bookings;</li>
+                    <li>Bus or other transportation services;</li>
+                    <li>Hotels and accommodation;</li>
+                    <li>Activities and experiences; and</li>
+                    <li>Other products and services offered through the Platform.</li>
+                </ul>
+
+                <p>
+                    Sea of Seats may provide certain services directly or may act as an intermediary, facilitator, marketplace or booking
+                    platform connecting Users with third-party organisers, operators, venues, suppliers and service providers ("Service
+                    Providers").
+                </p>
+
+                <!-- =================================================
+                     2. ACCEPTANCE
+                     ================================================= -->
+
+                <h2>2. Acceptance of This Agreement</h2>
+
+                <p>By using the Platform, you represent and confirm that:</p>
+
+                <ol>
+                    <li>You have read this Agreement;</li>
+                    <li>You understand its provisions;</li>
+                    <li>You have the legal capacity to enter into an agreement;</li>
+                    <li>The information provided by you is accurate;</li>
+                    <li>You agree to comply with applicable laws;</li>
+                    <li>You agree to Sea of Seats' Terms &amp; Conditions;</li>
+                    <li>You agree to the applicable Privacy Policy; and</li>
+                    <li>You agree to the applicable Cancellation &amp; Refund Policy.</li>
+                </ol>
+
+                <p>
+                    Where you make a booking for another person, you confirm that you have authority to provide the information necessary
+                    for that booking.
+                </p>
+
+                <!-- =================================================
+                     3. ELIGIBILITY
+                     ================================================= -->
+
+                <h2>3. Eligibility</h2>
+
+                <p>The Platform is intended for users who are legally capable of entering into binding contracts.</p>
+
+                <p>
+                    If you are under the age permitted to independently enter into such contracts under applicable law, you must use the
+                    Platform under the supervision and with the involvement of a parent or lawful guardian where required.
+                </p>
+
+                <p>
+                    Sea of Seats may restrict or terminate access where it reasonably believes that a User does not satisfy applicable
+                    eligibility requirements.
+                </p>
+
+                <!-- =================================================
+                     4. USER ACCOUNT
+                     ================================================= -->
+
+                <h2>4. User Account</h2>
+
+                <p>Certain Platform features may require the creation of a User account.</p>
+
+                <p>When creating an account, you agree to provide:</p>
+
+                <ul>
+                    <li>Your correct name;</li>
+                    <li>Valid email address;</li>
+                    <li>Valid mobile number;</li>
+                    <li>Accurate account information; and</li>
+                    <li>Any additional information reasonably required for the requested service.</li>
+                </ul>
+
+                <p>You are responsible for maintaining the accuracy of your account information.</p>
+
+                <p>You must promptly update information that becomes inaccurate or outdated.</p>
+
+                <!-- =================================================
+                     5. ACCOUNT SECURITY
+                     ================================================= -->
+
+                <h2>5. Account Security</h2>
+
+                <p>You are responsible for protecting your account credentials.</p>
+
+                <p>You must not:</p>
+
+                <ul>
+                    <li>Share your password with another person;</li>
+                    <li>Allow unauthorised access to your account;</li>
+                    <li>Attempt to access another User's account;</li>
+                    <li>Use another person's credentials without authorisation; or</li>
+                    <li>Circumvent account-security mechanisms.</li>
+                </ul>
+
+                <p>If you believe your account has been compromised, you must notify Sea of Seats as soon as reasonably possible.</p>
+
+                <p>
+                    Sea of Seats may temporarily restrict access to an account where necessary to protect the User, Platform or other Users.
+                </p>
+
+                <!-- =================================================
+                     6. USER INFORMATION
+                     ================================================= -->
+
+                <h2>6. User Information</h2>
+
+                <p>You agree that information submitted through the Platform shall be:</p>
+
+                <ul>
+                    <li>Accurate;</li>
+                    <li>Complete;</li>
+                    <li>Current;</li>
+                    <li>Lawful; and</li>
+                    <li>Not misleading.</li>
+                </ul>
+
+                <p>
+                    Sea of Seats may rely upon information supplied by you for processing bookings, payments, communications and other
+                    requested services.
+                </p>
+
+                <p>
+                    Sea of Seats shall not ordinarily be responsible for problems arising solely from incorrect information supplied by the
+                    User.
+                </p>
+
+                <!-- =================================================
+                     7. BOOKINGS
+                     ================================================= -->
+
+                <h2>7. Bookings</h2>
+
+                <p>A User may make bookings through the Platform for available products or services.</p>
+
+                <p>A booking request is not necessarily a confirmed booking until:</p>
+
+                <ol>
+                    <li>Availability has been confirmed;</li>
+                    <li>Required payment has been successfully processed; and</li>
+                    <li>
+                        Sea of Seats or the relevant Service Provider issues a booking confirmation, ticket, booking reference, QR code, PNR
+                        or equivalent confirmation.
+                    </li>
+                </ol>
+
+                <p>The User should carefully verify booking details before completing payment.</p>
+
+                <!-- =================================================
+                     8. USER RESPONSIBILITY FOR BOOKINGS
+                     ================================================= -->
+
+                <h2>8. User Responsibility for Bookings</h2>
+
+                <p>The User is responsible for reviewing:</p>
+
+                <ul>
+                    <li>Date;</li>
+                    <li>Time;</li>
+                    <li>Venue;</li>
+                    <li>Location;</li>
+                    <li>Number of tickets;</li>
+                    <li>Seat category;</li>
+                    <li>Passenger details;</li>
+                    <li>Guest details;</li>
+                    <li>Travel details;</li>
+                    <li>Hotel information;</li>
+                    <li>Cancellation conditions; and</li>
+                    <li>Other booking information</li>
+                </ul>
+
+                <p>before confirming the transaction.</p>
+
+                <p>Once a booking is confirmed, changes or cancellations may be restricted.</p>
+
+                <!-- =================================================
+                     9. TICKET AND SERVICE CONDITIONS
+                     ================================================= -->
+
+                <h2>9. Ticket and Service Conditions</h2>
+
+                <p>Individual tickets and bookings may be subject to additional conditions imposed by the relevant Service Provider.</p>
+
+                <p>These may include:</p>
+
+                <ul>
+                    <li>Age restrictions;</li>
+                    <li>Identification requirements;</li>
+                    <li>Entry conditions;</li>
+                    <li>Dress codes;</li>
+                    <li>Security procedures;</li>
+                    <li>Baggage restrictions;</li>
+                    <li>Check-in deadlines;</li>
+                    <li>Cancellation restrictions;</li>
+                    <li>Refund rules;</li>
+                    <li>Venue rules; and</li>
+                    <li>Other service-specific requirements.</li>
+                </ul>
+
+                <p>The User agrees to comply with all applicable conditions.</p>
+
+                <!-- =================================================
+                     10. PAYMENTS
+                     ================================================= -->
+
+                <h2>10. Payments</h2>
+
+                <p>Users agree to pay all amounts displayed at checkout before completing a booking.</p>
+
+                <p>Depending upon the service, the total amount may include:</p>
+
+                <ul>
+                    <li>Ticket price;</li>
+                    <li>Service fee;</li>
+                    <li>Convenience fee;</li>
+                    <li>Taxes;</li>
+                    <li>Booking charges;</li>
+                    <li>Delivery charges;</li>
+                    <li>Payment-related charges; or</li>
+                    <li>Other applicable charges.</li>
+                </ul>
+
+                <p>
+                    Payment may be processed through third-party payment gateways, banks, card networks or other authorised payment
+                    providers.
+                </p>
+
+                <!-- =================================================
+                     11. INTERNATIONAL PAYMENTS
+                     ================================================= -->
+
+                <h2>11. International Payments</h2>
+
+                <p>Sea of Seats may permit Users outside India to make payments using supported international payment methods.</p>
+
+                <p>International transactions may be subject to:</p>
+
+                <ul>
+                    <li>Currency conversion;</li>
+                    <li>Foreign-exchange rates;</li>
+                    <li>International transaction charges;</li>
+                    <li>Bank fees;</li>
+                    <li>Card issuer charges;</li>
+                    <li>Payment network requirements; and</li>
+                    <li>Applicable Indian and foreign laws.</li>
+                </ul>
+
+                <p>
+                    Sea of Seats is not responsible for charges independently imposed by the User's bank, card issuer or financial
+                    institution.
+                </p>
+
+                <!-- =================================================
+                     12. CANCELLATIONS AND REFUNDS
+                     ================================================= -->
+
+                <h2>12. Cancellations and Refunds</h2>
+
+                <p>
+                    Cancellations and refunds shall be governed by the applicable Sea of Seats Cancellation &amp; Refund Policy and the
+                    conditions displayed for the particular booking.
+                </p>
+
+                <p>Users acknowledge that:</p>
+
+                <ul>
+                    <li>Some bookings may be non-refundable;</li>
+                    <li>Cancellation deadlines may apply;</li>
+                    <li>Cancellation charges may apply;</li>
+                    <li>Convenience or service fees may be non-refundable;</li>
+                    <li>Third-party Service Provider policies may apply; and</li>
+                    <li>Refund processing may take time depending on the payment method.</li>
+                </ul>
+
+                <p>The User agrees to review the applicable cancellation conditions before completing a transaction.</p>
+
+                <!-- =================================================
+                     13. THIRD-PARTY SERVICE PROVIDERS
+                     ================================================= -->
+
+                <h2>13. Third-Party Service Providers</h2>
+
+                <p>Sea of Seats may facilitate services provided by independent third parties.</p>
+
+                <p>These may include:</p>
+
+                <ul>
+                    <li>Cinemas;</li>
+                    <li>Event organisers;</li>
+                    <li>Sports organisations;</li>
+                    <li>Venues;</li>
+                    <li>Airlines;</li>
+                    <li>Rail operators;</li>
+                    <li>Hotels;</li>
+                    <li>Transport operators;</li>
+                    <li>Travel companies; and</li>
+                    <li>Other suppliers.</li>
+                </ul>
+
+                <p>
+                    Sea of Seats may not control the conduct, availability, quality, schedule, pricing or performance of such third parties.
+                </p>
+
+                <p>
+                    The User acknowledges that certain contractual obligations may exist directly between the User and the relevant Service
+                    Provider.
+                </p>
+
+                <!-- =================================================
+                     14. USER CONDUCT
+                     ================================================= -->
+
+                <h2>14. User Conduct</h2>
+
+                <p>Users agree to use the Platform only for lawful purposes.</p>
+
+                <p>Users must not:</p>
+
+                <ol>
+                    <li>Use the Platform for fraudulent activity;</li>
+                    <li>Use stolen or unauthorised payment instruments;</li>
+                    <li>Create fake accounts;</li>
+                    <li>Provide false information;</li>
+                    <li>Impersonate another individual or organisation;</li>
+                    <li>Attempt to obtain unauthorised access;</li>
+                    <li>Use bots or automated purchasing tools without permission;</li>
+                    <li>Circumvent ticket limits;</li>
+                    <li>Interfere with Platform security;</li>
+                    <li>Upload malicious software;</li>
+                    <li>Reverse engineer the Platform;</li>
+                    <li>Copy Platform content without permission;</li>
+                    <li>Infringe intellectual-property rights;</li>
+                    <li>Harass Sea of Seats employees or service personnel;</li>
+                    <li>Abuse customer-support channels;</li>
+                    <li>Conduct unlawful ticket resale; or</li>
+                    <li>Use the Platform in violation of applicable law.</li>
+                </ol>
+
+                <!-- =================================================
+                     15. PROHIBITED AUTOMATED ACTIVITY
+                     ================================================= -->
+
+                <h2>15. Prohibited Automated Activity</h2>
+
+                <p>Users shall not use:</p>
+
+                <ul>
+                    <li>Bots;</li>
+                    <li>Scrapers;</li>
+                    <li>Crawlers;</li>
+                    <li>Automated purchasing systems;</li>
+                    <li>Scripts;</li>
+                    <li>Data-mining tools; or</li>
+                    <li>Similar technologies</li>
+                </ul>
+
+                <p>to access, extract information from or purchase inventory through the Platform without prior written authorisation.</p>
+
+                <p>Sea of Seats may block or terminate accounts associated with unauthorised automated activity.</p>
+
+                <!-- =================================================
+                     16. TICKET PURCHASE LIMITATIONS
+                     ================================================= -->
+
+                <h2>16. Ticket Purchase Limitations</h2>
+
+                <p>
+                    Sea of Seats or a Service Provider may impose limits on the number of tickets that can be purchased by an individual
+                    User, account, household, payment method or other applicable category.
+                </p>
+
+                <p>Transactions exceeding applicable limits may be cancelled where permitted by applicable law.</p>
+
+                <p>Any resulting refund shall be handled in accordance with the applicable refund policy.</p>
+
+                <!-- =================================================
+                     17. FRAUD PREVENTION
+                     ================================================= -->
+
+                <h2>17. Fraud Prevention</h2>
+
+                <p>Sea of Seats may use automated and manual measures to detect:</p>
+
+                <ul>
+                    <li>Fraud;</li>
+                    <li>Payment abuse;</li>
+                    <li>Account takeover;</li>
+                    <li>Unusual purchasing patterns;</li>
+                    <li>Ticketing abuse;</li>
+                    <li>Multiple-account misuse;</li>
+                    <li>Suspicious transactions; and</li>
+                    <li>Other security risks.</li>
+                </ul>
+
+                <p>Sea of Seats may request additional verification before confirming or completing a transaction.</p>
+
+                <!-- =================================================
+                     18. USER REVIEWS AND CONTENT
+                     ================================================= -->
+
+                <h2>18. User Reviews and Content</h2>
+
+                <p>Where the Platform permits reviews, ratings, comments or other content, Users agree not to submit content that is:</p>
+
+                <ul>
+                    <li>False;</li>
+                    <li>Defamatory;</li>
+                    <li>Abusive;</li>
+                    <li>Threatening;</li>
+                    <li>Obscene;</li>
+                    <li>Discriminatory;</li>
+                    <li>Fraudulent;</li>
+                    <li>Infringing;</li>
+                    <li>Unlawful; or</li>
+                    <li>Malicious.</li>
+                </ul>
+
+                <p>Sea of Seats may remove or restrict content that violates this Agreement or applicable law.</p>
+
+                <!-- =================================================
+                     19. INTELLECTUAL PROPERTY
+                     ================================================= -->
+
+                <h2>19. Intellectual Property</h2>
+
+                <p>
+                    All Sea of Seats trademarks, logos, designs, software, databases, text, graphics, photographs, interfaces and other
+                    proprietary material are owned by or licensed to Sea of Seats and are protected under applicable intellectual-property
+                    laws.
+                </p>
+
+                <p>
+                    Users receive a limited, non-exclusive, non-transferable right to access and use the Platform for personal and lawful
+                    purposes.
+                </p>
+
+                <p>
+                    No User may reproduce, distribute, modify, sell, publish or commercially exploit Sea of Seats intellectual property
+                    without prior written authorisation.
+                </p>
+
+                <!-- =================================================
+                     20. PRIVACY
+                     ================================================= -->
+
+                <h2>20. Privacy</h2>
+
+                <p>
+                    Sea of Seats may collect and process personal information in accordance with its Privacy Policy and applicable
+                    data-protection laws.
+                </p>
+
+                <p>By using the Platform, you acknowledge that information may be processed for purposes including:</p>
+
+                <ul>
+                    <li>Account management;</li>
+                    <li>Booking;</li>
+                    <li>Payment;</li>
+                    <li>Customer support;</li>
+                    <li>Fraud prevention;</li>
+                    <li>Communication;</li>
+                    <li>Analytics;</li>
+                    <li>Security;</li>
+                    <li>Legal compliance; and</li>
+                    <li>Other purposes described in the Privacy Policy.</li>
+                </ul>
+
+                <p>The Privacy Policy forms part of this Agreement.</p>
+
+                <!-- =================================================
+                     21. ELECTRONIC COMMUNICATIONS
+                     ================================================= -->
+
+                <h2>21. Electronic Communications</h2>
+
+                <p>By using the Platform, you consent to receiving electronic communications relating to your account and transactions.</p>
+
+                <p>These may include:</p>
+
+                <ul>
+                    <li>Emails;</li>
+                    <li>SMS;</li>
+                    <li>App notifications;</li>
+                    <li>WhatsApp or similar transactional communications, where applicable;</li>
+                    <li>Booking confirmations;</li>
+                    <li>Payment notifications;</li>
+                    <li>Refund updates;</li>
+                    <li>Security notifications; and</li>
+                    <li>Service-related messages.</li>
+                </ul>
+
+                <p>
+                    Marketing communications shall be handled in accordance with applicable law and your applicable communication
+                    preferences.
+                </p>
+
+                <!-- =================================================
+                     22. PLATFORM CONTENT AND INFORMATION
+                     ================================================= -->
+
+                <h2>22. Platform Content and Information</h2>
+
+                <p>Sea of Seats attempts to provide accurate information concerning available products and services.</p>
+
+                <p>However, information may originate from third-party Service Providers.</p>
+
+                <p>Sea of Seats does not guarantee that all third-party information will always be complete, accurate or current.</p>
+
+                <p>Users should verify important booking details before completing payment.</p>
+
+                <!-- =================================================
+                     23. AVAILABILITY OF PLATFORM
+                     ================================================= -->
+
+                <h2>23. Availability of Platform</h2>
+
+                <p>Sea of Seats will make reasonable efforts to keep the Platform available.</p>
+
+                <p>However, temporary interruptions may occur due to:</p>
+
+                <ul>
+                    <li>Maintenance;</li>
+                    <li>Technical issues;</li>
+                    <li>Internet failures;</li>
+                    <li>Server problems;</li>
+                    <li>Cybersecurity incidents;</li>
+                    <li>Third-party outages;</li>
+                    <li>System upgrades; or</li>
+                    <li>Circumstances beyond Sea of Seats' reasonable control.</li>
+                </ul>
+
+                <!-- =================================================
+                     24. SUSPENSION OR TERMINATION
+                     ================================================= -->
+
+                <h2>24. Suspension or Termination of Account</h2>
+
+                <p>Sea of Seats may suspend, restrict or terminate a User account where reasonably necessary due to:</p>
+
+                <ul>
+                    <li>Violation of this Agreement;</li>
+                    <li>Fraudulent activity;</li>
+                    <li>Unauthorised payment activity;</li>
+                    <li>Security concerns;</li>
+                    <li>Abuse of the Platform;</li>
+                    <li>Illegal activity;</li>
+                    <li>Misuse of tickets;</li>
+                    <li>Repeated policy violations; or</li>
+                    <li>Legal or regulatory requirements.</li>
+                </ul>
+
+                <p>Where appropriate and legally permissible, Sea of Seats may notify the User of the reason for such action.</p>
+
+                <!-- =================================================
+                     25. CONSEQUENCES OF TERMINATION
+                     ================================================= -->
+
+                <h2>25. Consequences of Termination</h2>
+
+                <p>Upon termination:</p>
+
+                <ul>
+                    <li>The User's access to the Platform may cease;</li>
+                    <li>Certain account features may become unavailable;</li>
+                    <li>Unused promotional benefits may be cancelled;</li>
+                    <li>Future bookings may be affected where legally and contractually permissible; and</li>
+                    <li>Outstanding obligations may continue until legally discharged.</li>
+                </ul>
+
+                <p>Termination does not extinguish rights or obligations that arose before termination.</p>
+
+                <!-- =================================================
+                     26. DISCLAIMER OF WARRANTIES
+                     ================================================= -->
+
+                <h2>26. Disclaimer of Warranties</h2>
+
+                <p>To the maximum extent permitted by applicable law, Sea of Seats does not guarantee that:</p>
+
+                <ul>
+                    <li>The Platform will always be available;</li>
+                    <li>The Platform will be completely error-free;</li>
+                    <li>Third-party information will always be accurate;</li>
+                    <li>Every event will take place as scheduled;</li>
+                    <li>Every Service Provider will perform as expected; or</li>
+                    <li>The Platform will be completely free from security threats.</li>
+                </ul>
+
+                <p>Nothing in this Agreement excludes rights or liabilities that cannot lawfully be excluded.</p>
+
+                <!-- =================================================
+                     27. LIMITATION OF LIABILITY
+                     ================================================= -->
+
+                <h2>27. Limitation of Liability</h2>
+
+                <p>
+                    To the maximum extent permitted by applicable law, Sea of Seats shall not be liable for indirect, incidental,
+                    consequential, special or exemplary losses arising from the use of the Platform or third-party services.
+                </p>
+
+                <p>
+                    Where Sea of Seats is legally liable for a claim relating to a particular booking, its liability shall, to the extent
+                    permitted by law, generally be limited to the amount actually paid by the User to Sea of Seats for the affected booking.
+                </p>
+
+                <p>Nothing in this Agreement limits liability that cannot legally be limited.</p>
+
+                <!-- =================================================
+                     28. INDEMNIFICATION
+                     ================================================= -->
+
+                <h2>28. Indemnification</h2>
+
+                <p>
+                    To the extent permitted by law, the User agrees to indemnify and hold harmless Sea of Seats, its affiliates, directors,
+                    officers, employees, agents and authorised representatives against claims, losses, damages, liabilities, costs and
+                    expenses arising from:
+                </p>
+
+                <ol type="a" class="legal-letter-list">
+                    <li>violation of this Agreement;</li>
+                    <li>unlawful use of the Platform;</li>
+                    <li>fraudulent conduct;</li>
+                    <li>infringement of third-party rights;</li>
+                    <li>misuse of tickets or bookings; or</li>
+                    <li>violation of applicable laws.</li>
+                </ol>
+
+                <!-- =================================================
+                     29. FORCE MAJEURE
+                     ================================================= -->
+
+                <h2>29. Force Majeure</h2>
+
+                <p>
+                    Sea of Seats shall not be responsible for failure or delay caused by circumstances beyond its reasonable control,
+                    including:
+                </p>
+
+                <ul>
+                    <li>Natural disasters;</li>
+                    <li>War;</li>
+                    <li>Terrorism;</li>
+                    <li>Civil unrest;</li>
+                    <li>Government restrictions;</li>
+                    <li>Pandemics;</li>
+                    <li>Strikes;</li>
+                    <li>Internet or telecommunications failures;</li>
+                    <li>Payment-system failures;</li>
+                    <li>Cyber incidents; or</li>
+                    <li>Service Provider failures.</li>
+                </ul>
+
+                <!-- =================================================
+                     30. CHANGES TO THIS AGREEMENT
+                     ================================================= -->
+
+                <h2>30. Changes to This Agreement</h2>
+
+                <p>Sea of Seats may modify this Agreement from time to time.</p>
+
+                <p>The updated Agreement will be published on the Platform and will contain a revised "Last Updated" date.</p>
+
+                <p>Where required by applicable law, appropriate notice may be provided to Users.</p>
+
+                <p>Continued use of the Platform following applicable changes may constitute acceptance of the revised Agreement.</p>
+
+                <!-- =================================================
+                     31. GOVERNING LAW
+                     ================================================= -->
+
+                <h2>31. Governing Law</h2>
+
+                <p>This Agreement shall be governed by and interpreted in accordance with the laws of India.</p>
+
+                <p>Nothing in this Agreement shall restrict mandatory rights available to consumers or Users under applicable law.</p>
+
+                <!-- =================================================
+                     32. DISPUTE RESOLUTION
+                     ================================================= -->
+
+                <h2>32. Dispute Resolution</h2>
+
+                <p>Users are encouraged to first contact Sea of Seats to resolve any dispute or complaint.</p>
+
+                <p>Where appropriate, Sea of Seats and the User may attempt to resolve disputes through:</p>
+
+                <ol>
+                    <li>Customer support;</li>
+                    <li>Internal grievance resolution;</li>
+                    <li>Negotiation;</li>
+                    <li>Mediation; or</li>
+                    <li>Arbitration, where legally applicable and mutually agreed or otherwise lawfully invoked.</li>
+                </ol>
+
+                <p>Nothing in this section prevents a User from exercising any mandatory statutory or consumer remedy.</p>
+
+                <!-- =================================================
+                     33. JURISDICTION
+                     ================================================= -->
+
+                <h2>33. Jurisdiction</h2>
+
+                <p>
+                    Subject to applicable law and mandatory consumer rights, courts having competent jurisdiction at
+                    <strong>[City, State, India]</strong>
+                    shall have jurisdiction over disputes arising from or relating to this Agreement.
+                </p>
+
+                <!-- =================================================
+                     34. GRIEVANCE REDRESSAL
+                     ================================================= -->
+
+                <h2>34. Grievance Redressal</h2>
+
+                <p>For complaints relating to the Platform, account, booking or services, Users may contact:</p>
+
+                <div class="legal-contact-card">
+                    <div class="contact-title">Grievance Contact</div>
+
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:info@seaofseats.com"> info@seaofseats.com </a>
+                    </p>
+                </div>
+
+                <p>
+                    Users should provide sufficient details, including booking ID or transaction reference where applicable, to enable
+                    investigation of the complaint.
+                </p>
+
+                <!-- =================================================
+                     35. SEVERABILITY
+                     ================================================= -->
+
+                <h2>35. Severability</h2>
+
+                <p>
+                    If any provision of this Agreement is determined to be invalid, unlawful or unenforceable, that provision shall be
+                    modified or severed to the minimum extent necessary.
+                </p>
+
+                <p>The remaining provisions shall continue in effect.</p>
+
+                <!-- =================================================
+                     36. WAIVER
+                     ================================================= -->
+
+                <h2>36. Waiver</h2>
+
+                <p>
+                    Failure by Sea of Seats to enforce any provision of this Agreement shall not constitute a waiver of its right to enforce
+                    that provision in the future.
+                </p>
+
+                <!-- =================================================
+                     37. ASSIGNMENT
+                     ================================================= -->
+
+                <h2>37. Assignment</h2>
+
+                <p>
+                    The User may not assign or transfer rights or obligations under this Agreement without the prior written consent of Sea
+                    of Seats.
+                </p>
+
+                <p>
+                    Sea of Seats may assign its rights and obligations as part of a merger, acquisition, restructuring, sale of business or
+                    other lawful corporate transaction.
+                </p>
+
+                <!-- =================================================
+                     38. ENTIRE AGREEMENT
+                     ================================================= -->
+
+                <h2>38. Entire Agreement</h2>
+
+                <p>
+                    This User Agreement, together with the following documents, constitutes the contractual framework governing the User's
+                    relationship with Sea of Seats:
+                </p>
+
+                <ol>
+                    <li>Terms &amp; Conditions;</li>
+                    <li>Privacy Policy;</li>
+                    <li>Cancellation &amp; Refund Policy;</li>
+                    <li>Payment Policy;</li>
+                    <li>Cookie Policy, where applicable; and</li>
+                    <li>Any booking-specific terms displayed during the transaction.</li>
+                </ol>
+
+                <p>In the event of a conflict, the applicable mandatory law shall prevail.</p>
+
+                <p>For a specific booking, booking-specific terms may apply to the extent they are not inconsistent with applicable law.</p>
+
+                <!-- =================================================
+                     39. ELECTRONIC ACCEPTANCE
+                     ================================================= -->
+
+                <h2>39. Electronic Acceptance</h2>
+
+                <p>The User acknowledges that clicking:</p>
+
+                <ul>
+                    <li>"I Agree"</li>
+                    <li>"Create Account"</li>
+                    <li>"Book Now"</li>
+                    <li>"Proceed to Payment"</li>
+                    <li>"Pay Now"</li>
+                </ul>
+
+                <p>
+                    or otherwise accessing or using the Platform may constitute electronic acceptance of this Agreement, subject to
+                    applicable law.
+                </p>
+
+                <p>
+                    Electronic records of acceptance, transactions and communications may be retained by Sea of Seats in accordance with
+                    applicable law.
+                </p>
+
+                <!-- =================================================
+                     40. CONTACT INFORMATION
+                     ================================================= -->
+
+                <h2>40. Contact Information</h2>
+
+                <div class="legal-contact-card">
+                    <div class="contact-title">SEA OF SEATS</div>
+
+                    <p>
+                        <strong>Legal Entity Name:</strong>
+                        Booking Studio Pvt Ltd
+                    </p>
+
+                    <p>
+                        <strong>Brand Name:</strong>
+                        Sea of Seats
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:info@seaofseats.com"> info@seaofseats.com </a>
+                    </p>
+
+                    <p>
+                        <strong>Website:</strong>
+                        www.seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Last Updated:</strong>
+                        31 August 2026
+                    </p>
+                </div>
+
+                <!-- =================================================
+                     FOOTER NOTE
+                     ================================================= -->
+
+                <div class="legal-footer-note">
+                    <p>
+                        This User Agreement is provided for informational and contractual purposes and should be read together with the
+                        other applicable Sea of Seats policies and booking-specific terms.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

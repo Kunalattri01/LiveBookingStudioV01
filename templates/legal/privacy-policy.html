@@ -1,0 +1,1197 @@
+{% extends 'base/public_base.html' %} {% block extraCSS %}
+<style>
+    .legal-hero {
+        background: linear-gradient(135deg, #0f172a 0%, #164e4c 55%, #0f766e 100%) !important;
+
+        position: relative;
+        overflow: hidden;
+    }
+
+    .legal-hero::before {
+        content: "";
+        position: absolute;
+
+        width: 520px;
+        height: 520px;
+
+        right: -180px;
+        top: -280px;
+
+        border-radius: 50%;
+
+        background: rgba(20, 184, 166, 0.14) !important;
+
+        pointer-events: none;
+    }
+
+    .legal-hero::after {
+        content: "";
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        left: -150px;
+        bottom: -200px;
+
+        border-radius: 50%;
+
+        background: rgba(45, 212, 191, 0.08) !important;
+
+        pointer-events: none;
+    }
+
+    .legal-hero-content {
+        position: relative;
+        z-index: 5;
+    }
+
+    .legal-hero-label {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        color: #5eead4 !important;
+
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+
+        letter-spacing: 0.04em !important;
+
+        margin-bottom: 12px !important;
+    }
+
+    .legal-hero-label i {
+        color: #5eead4 !important;
+        font-size: 0.9rem !important;
+    }
+
+    .legal-hero h1 {
+        color: #ffffff !important;
+    }
+
+    .legal-hero-description {
+        color: #d1fae5 !important;
+    }
+
+    .legal-hero-date {
+        color: #99f6e4 !important;
+    }
+
+    .legal-card {
+        background: #ffffff !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 18px !important;
+
+        box-shadow:
+            0 8px 25px rgba(15, 23, 42, 0.05),
+            0 2px 6px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    .legal-sidebar {
+        overflow: hidden !important;
+    }
+
+    .legal-sidebar-title {
+        padding: 10px 12px !important;
+
+        color: #94a3b8 !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        letter-spacing: 0.08em !important;
+
+        text-transform: uppercase !important;
+    }
+
+    .legal-sidebar a {
+        display: block !important;
+
+        padding: 11px 13px !important;
+
+        margin: 2px 0 !important;
+
+        border-radius: 10px !important;
+
+        color: #64748b !important;
+
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+
+        text-decoration: none !important;
+
+        transition:
+            color 180ms ease,
+            background 180ms ease,
+            transform 180ms ease !important;
+    }
+
+    .legal-sidebar a:hover {
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        color: #0f766e !important;
+
+        transform: translateX(2px) !important;
+    }
+
+    .legal-sidebar a.active {
+        background: rgba(20, 184, 166, 0.12) !important;
+
+        color: #0ea5a4 !important;
+
+        font-weight: 700 !important;
+    }
+
+    .legal-sidebar a.active::before {
+        content: "";
+
+        display: inline-block;
+
+        width: 4px;
+        height: 16px;
+
+        margin-right: 8px;
+
+        vertical-align: -3px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    .legal-content {
+        color: #475569 !important;
+        min-width: 0;
+    }
+
+    .legal-content h2 {
+        display: flex !important;
+        align-items: flex-start !important;
+
+        font-size: 1.3rem !important;
+        line-height: 1.45 !important;
+
+        font-weight: 800 !important;
+
+        color: #0f172a !important;
+
+        margin: 2.25rem 0 0.8rem !important;
+
+        letter-spacing: -0.015em !important;
+    }
+
+    .legal-content h2:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    .legal-content h2::before {
+        content: "";
+
+        flex: 0 0 auto;
+
+        width: 4px;
+        height: 24px;
+
+        margin-right: 10px;
+        margin-top: 2px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    .legal-content h3 {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+
+        font-weight: 700 !important;
+
+        color: #0f172a !important;
+
+        margin: 1.35rem 0 0.5rem !important;
+    }
+
+    .legal-content p {
+        font-size: 0.9rem !important;
+
+        line-height: 1.85 !important;
+
+        color: #475569 !important;
+
+        margin: 0 0 0.85rem !important;
+    }
+
+    .legal-content ul,
+    .legal-content ol {
+        margin: 0.55rem 0 1rem !important;
+
+        padding-left: 1.45rem !important;
+    }
+
+    .legal-content li {
+        font-size: 0.9rem !important;
+
+        line-height: 1.8 !important;
+
+        color: #475569 !important;
+
+        margin: 0.35rem 0 !important;
+
+        padding-left: 3px !important;
+    }
+
+    .legal-content ul li::marker {
+        color: #0ea5a4 !important;
+    }
+
+    .legal-content ol li::marker {
+        color: #0ea5a4 !important;
+        font-weight: 700 !important;
+    }
+
+    .legal-note {
+        display: flex !important;
+
+        gap: 12px !important;
+
+        align-items: flex-start !important;
+
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        border: 1px solid rgba(20, 184, 166, 0.22) !important;
+
+        border-left: 4px solid #0ea5a4 !important;
+
+        border-radius: 12px !important;
+
+        padding: 1rem !important;
+
+        margin-bottom: 2rem !important;
+    }
+
+    .legal-note i {
+        flex-shrink: 0;
+
+        color: #0ea5a4 !important;
+
+        margin-top: 3px;
+    }
+
+    .legal-note p {
+        margin: 0 !important;
+
+        color: #475569 !important;
+
+        font-size: 0.875rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    .legal-contact {
+        background: #f8fafc !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 14px !important;
+
+        padding: 1.25rem !important;
+
+        margin: 1rem 0 1.25rem !important;
+    }
+
+    .legal-contact p {
+        margin-bottom: 0.45rem !important;
+    }
+
+    .legal-contact p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .legal-contact strong {
+        color: #0f172a !important;
+    }
+
+    .legal-important {
+        margin-top: 2.5rem !important;
+
+        padding: 1.35rem !important;
+
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(20, 184, 166, 0.025)) !important;
+
+        border: 1px solid rgba(20, 184, 166, 0.22) !important;
+
+        border-radius: 14px !important;
+    }
+
+    .legal-important-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-bottom: 0.85rem;
+
+        color: #0f172a !important;
+
+        font-size: 1.05rem !important;
+
+        font-weight: 800 !important;
+    }
+
+    .legal-important-title i {
+        color: #0ea5a4 !important;
+    }
+
+    .legal-footer-note {
+        margin-top: 2.5rem !important;
+
+        padding-top: 1.5rem !important;
+
+        border-top: 1px solid #e2e8f0 !important;
+    }
+
+    .legal-footer-note p {
+        color: #94a3b8 !important;
+
+        font-size: 0.78rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    @media (max-width: 1023px) {
+        .legal-sidebar {
+            position: static !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .legal-hero {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .legal-hero h1 {
+            font-size: 2rem !important;
+        }
+
+        .legal-hero-description {
+            font-size: 0.875rem !important;
+        }
+
+        .legal-content {
+            padding: 1.35rem !important;
+        }
+
+        .legal-content h2 {
+            font-size: 1.15rem !important;
+
+            margin-top: 1.8rem !important;
+        }
+
+        .legal-content h2::before {
+            width: 3px !important;
+            height: 20px !important;
+
+            margin-right: 8px !important;
+        }
+
+        .legal-content p,
+        .legal-content li {
+            font-size: 0.875rem !important;
+            line-height: 1.78 !important;
+        }
+
+        .legal-card {
+            border-radius: 14px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .legal-hero h1 {
+            font-size: 1.75rem !important;
+        }
+
+        .legal-sidebar a {
+            font-size: 0.82rem !important;
+            padding: 10px 11px !important;
+        }
+
+        .legal-note {
+            padding: 0.85rem !important;
+        }
+    }
+</style>
+{% endblock %} {% block content %}
+
+<section class="legal-hero text-white py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 legal-hero-content">
+        <div class="legal-hero-label">
+            <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+
+            <span> LEGAL &amp; POLICIES </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Privacy Policy</h1>
+
+        <p class="legal-hero-description mt-3 max-w-3xl text-sm sm:text-base">
+            How Sea of Seats collects, uses, stores, processes, shares and protects your personal data.
+        </p>
+
+        <p class="legal-hero-date mt-5 text-xs">Last updated: 31 August 2026</p>
+    </div>
+</section>
+
+<section class="py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[230px_minmax(0,1fr)] gap-7 items-start">
+            <aside class="legal-sidebar legal-card p-3 lg:sticky lg:top-24">
+                <div class="legal-sidebar-title">Legal Centre</div>
+
+                <a href="{% url 'PrivacyPolicyPage' %}" class="active"> Privacy Policy </a>
+
+                <a href="{% url 'TermsConditionPage' %}"> Terms &amp; Conditions </a>
+
+                <a href="{% url 'RefundPolicyPage' %}"> Refund &amp; Cancellation </a>
+
+                <a href="{% url 'UserAgreementPage' %}"> User Agreement </a>
+            </aside>
+
+            <article class="legal-card p-6 sm:p-9 lg:p-10 legal-content">
+                <div class="legal-note">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+
+                    <p>
+                        Sea of Seats respects your privacy and is committed to protecting your personal data. This Privacy Policy explains
+                        how Sea of Seats collects, uses, stores, processes, shares and protects information when you use the Platform.
+                    </p>
+                </div>
+
+                <p>
+                    Sea of Seats ("Sea of Seats", "Company", "we", "us", or "our") respects your privacy and is committed to protecting your
+                    personal data.
+                </p>
+
+                <p>
+                    This Privacy Policy explains how Sea of Seats collects, uses, stores, processes, shares and protects information when
+                    you access or use our website, mobile application, booking platform, services, customer-support channels or any other
+                    digital services operated by Sea of Seats (collectively, the "Platform").
+                </p>
+
+                <p>By accessing or using the Platform, you acknowledge that you have read and understood this Privacy Policy.</p>
+
+                <p>
+                    Where applicable, this Privacy Policy is intended to operate consistently with India's applicable data-protection laws,
+                    including the Digital Personal Data Protection Act, 2023 ("DPDP Act") and applicable rules and regulations made
+                    thereunder. The Government notified the Digital Personal Data Protection Rules, 2025 on 13 November 2025.
+                </p>
+
+                <h2>1. WHO WE ARE</h2>
+
+                <p>Sea of Seats is an online ticketing and booking platform that may facilitate bookings for:</p>
+
+                <ul>
+                    <li>Movies and cinema;</li>
+                    <li>Concerts and music events;</li>
+                    <li>Sports events;</li>
+                    <li>Entertainment and recreational activities;</li>
+                    <li>Theatre, comedy and cultural events;</li>
+                    <li>Travel and transportation;</li>
+                    <li>Airlines;</li>
+                    <li>Railways and metro services;</li>
+                    <li>Hotels and accommodation;</li>
+                    <li>Experiences and activities; and</li>
+                    <li>Other products and services made available through the Platform.</li>
+                </ul>
+
+                <p>
+                    Depending on the particular service, Sea of Seats may act as a booking platform, facilitator, intermediary, marketplace
+                    or service provider.
+                </p>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>Legal Entity Name:</strong>
+                        Booking Studio Private Limited
+                    </p>
+
+                    <p>
+                        <strong>Brand Name:</strong>
+                        Sea of Seats
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Website:</strong>
+                        www.seaofseats.com
+                    </p>
+                </div>
+
+                <h2>2. INFORMATION WE COLLECT</h2>
+
+                <p>We may collect different categories of information depending on how you use the Platform.</p>
+
+                <h3>2.1 Information You Provide Directly</h3>
+
+                <p>This may include:</p>
+
+                <ul>
+                    <li>Full name;</li>
+                    <li>Email address;</li>
+                    <li>Mobile/telephone number;</li>
+                    <li>Billing address;</li>
+                    <li>Date of birth, where required;</li>
+                    <li>Gender, where required for a particular booking;</li>
+                    <li>Identification information where required by a Service Provider;</li>
+                    <li>Account login information;</li>
+                    <li>Booking details;</li>
+                    <li>Passenger information;</li>
+                    <li>Traveller information;</li>
+                    <li>Guest information;</li>
+                    <li>Preferences;</li>
+                    <li>Customer-support communications;</li>
+                    <li>Reviews, ratings or feedback; and</li>
+                    <li>Other information you voluntarily provide.</li>
+                </ul>
+
+                <p>You should provide only information that is accurate and necessary for the relevant service.</p>
+
+                <h2>3. PAYMENT INFORMATION</h2>
+
+                <p>When you make a payment, we may receive information relating to the transaction, including:</p>
+
+                <ul>
+                    <li>Transaction ID;</li>
+                    <li>Order ID;</li>
+                    <li>Payment status;</li>
+                    <li>Amount paid;</li>
+                    <li>Currency;</li>
+                    <li>Payment method;</li>
+                    <li>Bank/payment-provider reference;</li>
+                    <li>Card type or masked card information; and</li>
+                    <li>Other payment-related information supplied by our payment partners.</li>
+                </ul>
+
+                <p>
+                    Where payment processing is performed by an authorised third-party payment gateway, Sea of Seats generally does not
+                    receive or store your complete card number, CVV or banking password.
+                </p>
+
+                <p>
+                    Payment information may be processed directly by payment gateways, banks, card networks or other authorised payment
+                    service providers in accordance with their own privacy policies and applicable law.
+                </p>
+
+                <h2>4. INFORMATION COLLECTED AUTOMATICALLY</h2>
+
+                <p>When you access or use our Platform, certain technical information may be automatically collected, including:</p>
+
+                <ul>
+                    <li>IP address;</li>
+                    <li>Browser type;</li>
+                    <li>Device type;</li>
+                    <li>Operating system;</li>
+                    <li>Device identifiers;</li>
+                    <li>Approximate location derived from technical information;</li>
+                    <li>Language preferences;</li>
+                    <li>Date and time of access;</li>
+                    <li>Pages visited;</li>
+                    <li>Search activity;</li>
+                    <li>Clicks and interactions;</li>
+                    <li>Referring websites;</li>
+                    <li>Session information;</li>
+                    <li>Crash reports;</li>
+                    <li>Log information; and</li>
+                    <li>Other technical information necessary to operate and secure the Platform.</li>
+                </ul>
+
+                <p>We may use this information for security, analytics, troubleshooting, fraud prevention and improving our services.</p>
+
+                <h2>5. COOKIES AND TRACKING TECHNOLOGIES</h2>
+
+                <p>Sea of Seats may use cookies, pixels, SDKs, local storage and similar technologies.</p>
+
+                <p>These technologies may be used to:</p>
+
+                <ul>
+                    <li>Keep users signed in;</li>
+                    <li>Remember preferences;</li>
+                    <li>Maintain booking sessions;</li>
+                    <li>Understand Platform usage;</li>
+                    <li>Analyse traffic;</li>
+                    <li>Improve website performance;</li>
+                    <li>Detect fraudulent activity;</li>
+                    <li>Provide relevant advertising where permitted; and</li>
+                    <li>Measure marketing effectiveness.</li>
+                </ul>
+
+                <p>
+                    Where required by applicable law, non-essential cookies and similar technologies will be used only after obtaining the
+                    appropriate consent.
+                </p>
+
+                <p>You may manage cookie preferences through your browser or any cookie-management mechanism provided on the Platform.</p>
+
+                <p>Disabling certain cookies may affect Platform functionality.</p>
+
+                <h2>6. PURPOSES FOR WHICH WE USE PERSONAL DATA</h2>
+
+                <p>Sea of Seats may process personal data for legitimate and lawful purposes, including:</p>
+
+                <h3>A. Providing Services</h3>
+
+                <p>To:</p>
+
+                <ul>
+                    <li>Create and manage accounts;</li>
+                    <li>Process bookings;</li>
+                    <li>Issue tickets;</li>
+                    <li>Confirm reservations;</li>
+                    <li>Process payments;</li>
+                    <li>Provide customer support;</li>
+                    <li>Send booking confirmations;</li>
+                    <li>Send invoices and receipts;</li>
+                    <li>Facilitate cancellations and refunds; and</li>
+                    <li>Provide requested services.</li>
+                </ul>
+
+                <h3>B. Communication</h3>
+
+                <p>To send:</p>
+
+                <ul>
+                    <li>Booking confirmations;</li>
+                    <li>Payment confirmations;</li>
+                    <li>Ticket information;</li>
+                    <li>Schedule changes;</li>
+                    <li>Cancellation notifications;</li>
+                    <li>Refund updates;</li>
+                    <li>Security alerts;</li>
+                    <li>Service announcements; and</li>
+                    <li>Customer-support communications.</li>
+                </ul>
+
+                <h3>C. Fraud and Security</h3>
+
+                <p>To:</p>
+
+                <ul>
+                    <li>Detect fraudulent transactions;</li>
+                    <li>Prevent misuse;</li>
+                    <li>Authenticate users;</li>
+                    <li>Protect accounts;</li>
+                    <li>Investigate suspicious activity;</li>
+                    <li>Maintain Platform security; and</li>
+                    <li>Protect Sea of Seats, users and third parties.</li>
+                </ul>
+
+                <h3>D. Improvement of Services</h3>
+
+                <p>To:</p>
+
+                <ul>
+                    <li>Analyse Platform performance;</li>
+                    <li>Understand customer behaviour;</li>
+                    <li>Improve features;</li>
+                    <li>Develop new products;</li>
+                    <li>Troubleshoot technical issues; and</li>
+                    <li>Conduct internal research and analytics.</li>
+                </ul>
+
+                <h3>E. Marketing</h3>
+
+                <p>
+                    Where permitted by applicable law and, where required, with appropriate consent, we may use contact information to send:
+                </p>
+
+                <ul>
+                    <li>Offers;</li>
+                    <li>Promotions;</li>
+                    <li>Discounts;</li>
+                    <li>Event recommendations;</li>
+                    <li>New-service announcements; and</li>
+                    <li>Other marketing communications.</li>
+                </ul>
+
+                <p>
+                    You may unsubscribe from promotional communications at any time using the unsubscribe mechanism provided in the
+                    communication or by contacting us.
+                </p>
+
+                <h2>7. LEGAL BASIS FOR PROCESSING</h2>
+
+                <p>Depending on the circumstances and applicable law, Sea of Seats may process personal data:</p>
+
+                <ol type="a">
+                    <li>with your consent;</li>
+                    <li>to provide a service or fulfil a transaction requested by you;</li>
+                    <li>to comply with legal or regulatory obligations;</li>
+                    <li>for legitimate and lawful business purposes where permitted by applicable law;</li>
+                    <li>to prevent fraud, abuse or security incidents; or</li>
+                    <li>for other purposes permitted under applicable law.</li>
+                </ol>
+
+                <p>Where consent is required, Sea of Seats will seek consent in the manner prescribed by applicable law.</p>
+
+                <p>
+                    The Digital Personal Data Protection Rules, 2025 require applicable notices to provide clear information about the
+                    personal data being processed and the purposes for which it is processed.
+                </p>
+
+                <h2>8. SHARING OF PERSONAL DATA</h2>
+
+                <p>
+                    Sea of Seats may share personal data with appropriate third parties where necessary to provide services or fulfil the
+                    purposes described in this Privacy Policy.
+                </p>
+
+                <h3>8.1 Service Providers</h3>
+
+                <p>Such as:</p>
+
+                <ul>
+                    <li>Event organisers;</li>
+                    <li>Cinema operators;</li>
+                    <li>Sports organisers;</li>
+                    <li>Venues;</li>
+                    <li>Airlines;</li>
+                    <li>Railway/transport operators;</li>
+                    <li>Hotels;</li>
+                    <li>Travel providers;</li>
+                    <li>Ticket suppliers; and</li>
+                    <li>Other booking partners.</li>
+                </ul>
+
+                <p>Only information reasonably necessary for the relevant service should be shared.</p>
+
+                <h3>8.2 Payment Service Providers</h3>
+
+                <p>We may share relevant information with:</p>
+
+                <ul>
+                    <li>Payment gateways;</li>
+                    <li>Banks;</li>
+                    <li>Card networks;</li>
+                    <li>Financial institutions; and</li>
+                    <li>Fraud-prevention/payment-processing providers.</li>
+                </ul>
+
+                <h3>8.3 Technology Service Providers</h3>
+
+                <p>We may use third parties providing:</p>
+
+                <ul>
+                    <li>Cloud hosting;</li>
+                    <li>Databases;</li>
+                    <li>Analytics;</li>
+                    <li>Customer-support software;</li>
+                    <li>Email services;</li>
+                    <li>SMS services;</li>
+                    <li>Authentication services;</li>
+                    <li>Cybersecurity;</li>
+                    <li>Fraud detection; and</li>
+                    <li>Technical infrastructure.</li>
+                </ul>
+
+                <h3>8.4 Government and Legal Authorities</h3>
+
+                <p>
+                    We may disclose information where required or permitted by applicable law, court order, governmental direction,
+                    regulatory requirement or lawful request.
+                </p>
+
+                <h3>8.5 Corporate Transactions</h3>
+
+                <p>Personal data may be transferred or disclosed as part of:</p>
+
+                <ul>
+                    <li>Merger;</li>
+                    <li>Acquisition;</li>
+                    <li>Restructuring;</li>
+                    <li>Financing;</li>
+                    <li>Sale of assets;</li>
+                    <li>Business transfer; or</li>
+                    <li>Similar corporate transaction,</li>
+                </ul>
+
+                <p>subject to applicable law.</p>
+
+                <h2>9. THIRD-PARTY SERVICE PROVIDERS</h2>
+
+                <p>Some services available through Sea of Seats are provided by independent third parties.</p>
+
+                <p>Those third parties may have their own privacy policies and terms.</p>
+
+                <p>
+                    For example, airlines, hotels, event organisers, cinemas, venues and payment providers may independently process
+                    information in accordance with their own legal and contractual obligations.
+                </p>
+
+                <p>Sea of Seats recommends that Customers review the applicable third-party privacy policies where relevant.</p>
+
+                <h2>10. INTERNATIONAL DATA TRANSFERS</h2>
+
+                <p>
+                    Sea of Seats may use service providers, technology providers, payment processors or other partners located in India or
+                    outside India.
+                </p>
+
+                <p>
+                    Where personal data is transferred outside India, Sea of Seats will take steps required by applicable law and applicable
+                    government restrictions relating to such transfer.
+                </p>
+
+                <p>
+                    Customers using international payment methods acknowledge that transaction processing may involve payment networks,
+                    banks or service providers operating in jurisdictions outside India.
+                </p>
+
+                <h2>11. INTERNATIONAL CUSTOMERS</h2>
+
+                <p>
+                    Customers accessing Sea of Seats from outside India acknowledge that their information may be processed in India and/or
+                    other jurisdictions where our service providers operate.
+                </p>
+
+                <p>By using the Platform, Customers acknowledge such processing to the extent permitted by applicable law.</p>
+
+                <p>
+                    Where additional legal requirements apply to a particular Customer or jurisdiction, Sea of Seats will seek to comply
+                    with applicable requirements.
+                </p>
+
+                <h2>12. DATA RETENTION</h2>
+
+                <p>Sea of Seats will retain personal data only for as long as reasonably necessary for:</p>
+
+                <ul>
+                    <li>Providing services;</li>
+                    <li>Maintaining transaction records;</li>
+                    <li>Customer support;</li>
+                    <li>Accounting and financial records;</li>
+                    <li>Legal and regulatory compliance;</li>
+                    <li>Fraud prevention;</li>
+                    <li>Dispute resolution;</li>
+                    <li>Security purposes; and</li>
+                    <li>Other lawful business purposes.</li>
+                </ul>
+
+                <p>
+                    When personal data is no longer required, Sea of Seats may delete, anonymise or securely dispose of it, subject to legal
+                    or regulatory retention requirements.
+                </p>
+
+                <p>Certain booking, payment, tax and transaction records may therefore need to be retained for a longer period.</p>
+
+                <h2>13. DATA SECURITY</h2>
+
+                <p>Sea of Seats takes reasonable technical and organisational measures designed to protect personal data against:</p>
+
+                <ul>
+                    <li>Unauthorised access;</li>
+                    <li>Unauthorised disclosure;</li>
+                    <li>Accidental loss;</li>
+                    <li>Destruction;</li>
+                    <li>Alteration;</li>
+                    <li>Misuse; and</li>
+                    <li>Other security risks.</li>
+                </ul>
+
+                <p>Security measures may include:</p>
+
+                <ul>
+                    <li>Encryption where appropriate;</li>
+                    <li>Access controls;</li>
+                    <li>Authentication mechanisms;</li>
+                    <li>Secure infrastructure;</li>
+                    <li>Monitoring;</li>
+                    <li>Logging;</li>
+                    <li>Vendor security controls; and</li>
+                    <li>Other reasonable safeguards.</li>
+                </ul>
+
+                <p>However, no internet-based system can be guaranteed to be completely secure.</p>
+
+                <h2>14. DATA BREACHES</h2>
+
+                <p>
+                    If Sea of Seats becomes aware of a personal-data breach requiring notification under applicable law, we will take
+                    reasonable steps to investigate, contain and address the incident and provide notifications to affected persons and/or
+                    authorities where required.
+                </p>
+
+                <h2>15. YOUR RIGHTS</h2>
+
+                <p>
+                    Subject to applicable law and the relevant implementation timeline, you may have rights concerning your personal data,
+                    including rights to:
+                </p>
+
+                <ul>
+                    <li>Access information regarding processing;</li>
+                    <li>Request correction of inaccurate information;</li>
+                    <li>Request updating of information;</li>
+                    <li>Withdraw consent where processing is based on consent;</li>
+                    <li>Request deletion/erasure where legally applicable;</li>
+                    <li>Obtain information regarding processing;</li>
+                    <li>Raise a grievance; and</li>
+                    <li>Exercise other rights provided under applicable law.</li>
+                </ul>
+
+                <p>
+                    The DPDP framework provides rights and mechanisms for individuals concerning their personal data, with implementation
+                    taking place according to the notified commencement timeline.
+                </p>
+
+                <h2>16. WITHDRAWAL OF CONSENT</h2>
+
+                <p>
+                    Where processing is based on consent, you may withdraw your consent by using the method provided by Sea of Seats or by
+                    contacting us.
+                </p>
+
+                <p>Withdrawal of consent shall not affect the lawfulness of processing carried out before withdrawal.</p>
+
+                <p>
+                    Withdrawal may affect our ability to provide certain services where the relevant processing is necessary to provide
+                    those services.
+                </p>
+
+                <p>
+                    Where a particular service requires certain information to fulfil a booking, withdrawing the relevant consent may result
+                    in cancellation or inability to provide that service, subject to applicable law and the relevant booking terms.
+                </p>
+
+                <h2>17. CORRECTION OF INFORMATION</h2>
+
+                <p>You may request correction or updating of inaccurate personal information.</p>
+
+                <p>Requests may be submitted through your account, where the functionality is available, or by contacting:</p>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+                </div>
+
+                <p>We may request reasonable information to verify your identity before processing a request.</p>
+
+                <h2>18. CHILDREN'S DATA</h2>
+
+                <p>The Platform is not intended to knowingly collect personal data from children in violation of applicable law.</p>
+
+                <p>
+                    Where services involve children, such as child tickets, travel bookings or family events, information may be collected
+                    where necessary to complete the booking and in accordance with applicable law.
+                </p>
+
+                <p>
+                    Where processing of a child's personal data requires parental or lawful guardian consent under applicable law, Sea of
+                    Seats will follow the applicable requirements.
+                </p>
+
+                <h2>19. MARKETING COMMUNICATIONS</h2>
+
+                <p>You may receive promotional communications where permitted by law.</p>
+
+                <p>You can opt out by:</p>
+
+                <ul>
+                    <li>Clicking the unsubscribe link in marketing emails;</li>
+                    <li>Using available communication preferences in your account; or</li>
+                    <li>Contacting Sea of Seats.</li>
+                </ul>
+
+                <p>
+                    You may continue to receive essential transactional and service-related communications even after opting out of
+                    marketing communications.
+                </p>
+
+                <h2>20. THIRD-PARTY LINKS</h2>
+
+                <p>The Platform may contain links to websites, applications or services operated by third parties.</p>
+
+                <p>Sea of Seats is not responsible for the privacy practices, content or security of third-party websites.</p>
+
+                <p>You should review the privacy policy of any third-party website before providing personal information.</p>
+
+                <h2>21. SOCIAL MEDIA</h2>
+
+                <p>Sea of Seats may maintain profiles or integrations with social-media platforms.</p>
+
+                <p>
+                    If you interact with Sea of Seats through such platforms, the relevant platform may independently collect and process
+                    information according to its own privacy policy.
+                </p>
+
+                <h2>22. ANALYTICS AND ADVERTISING</h2>
+
+                <p>
+                    Sea of Seats may use analytics and advertising technologies to understand Platform usage and measure marketing
+                    performance.
+                </p>
+
+                <p>Where legally permitted, we may work with advertising and analytics providers to understand:</p>
+
+                <ul>
+                    <li>Website traffic;</li>
+                    <li>Campaign performance;</li>
+                    <li>User interactions;</li>
+                    <li>Conversion rates; and</li>
+                    <li>General audience trends.</li>
+                </ul>
+
+                <p>We will not sell personal data in violation of applicable law.</p>
+
+                <h2>23. ACCOUNT SECURITY</h2>
+
+                <p>You are responsible for maintaining the confidentiality of your account credentials.</p>
+
+                <p>You should immediately notify Sea of Seats if you suspect:</p>
+
+                <ul>
+                    <li>Unauthorised account access;</li>
+                    <li>Password compromise;</li>
+                    <li>Unauthorised booking activity; or</li>
+                    <li>Suspicious transactions.</li>
+                </ul>
+
+                <p>Sea of Seats may temporarily restrict access to an account where necessary to protect the account or Platform.</p>
+
+                <h2>24. PAYMENT SECURITY</h2>
+
+                <p>Payments are processed through authorised payment providers.</p>
+
+                <p>Sea of Seats does not ask customers to disclose:</p>
+
+                <ul>
+                    <li>OTPs;</li>
+                    <li>CVV numbers;</li>
+                    <li>Internet banking passwords;</li>
+                    <li>UPI PINs; or</li>
+                    <li>Payment authentication credentials</li>
+                </ul>
+
+                <p>through customer-support channels.</p>
+
+                <p>You should never disclose such information to anyone claiming to represent Sea of Seats.</p>
+
+                <h2>25. DATA PROVIDED FOR BOOKINGS</h2>
+
+                <p>Some bookings require information belonging to another individual, such as:</p>
+
+                <ul>
+                    <li>Family members;</li>
+                    <li>Passengers;</li>
+                    <li>Guests;</li>
+                    <li>Friends; or</li>
+                    <li>Other travellers.</li>
+                </ul>
+
+                <p>
+                    If you provide personal information belonging to another individual, you represent that you have the authority or lawful
+                    basis to provide that information and that the information is accurate.
+                </p>
+
+                <h2>26. CHANGES TO THIS PRIVACY POLICY</h2>
+
+                <p>Sea of Seats may update this Privacy Policy from time to time.</p>
+
+                <p>Changes may be made due to:</p>
+
+                <ul>
+                    <li>Changes in law;</li>
+                    <li>Regulatory requirements;</li>
+                    <li>New Platform features;</li>
+                    <li>Changes in our business;</li>
+                    <li>Changes in service providers; or</li>
+                    <li>Improvements to our privacy practices.</li>
+                </ul>
+
+                <p>The updated Privacy Policy will be published on the Platform with a revised "Last Updated" date.</p>
+
+                <p>Where required by law, we will provide additional notice or obtain consent.</p>
+
+                <h2>27. GOVERNING LAW</h2>
+
+                <p>
+                    This Privacy Policy shall be governed by the laws of India, subject to any mandatory rights or protections available to
+                    individuals under applicable law.
+                </p>
+
+                <h2>28. CONTACT US</h2>
+
+                <p>For questions, complaints or requests concerning this Privacy Policy:</p>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>SEA OF SEATS</strong>
+                    </p>
+
+                    <p>
+                        <strong>Legal Entity Name:</strong>
+                        Booking Studio Private Limited
+                    </p>
+
+                    <p>
+                        <strong>Brand Name:</strong>
+                        Sea of Seats
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Grievance Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Website:</strong>
+                        www.seaofseats.com
+                    </p>
+                </div>
+
+                <div class="legal-footer-note">
+                    <p>Last Updated: 31 August 2026</p>
+                </div>
+
+                <div class="legal-important">
+                    <div class="legal-important-title">
+                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+
+                        <span> Important Notice </span>
+                    </div>
+
+                    <p>This Privacy Policy should be read together with:</p>
+
+                    <ol>
+                        <li>Terms &amp; Conditions;</li>
+                        <li>Cancellation &amp; Refund Policy;</li>
+                        <li>Payment Policy;</li>
+                        <li>Cookie Policy, where applicable; and</li>
+                        <li>Grievance Redressal Policy.</li>
+                    </ol>
+
+                    <p>
+                        Sea of Seats should ensure that the actual data collection, consent mechanisms, vendor contracts, retention
+                        practices, payment processing and security controls implemented on the Platform match the statements made in this
+                        Privacy Policy.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

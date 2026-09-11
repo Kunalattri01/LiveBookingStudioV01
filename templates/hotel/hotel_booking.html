@@ -1,0 +1,103 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
+<link rel="stylesheet" href="{% static 'css/hotel.css' %}" />
+<style>
+    .hotel-page { background: #f8fafc }
+    .teal { color: #0d9488 }
+    .muted { color: #64748b }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 18px; box-shadow: 0 6px 22px rgba(15, 23, 42, .05) }
+    .btn { background: linear-gradient(135deg, #0d9488, #10b981); color: #fff; border-radius: 12px; padding: .7rem 1rem; font-weight: 800; display: inline-block; border: none; cursor: pointer; width: 100% }
+    .btn[disabled] { opacity: .5; cursor: not-allowed }
+    /* Scoped to #hotel-booking-form (not a bare `input, select` rule) so
+       these values reliably win over the Tailwind CDN reset, which can
+       load after this block and zero out padding at equal specificity. */
+    #hotel-booking-form input,
+    #hotel-booking-form select {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        height: 48px;
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    #hotel-booking-form input:focus,
+    #hotel-booking-form select:focus { outline: none; border-color: #0d9488; box-shadow: 0 0 0 3px rgba(13, 148, 136, .12) }
+    .hidden { display: none !important }
+    .traveller-row { display: grid; grid-template-columns: 100px 1fr 1fr; gap: .75rem; margin-bottom: .75rem }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hotel-page min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 pt-24">
+        <div class="mb-6">
+            <p class="text-xs teal font-bold uppercase">Secure Booking</p>
+            <h1 class="text-2xl sm:text-3xl font-extrabold">Complete Your Booking</h1>
+            <p id="hotel-booking-subtitle" class="muted text-sm"></p>
+        </div>
+
+        <div id="hotel-booking-error" class="card p-5 mb-4 hidden">
+            <p id="hotel-booking-error-message" class="font-bold text-danger"></p>
+        </div>
+
+        <form id="hotel-booking-form" class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6">
+            <main class="space-y-5">
+                <section class="card p-5">
+                    <h2 class="text-lg font-extrabold mb-4">Guest Details</h2>
+                    <div id="hotel-booking-travellers"></div>
+                </section>
+
+                <section class="card p-5">
+                    <h2 class="text-lg font-extrabold mb-4">Contact for booking confirmation</h2>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <input id="hotel-contact-email" type="email" placeholder="Email address" required />
+                        <input id="hotel-contact-code" type="text" placeholder="Dialing code, e.g. +91" value="+91" required />
+                        <input id="hotel-contact-phone" type="text" placeholder="Mobile number" required />
+                    </div>
+                </section>
+            </main>
+
+            <aside class="card p-5 h-fit lg:sticky lg:top-24">
+                <h3 id="hotel-booking-hotel-name" class="font-extrabold"></h3>
+                <p id="hotel-booking-room-name" class="muted text-sm"></p>
+                <div class="border-t my-4"></div>
+                <div class="flex justify-between text-sm"><span>Base price</span><b id="hotel-booking-base"></b></div>
+                <div class="flex justify-between text-sm mt-2"><span>Taxes &amp; fees</span><b id="hotel-booking-taxes"></b></div>
+                <div class="border-t my-4"></div>
+                <div class="flex justify-between"><b>Total</b><b id="hotel-booking-total" class="text-xl"></b></div>
+                <button type="submit" id="hotel-booking-submit" class="btn mt-5">PAY &amp; BOOK</button>
+            </aside>
+        </form>
+    </div>
+</div>
+
+<template id="hotel-traveller-template">
+    <div class="mb-4">
+        <p class="text-xs font-bold muted uppercase mb-2 js-room-label"></p>
+        <div class="traveller-row">
+            <select class="js-title">
+                <option>Mr</option>
+                <option>Mrs</option>
+                <option>Ms</option>
+                <option>Miss</option>
+                <option>Master</option>
+            </select>
+            <input class="js-first-name" placeholder="First name" required />
+            <input class="js-last-name" placeholder="Last name" required />
+        </div>
+        <input class="js-pan hidden mt-2" placeholder="PAN number (required for this rate)" style="width:100%" />
+        <input class="js-passport hidden mt-2" placeholder="Passport number (required for this rate)" style="width:100%" />
+    </div>
+</template>
+{% endblock %}
+
+{% block extraJs %}
+<script>
+    window.__HOTEL_REVIEW__ = {{ review_json|default:"null"|safe }};
+</script>
+<script src="{% static 'js/hotel-booking.js' %}"></script>
+{% endblock %}

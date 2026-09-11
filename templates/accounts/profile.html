@@ -1,0 +1,45 @@
+{% extends 'base/public_base.html' %}
+
+{% block content %}
+<section class="min-h-screen bg-background py-28 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+            <p class="text-xs font-bold tracking-[0.18em] text-primary uppercase">Account</p>
+            <h1 class="text-3xl font-extrabold mt-2">Profile settings</h1>
+            <p class="text-sm text-text-secondary mt-2">Keep your contact and travel preferences up to date.</p>
+        </div>
+        <form method="post" class="bg-white border border-border rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            {% csrf_token %}
+            <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm font-semibold mb-2">First name</label>
+                    <input name="first_name" value="{{ request.user.first_name }}" class="w-full rounded-xl border border-border px-4 py-3 outline-none focus:border-primary" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Last name</label>
+                    <input name="last_name" value="{{ request.user.last_name }}" class="w-full rounded-xl border border-border px-4 py-3 outline-none focus:border-primary" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Email</label>
+                    <input value="{{ request.user.email }}" disabled class="w-full rounded-xl border border-border bg-slate-50 px-4 py-3 text-text-secondary" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Phone</label>
+                    <input name="phone" value="{{ profile.phone }}" class="w-full rounded-xl border border-border px-4 py-3 outline-none focus:border-primary" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Currency</label>
+                    <input name="preferred_currency" value="{{ profile.preferred_currency }}" maxlength="3" class="w-full rounded-xl border border-border px-4 py-3 outline-none focus:border-primary" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Timezone</label>
+                    <input name="timezone" value="{{ profile.timezone }}" class="w-full rounded-xl border border-border px-4 py-3 outline-none focus:border-primary" />
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button class="px-5 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-hover">Save changes</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

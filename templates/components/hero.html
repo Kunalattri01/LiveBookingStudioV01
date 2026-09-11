@@ -1,0 +1,4911 @@
+{% load static %} {% block extraCSS %}
+<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
+<style>
+    /* =========================================================
+           HERO SEARCH THEME
+           ========================================================= */
+    #hero .hero-tab-bar-themed {
+        background: linear-gradient(90deg, #f0fdfa 0%, #ecfdf5 100%);
+        border-bottom: 1px solid #99f6e4;
+    }
+
+    #hero .hero-tab {
+        color: #0f766e;
+    }
+
+    #hero .hero-tab i {
+        color: #14b8a6;
+    }
+
+    #hero .hero-tab:hover {
+        background: rgba(20, 184, 166, 0.08);
+        color: #0f766e;
+    }
+
+    #hero .hero-tab.is-active {
+        background: #ffffff;
+        color: #065f46;
+        font-weight: 700;
+        box-shadow: none;
+    }
+
+    #hero .hero-tab.is-active i {
+        color: #10b981;
+    }
+
+    #hero .hero-tab-badge {
+        background: #10b981;
+        color: #ffffff;
+    }
+
+    #hero .search-card-themed {
+        background: #ffffff;
+        border: 1px solid #99f6e4;
+    }
+
+    #hero .search-field-lg .search-field-label,
+    #hero .search-field .search-label {
+        color: #0f766e;
+    }
+
+    #hero .swap-btn {
+        background: linear-gradient(135deg, #0d9488, #10b981);
+        color: #ffffff;
+        border: none;
+    }
+
+    #hero .trip-type-option input:checked ~ .trip-type-dot {
+        background: #10b981;
+        border-color: #0d9488;
+    }
+
+    #hero .fare-chip.is-active {
+        border-color: #10b981;
+        background: #ecfdf5;
+    }
+
+    #hero .fare-chip-new {
+        background: #10b981;
+        color: #ffffff;
+    }
+
+    #hero .quick-tool-btn:hover {
+        background: #ecfdf5;
+        border-color: #99f6e4;
+        color: #0f766e;
+    }
+
+    #hero .price-protection-bar {
+        background: #f0fdfa;
+        border: 1px solid #99f6e4;
+    }
+
+    #hero .price-protection-bar input:checked ~ .price-protection-check {
+        background: #10b981;
+        border-color: #0d9488;
+    }
+
+    #hero .search-submit-btn {
+        background: linear-gradient(135deg, #0d9488, #10b981);
+        border: none;
+        box-shadow: 0 8px 20px -6px rgba(13, 148, 136, 0.55);
+    }
+
+    #hero .search-submit-btn:hover {
+        background: linear-gradient(135deg, #0f766e, #059669);
+    }
+
+    /* =========================================================
+           FLOATING CATEGORY NAVIGATION
+           The category bar overlaps the search card, matching the
+           seaofseats-style layout shown in the reference.
+           ========================================================= */
+    #hero .hero-category-wrapper {
+        position: relative;
+        z-index: 30;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 1150px;
+        margin: 0 auto -46px;
+        padding: 0 14px;
+    }
+
+    #hero .hero-category-tabs {
+        position: relative;
+        width: 92%;
+        min-height: 82px;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        overflow-x: auto;
+        overflow-y: visible;
+        background: #ffffff;
+        border: 1px solid rgba(203, 213, 225, 0.9);
+        border-radius: 13px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #hero .hero-category-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    #hero .hero-category-tabs .hero-tab {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 auto;
+        width: 80px;
+        min-width: 80px;
+        height: 68px;
+        padding: 7px 5px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #475569;
+        background: transparent;
+        border-radius: 10px;
+        transition:
+            background 0.25s ease,
+            color 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    #hero .hero-category-tabs .hero-tab i {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 1;
+        transform: translateY(0) scale(1);
+        transform-origin: center bottom;
+        transition:
+            transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+            color 0.25s ease;
+        will-change: transform;
+    }
+
+    #hero .hero-category-tabs .hero-tab > span:not(.hero-tab-badge) {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.15;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* Hover: icon becomes larger and moves upward */
+    #hero .hero-category-tabs .hero-tab:hover {
+        background: #f0fdfa;
+        color: #0f766e;
+    }
+
+    #hero .hero-category-tabs .hero-tab:hover i {
+        transform: translateY(-6px) scale(1.45);
+    }
+
+    /* Selected tab */
+    #hero .hero-category-tabs .hero-tab.is-active {
+        background: #f0fdfa;
+        color: #065f46;
+        font-weight: 700;
+    }
+
+    /* Selected icon is also larger and raised */
+    #hero .hero-category-tabs .hero-tab.is-active i {
+        color: #10b981;
+        transform: translateY(-4px) scale(1.3);
+    }
+
+    /* Selected + hover */
+    #hero .hero-category-tabs .hero-tab.is-active:hover i {
+        transform: translateY(-7px) scale(1.52);
+    }
+
+    /* Active underline */
+    #hero .hero-category-tabs .hero-tab.is-active::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0px;
+        width: 28px;
+        height: 3px;
+        border-radius: 10px;
+        background: #10b981;
+        transform: translateX(-50%);
+    }
+
+    #hero .hero-category-tabs .hero-tab-badge {
+        position: absolute;
+        top: -4px;
+        right: 4px;
+        z-index: 3;
+        padding: 2px 6px;
+        border-radius: 999px;
+        font-size: 9px;
+        line-height: 1.1;
+        font-weight: 800;
+        text-transform: lowercase;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+    }
+
+    /* =========================================================
+           SEARCH CARD
+           The card is pulled upward underneath the category bar.
+           Extra top padding keeps its content below the floating tabs.
+           ========================================================= */
+    #hero .hero-search-wrapper {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    #hero .hero-search-wrapper .search-card-themed {
+        padding-top: 48px;
+        border-radius: 18px;
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+    @media (max-width: 1200px) {
+        #hero .hero-category-wrapper,
+        #hero .hero-search-wrapper {
+            max-width: 100%;
+        }
+
+        #hero .hero-category-tabs {
+            width: 94%;
+            justify-content: flex-start;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #hero .hero-category-wrapper {
+            margin-bottom: -40px;
+            padding: 0 8px;
+        }
+
+        #hero .hero-category-tabs {
+            width: 100%;
+            min-height: 74px;
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        #hero .hero-category-tabs .hero-tab {
+            width: 72px;
+            min-width: 72px;
+            height: 62px;
+            gap: 5px;
+            padding: 6px 4px;
+        }
+
+        #hero .hero-category-tabs .hero-tab i {
+            font-size: 18px;
+        }
+
+        #hero .hero-category-tabs .hero-tab > span:not(.hero-tab-badge) {
+            font-size: 9px;
+        }
+
+        #hero .hero-category-tabs .hero-tab:hover i {
+            transform: translateY(-5px) scale(1.34);
+        }
+
+        #hero .hero-category-tabs .hero-tab.is-active i {
+            transform: translateY(-3px) scale(1.24);
+        }
+
+        #hero .hero-category-tabs .hero-tab.is-active:hover i {
+            transform: translateY(-5px) scale(1.4);
+        }
+
+        #hero .hero-search-wrapper .search-card-themed {
+            padding-top: 40px;
+            border-radius: 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #hero .hero-category-wrapper {
+            margin-bottom: -34px;
+            padding: 0 5px;
+        }
+
+        #hero .hero-category-tabs {
+            min-height: 70px;
+            padding: 5px;
+        }
+
+        #hero .hero-category-tabs .hero-tab {
+            width: 66px;
+            min-width: 66px;
+            height: 58px;
+        }
+
+        #hero .hero-category-tabs .hero-tab i {
+            font-size: 17px;
+        }
+
+        #hero .hero-category-tabs .hero-tab > span:not(.hero-tab-badge) {
+            font-size: 8.5px;
+        }
+
+        #hero .hero-search-wrapper .search-card-themed {
+            padding-top: 36px;
+        }
+    }
+
+    /* =========================================================
+   PREMIUM TRUST BADGES — CLEAN TRAVEL STYLE
+   ========================================================= */
+
+    .premium-trust-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        width: 100%;
+        max-width: 1400px;
+
+        margin: 0 auto;
+    }
+
+    /* =========================================================
+   TRUST ITEM
+   ========================================================= */
+
+    .premium-trust-item {
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        flex: 1;
+
+        min-height: 54px;
+
+        padding: 8px 16px;
+
+        background: rgba(255, 255, 255, 0.94);
+
+        border: 1px solid rgba(226, 232, 240, 0.9);
+
+        border-radius: 13px;
+
+        box-shadow: 0 5px 18px rgba(15, 23, 42, 0.07);
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+    /* =========================================================
+   ICON
+   ========================================================= */
+
+    .premium-trust-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 34px;
+        height: 34px;
+
+        flex: 0 0 34px;
+
+        border-radius: 50%;
+
+        background: #e8f8f5;
+
+        color: #0d9488;
+
+        border: 1px solid rgba(13, 148, 136, 0.1);
+
+        transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            color 0.25s ease;
+    }
+
+    .premium-trust-icon i {
+        font-size: 13px;
+    }
+
+    /* =========================================================
+   TEXT
+   ========================================================= */
+
+    .premium-trust-content {
+        display: flex;
+        flex-direction: column;
+
+        gap: 2px;
+
+        min-width: 0;
+    }
+
+    .premium-trust-text {
+        color: #1e293b;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        line-height: 1.2;
+
+        white-space: nowrap;
+    }
+
+    .premium-trust-subtext {
+        color: #94a3b8;
+
+        font-size: 9px;
+        font-weight: 500;
+
+        line-height: 1.2;
+
+        white-space: nowrap;
+    }
+
+    /* =========================================================
+   HOVER
+   ========================================================= */
+
+    .premium-trust-item:hover {
+        transform: translateY(-3px);
+
+        border-color: rgba(13, 148, 136, 0.18);
+
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+    }
+
+    .premium-trust-item:hover .premium-trust-icon {
+        transform: scale(1.08);
+
+        background: #d5f5ef;
+
+        color: #087f75;
+    }
+
+    /* =========================================================
+   TABLET
+   ========================================================= */
+
+    @media (max-width: 900px) {
+        .premium-trust-bar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 8px;
+        }
+
+        .premium-trust-item {
+            flex: none;
+        }
+    }
+
+    /* =========================================================
+   MOBILE
+   ========================================================= */
+
+    @media (max-width: 500px) {
+        .premium-trust-bar {
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 7px;
+
+            padding: 0 6px;
+        }
+
+        .premium-trust-item {
+            gap: 7px;
+
+            min-height: 48px;
+
+            padding: 7px 8px;
+
+            border-radius: 11px;
+        }
+
+        .premium-trust-icon {
+            width: 28px;
+            height: 28px;
+
+            flex-basis: 28px;
+        }
+
+        .premium-trust-icon i {
+            font-size: 11px;
+        }
+
+        .premium-trust-text {
+            font-size: 10px;
+        }
+
+        .premium-trust-subtext {
+            font-size: 8px;
+        }
+    }
+
+    /* =========================================================
+   TRAVELLER TESTIMONIALS
+   ========================================================= */
+
+    .travel-testimonials {
+        position: relative;
+    }
+
+    /* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+    .testimonial-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 28px;
+    }
+
+    /* Small label */
+
+    .testimonial-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-bottom: 8px;
+
+        color: #0d9488;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .testimonial-eyebrow i {
+        font-size: 10px;
+    }
+
+    /* Main heading */
+
+    .testimonial-title {
+        margin: 0;
+
+        color: #0f172a;
+
+        font-size: clamp(25px, 3vw, 34px);
+        line-height: 1.15;
+        font-weight: 800;
+
+        letter-spacing: -0.035em;
+    }
+
+    /* Description */
+
+    .testimonial-subtitle {
+        margin-top: 8px;
+        margin-bottom: 0;
+
+        color: #64748b;
+
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* =========================================================
+   RATING SUMMARY
+   ========================================================= */
+
+    .testimonial-rating-summary {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 12px 16px;
+
+        background: #ffffff;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .rating-score {
+        color: #0f172a;
+
+        font-size: 25px;
+        line-height: 1;
+        font-weight: 800;
+    }
+
+    .rating-details {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .rating-stars {
+        display: flex;
+        gap: 2px;
+
+        color: #f59e0b;
+
+        font-size: 10px;
+    }
+
+    .rating-details span {
+        color: #94a3b8;
+
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+    /* =========================================================
+   REVIEW GRID
+   ========================================================= */
+
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    /* =========================================================
+   REVIEW CARD
+   ========================================================= */
+
+    .travel-review-card {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+
+        min-height: 245px;
+
+        padding: 21px;
+
+        background: #ffffff;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+
+        box-shadow:
+            0 2px 5px rgba(15, 23, 42, 0.025),
+            0 10px 25px rgba(15, 23, 42, 0.035);
+
+        overflow: hidden;
+
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    /* Small premium top line */
+
+    .travel-review-card::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 24px;
+        right: 24px;
+
+        height: 2px;
+
+        background: linear-gradient(90deg, transparent, #14b8a6, transparent);
+
+        opacity: 0;
+
+        transition: opacity 0.3s ease;
+    }
+
+    /* Hover */
+
+    .travel-review-card:hover {
+        transform: translateY(-5px);
+
+        border-color: rgba(20, 184, 166, 0.3);
+
+        box-shadow:
+            0 10px 25px rgba(15, 23, 42, 0.07),
+            0 20px 45px rgba(20, 184, 166, 0.07);
+    }
+
+    .travel-review-card:hover::before {
+        opacity: 1;
+    }
+
+    /* =========================================================
+   REVIEW TOP
+   ========================================================= */
+
+    .review-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        gap: 12px;
+    }
+
+    /* Traveller */
+
+    .traveller-info {
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+    }
+
+    /* Avatar */
+
+    .traveller-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 38px;
+        height: 38px;
+
+        flex: 0 0 38px;
+
+        border-radius: 50%;
+
+        background: linear-gradient(135deg, #ccfbf1, #f0fdfa);
+
+        border: 1px solid #99f6e4;
+
+        color: #0f766e;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .travel-review-card:hover .traveller-avatar {
+        transform: scale(1.08);
+
+        box-shadow: 0 5px 14px rgba(13, 148, 136, 0.15);
+    }
+
+    /* Name */
+
+    .traveller-name-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .traveller-name-row h3 {
+        margin: 0;
+
+        color: #0f172a;
+
+        font-size: 13px;
+        font-weight: 750;
+    }
+
+    /* Verified */
+
+    .verified-reviewer {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+
+        color: #0d9488;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+
+    .verified-reviewer i {
+        font-size: 9px;
+    }
+
+    /* Label */
+
+    .traveller-label {
+        margin: 2px 0 0;
+
+        color: #94a3b8;
+
+        font-size: 9px;
+        font-weight: 500;
+    }
+
+    /* =========================================================
+   STARS
+   ========================================================= */
+
+    .review-stars {
+        display: flex;
+        gap: 2px;
+
+        padding-top: 3px;
+
+        color: #f59e0b;
+
+        font-size: 9px;
+    }
+
+    /* =========================================================
+   REVIEW CONTENT
+   ========================================================= */
+
+    .review-content {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+
+        flex: 1;
+
+        margin-top: 20px;
+    }
+
+    /* Quote icon */
+
+    .review-quote-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 28px;
+        height: 28px;
+
+        margin-bottom: 9px;
+
+        border-radius: 8px;
+
+        background: #f0fdfa;
+
+        color: #0d9488;
+
+        font-size: 11px;
+    }
+
+    /* Review text */
+
+    .testimonial-quote {
+        margin: 0;
+
+        color: #475569;
+
+        font-size: 13px;
+        line-height: 1.7;
+
+        font-weight: 450;
+    }
+
+    /* =========================================================
+   REVIEW FOOTER
+   ========================================================= */
+
+    .review-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-top: 18px;
+        padding-top: 13px;
+
+        border-top: 1px solid #f1f5f9;
+    }
+
+    /* Location */
+
+    .review-location {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+
+        color: #64748b;
+
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .review-location i {
+        color: #0d9488;
+
+        font-size: 9px;
+    }
+
+    /* Trip */
+
+    .review-trip {
+        color: #94a3b8;
+
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+    /* =========================================================
+   ENTRANCE ANIMATION
+   ========================================================= */
+
+    .travel-review-card {
+        animation: testimonialFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .travel-review-card:nth-child(1) {
+        animation-delay: 80ms;
+    }
+
+    .travel-review-card:nth-child(2) {
+        animation-delay: 160ms;
+    }
+
+    .travel-review-card:nth-child(3) {
+        animation-delay: 240ms;
+    }
+
+    @keyframes testimonialFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* =========================================================
+   TABLET
+   ========================================================= */
+
+    @media (max-width: 900px) {
+        .testimonial-heading {
+            align-items: flex-start;
+        }
+
+        .testimonial-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .travel-review-card:last-child {
+            grid-column: span 2;
+        }
+    }
+
+    /* =========================================================
+   MOBILE
+   ========================================================= */
+
+    @media (max-width: 640px) {
+        .testimonial-heading {
+            flex-direction: column;
+            gap: 16px;
+
+            margin-bottom: 22px;
+        }
+
+        .testimonial-rating-summary {
+            width: fit-content;
+        }
+
+        .testimonial-grid {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .travel-review-card:last-child {
+            grid-column: auto;
+        }
+
+        .travel-review-card {
+            min-height: 220px;
+            padding: 18px;
+        }
+
+        .testimonial-title {
+            font-size: 26px;
+        }
+    }
+
+    /* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+        .travel-review-card,
+        .travel-review-card:hover,
+        .traveller-avatar {
+            animation: none;
+            transition: none;
+            transform: none;
+        }
+    }
+
+    /* =========================================================
+   AIRLINE PARTNERS — PREMIUM TRAVEL STYLE
+   ========================================================= */
+
+    .airline-partners-section {
+        position: relative;
+    }
+
+    /* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+    .airline-partners {
+        position: relative;
+        overflow: hidden;
+
+        padding: 26px 22px 22px;
+
+        border: 1px solid rgba(14, 165, 233, 0.18);
+        border-radius: 24px;
+
+        background:
+            radial-gradient(circle at 96% 8%, rgba(14, 165, 233, 0.14), transparent 30%),
+            radial-gradient(circle at 4% 92%, rgba(20, 184, 166, 0.1), transparent 32%),
+            linear-gradient(135deg, #ffffff 0%, #f8fdff 52%, #eefcff 100%);
+
+        box-shadow:
+            0 14px 36px rgba(15, 23, 42, 0.07),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    /* =========================================================
+   HEADER
+   ========================================================= */
+
+    .airline-partners-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 18px;
+    }
+
+    .airline-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-bottom: 5px;
+
+        color: #0d9488;
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+    }
+
+    .airline-eyebrow i {
+        font-size: 10px;
+    }
+
+    .airline-title {
+        margin: 0;
+
+        color: #0f172a;
+
+        font-size: clamp(22px, 2vw, 28px);
+        line-height: 1.15;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+    }
+
+    .airline-title span {
+        color: #0d9488;
+    }
+
+    .airline-subtitle {
+        margin: 6px 0 0;
+
+        color: #64748b;
+
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .airline-view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        flex-shrink: 0;
+
+        padding: 8px 13px;
+
+        border: 1px solid rgba(13, 148, 136, 0.2);
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.72);
+
+        color: #0d9488;
+
+        font-size: 10px;
+        font-weight: 800;
+
+        text-decoration: none;
+
+        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.06);
+
+        transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .airline-view-all:hover {
+        transform: translateY(-2px);
+
+        background: #ecfdf5;
+
+        box-shadow: 0 8px 20px rgba(13, 148, 136, 0.13);
+    }
+
+    .airline-view-all i {
+        font-size: 9px;
+
+        transition: transform 0.25s ease;
+    }
+
+    .airline-view-all:hover i {
+        transform: translateX(3px);
+    }
+
+    /* =========================================================
+   GRID
+   ========================================================= */
+
+    .airline-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+    /* =========================================================
+   AIRLINE CARD
+   ========================================================= */
+
+    .airline-card {
+        position: relative;
+
+        display: block;
+
+        height: 178px;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 19px;
+
+        color: #ffffff;
+        text-decoration: none;
+
+        isolation: isolate;
+
+        box-shadow: 0 9px 24px rgba(15, 23, 42, 0.12);
+
+        transition:
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.4s ease;
+    }
+
+    .airline-card:hover {
+        transform: translateY(-5px);
+
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.17);
+    }
+
+    /* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+    .airline-bg {
+        position: absolute;
+        inset: 0;
+
+        z-index: -3;
+
+        background-position: center;
+        background-size: cover;
+
+        transition:
+            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.45s ease;
+    }
+
+    .airline-card:hover .airline-bg {
+        transform: scale(1.055);
+        filter: saturate(1.08);
+    }
+
+    /* =========================================================
+   BACKGROUND IMAGES
+   ========================================================= */
+
+    .airline-air-india .airline-bg {
+        background-image: url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=90");
+    }
+
+    .airline-etihad .airline-bg {
+        background-image: url("https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=90");
+    }
+
+    .airline-emirates .airline-bg {
+        background-image: url("https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?auto=format&fit=crop&w=1200&q=90");
+    }
+
+    .airline-indigo .airline-bg {
+        background-image: url("https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=90");
+    }
+
+    /* =========================================================
+   SOFT AIRLINE OVERLAY
+   ========================================================= */
+
+    .airline-overlay {
+        position: absolute;
+        inset: 0;
+
+        z-index: -2;
+
+        background: linear-gradient(112deg, rgba(2, 24, 52, 0.82) 0%, rgba(2, 34, 57, 0.48) 43%, rgba(2, 34, 57, 0.08) 100%);
+    }
+
+    /* Air India */
+
+    .airline-air-india .airline-overlay {
+        background: linear-gradient(112deg, rgba(4, 43, 78, 0.84) 0%, rgba(8, 83, 117, 0.42) 48%, rgba(185, 28, 28, 0.1) 100%);
+    }
+
+    /* Etihad */
+
+    .airline-etihad .airline-overlay {
+        background: linear-gradient(112deg, rgba(55, 42, 26, 0.84) 0%, rgba(105, 82, 49, 0.44) 48%, rgba(218, 179, 102, 0.12) 100%);
+    }
+
+    /* Emirates */
+
+    .airline-emirates .airline-overlay {
+        background: linear-gradient(112deg, rgba(65, 27, 15, 0.86) 0%, rgba(106, 46, 27, 0.45) 48%, rgba(190, 140, 50, 0.12) 100%);
+    }
+
+    /* Indigo */
+
+    .airline-indigo .airline-overlay {
+        background: linear-gradient(112deg, rgba(4, 31, 78, 0.86) 0%, rgba(15, 70, 130, 0.46) 48%, rgba(14, 165, 233, 0.12) 100%);
+    }
+
+    /* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+    .airline-content {
+        position: absolute;
+
+        top: 17px;
+        left: 18px;
+
+        z-index: 3;
+
+        max-width: 58%;
+    }
+
+    .airline-label {
+        display: inline-flex;
+        align-items: center;
+
+        padding: 4px 8px;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.13);
+
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+
+        color: rgba(255, 255, 255, 0.94);
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .airline-content h3 {
+        margin: 9px 0 4px;
+
+        color: #ffffff;
+
+        font-size: clamp(20px, 2vw, 26px);
+        line-height: 1.05;
+        font-weight: 800;
+
+        letter-spacing: -0.035em;
+
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
+    }
+
+    .airline-content p {
+        margin: 0;
+
+        color: rgba(255, 255, 255, 0.88);
+
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .airline-explore {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        margin-top: 11px;
+
+        padding: 6px 9px;
+
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+
+        color: #ffffff;
+
+        font-size: 8px;
+        font-weight: 800;
+
+        transition:
+            background 0.25s ease,
+            gap 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .airline-explore i {
+        font-size: 7px;
+
+        transition: transform 0.25s ease;
+    }
+
+    .airline-card:hover .airline-explore {
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.17);
+        transform: translateY(-1px);
+    }
+
+    .airline-card:hover .airline-explore i {
+        transform: translateX(3px);
+    }
+
+    /* =========================================================
+   3D AIRCRAFT
+   ========================================================= */
+
+    .airline-plane {
+        position: absolute;
+
+        right: -23px;
+        bottom: -8px;
+
+        z-index: 2;
+
+        width: 70%;
+
+        pointer-events: none;
+
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .airline-plane img {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        object-fit: contain;
+
+        filter: drop-shadow(0 14px 12px rgba(0, 0, 0, 0.28));
+
+        transform: rotate(-1deg);
+
+        transition:
+            transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.4s ease;
+    }
+
+    .airline-card:hover .airline-plane {
+        transform: translate(7px, -7px) scale(1.025);
+    }
+
+    .airline-card:hover .airline-plane img {
+        transform: rotate(-1deg) scale(1.035);
+
+        filter: drop-shadow(0 18px 15px rgba(0, 0, 0, 0.3));
+    }
+
+    /* =========================================================
+   SOFT LIGHT EFFECT
+   ========================================================= */
+
+    .airline-card::after {
+        content: "";
+
+        position: absolute;
+
+        width: 190px;
+        height: 190px;
+
+        right: -90px;
+        bottom: -115px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.13);
+
+        filter: blur(28px);
+
+        z-index: 1;
+
+        pointer-events: none;
+    }
+
+    /* =========================================================
+   TOP HIGHLIGHT
+   ========================================================= */
+
+    .airline-card::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 1px;
+
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+
+        z-index: 5;
+    }
+
+    /* =========================================================
+   TABLET
+   ========================================================= */
+
+    @media (max-width: 1100px) {
+        .airline-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .airline-card {
+            height: 190px;
+        }
+    }
+
+    /* =========================================================
+   MOBILE
+   ========================================================= */
+
+    @media (max-width: 640px) {
+        .airline-partners {
+            padding: 22px 15px 18px;
+
+            border-radius: 20px;
+        }
+
+        .airline-partners-header {
+            align-items: flex-start;
+        }
+
+        .airline-title {
+            font-size: 22px;
+        }
+
+        .airline-subtitle {
+            font-size: 11px;
+        }
+
+        .airline-view-all {
+            padding: 8px 11px;
+            font-size: 10px;
+        }
+
+        .airline-grid {
+            grid-template-columns: 1fr;
+
+            gap: 12px;
+        }
+
+        .airline-card {
+            height: 185px;
+        }
+
+        .airline-content {
+            top: 18px;
+            left: 18px;
+        }
+
+        .airline-plane {
+            width: 68%;
+            right: -20px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        .airline-partners-header {
+            display: block;
+        }
+
+        .airline-view-all {
+            margin-top: 12px;
+        }
+
+        .airline-card {
+            height: 175px;
+        }
+
+        .airline-content h3 {
+            font-size: 20px;
+        }
+
+        .airline-plane {
+            width: 70%;
+        }
+    }
+
+    /* =========================================================
+   EXCLUSIVE OFFERS — REFRESHED CARD STYLE
+   (only the .offer-card* rules below are new — nothing else
+   on the page was touched)
+   ========================================================= */
+
+    .offer-card {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        min-height: 232px;
+
+        padding: 20px;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+
+        background-size: cover;
+        background-position: center;
+
+        isolation: isolate;
+
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
+
+        transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s ease;
+    }
+
+    .offer-card:hover {
+        transform: translateY(-6px);
+
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    .offer-card-scrim {
+        position: absolute;
+        inset: 0;
+
+        z-index: -1;
+
+        background: linear-gradient(180deg, rgba(4, 26, 36, 0.05) 0%, rgba(4, 26, 36, 0.42) 55%, rgba(2, 18, 26, 0.88) 100%);
+
+        transition: background 0.35s ease;
+    }
+
+    .offer-card:hover .offer-card-scrim {
+        background: linear-gradient(180deg, rgba(4, 26, 36, 0.1) 0%, rgba(4, 26, 36, 0.5) 55%, rgba(2, 18, 26, 0.92) 100%);
+    }
+
+    .offer-card-tag {
+        display: inline-flex;
+        align-self: flex-start;
+
+        margin-bottom: auto;
+
+        padding: 5px 10px;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.14);
+
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+
+        color: #ffffff;
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+    }
+
+    .offer-card-title {
+        margin: 16px 0 3px;
+
+        color: #ffffff;
+
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .offer-card-sub {
+        margin: 0;
+
+        color: rgba(255, 255, 255, 0.82);
+
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .offer-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        width: fit-content;
+
+        margin-top: 14px;
+
+        padding: 8px 13px;
+
+        border-radius: 999px;
+
+        background: #ffffff;
+
+        color: #0f172a;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        transition:
+            gap 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .offer-card:hover .offer-card-cta {
+        gap: 9px;
+
+        background: #ecfdf5;
+    }
+
+    .offer-card-cta i {
+        font-size: 9px;
+
+        transition: transform 0.25s ease;
+    }
+
+    .offer-card:hover .offer-card-cta i {
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 640px) {
+        .offer-card {
+            min-height: 200px;
+
+            padding: 18px;
+
+            border-radius: 17px;
+        }
+
+        .offer-card-title {
+            font-size: 16px;
+        }
+    }
+
+    /* =========================================================
+   POPULAR FLIGHT ROUTES — REFRESHED CARD STYLE
+   (only the .route-card* rules below are new — nothing else
+   on the page was touched)
+   ========================================================= */
+
+    .route-card {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        padding: 18px 20px;
+
+        background: #ffffff;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+
+        text-decoration: none;
+
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.03);
+
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .route-card:hover {
+        transform: translateY(-4px);
+
+        border-color: rgba(13, 148, 136, 0.28);
+
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .route-card > div {
+        position: relative;
+
+        gap: 10px;
+    }
+
+    .route-card > div::before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        top: 50%;
+
+        height: 1px;
+
+        background: repeating-linear-gradient(90deg, #cbd5e1 0 4px, transparent 4px 9px);
+
+        z-index: 0;
+    }
+
+    .route-card > div > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .route-card > div i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 22px;
+        height: 22px;
+
+        border-radius: 50%;
+
+        background: #f0fdfa;
+
+        color: #0d9488 !important;
+
+        transition:
+            transform 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .route-card:hover > div i {
+        transform: translateX(3px) rotate(6deg);
+
+        background: #ccfbf1;
+    }
+
+    .route-card-city {
+        color: #0f172a;
+
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+
+        background: #ffffff;
+
+        padding-right: 6px;
+    }
+
+    .route-card:last-child .route-card-city:last-of-type,
+    .route-card .route-card-city:last-of-type {
+        padding-right: 0;
+        padding-left: 6px;
+    }
+
+    .route-card-price {
+        margin: 0;
+
+        color: #0d9488;
+
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    /* =========================================================
+   WHY BOOK WITH US — REFRESHED CARD STYLE, NOW WITH PHOTOS
+   (only the .why-us-* rules below are new/updated — nothing
+   else on the page was touched)
+   ========================================================= */
+
+    .why-us-item {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 12px;
+
+        padding: 22px 20px;
+
+        background: #ffffff;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.03);
+
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .why-us-item-bg {
+        position: absolute;
+        inset: 0;
+
+        z-index: -2;
+
+        background-size: cover;
+        background-position: center;
+
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .why-us-item:hover .why-us-item-bg {
+        transform: scale(1.08);
+    }
+
+    .why-us-item-scrim {
+        position: absolute;
+        inset: 0;
+
+        z-index: -1;
+
+        /* background: linear-gradient(
+            165deg,
+            rgba(255, 255, 255, 0.64) 0%,
+            rgba(255, 255, 255, 0.52) 45%,
+            rgba(255, 255, 255, 0.40) 100%
+        ); */
+
+        transition: background 0.3s ease;
+    }
+/* 
+    .why-us-item:hover .why-us-item-scrim {
+background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.58) 0%,
+    rgba(255, 255, 255, 0.46) 45%,
+    rgba(255, 255, 255, 0.34) 100%
+);
+    } */
+
+    .why-us-item:hover {
+        transform: translateY(-4px);
+
+        border-color: rgba(13, 148, 136, 0.28);
+
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .why-us-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 44px;
+        height: 44px;
+
+        border-radius: 12px;
+
+        background: #f0fdfa;
+
+        color: #0d9488;
+
+        font-size: 16px;
+
+        transition:
+            transform 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .why-us-item:hover .why-us-icon {
+        transform: scale(1.08) rotate(-4deg);
+
+        background: #ccfbf1;
+    }
+
+    .why-us-title {
+        margin: 2px 0 0;
+
+        color: #0f172a;
+
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+    }
+
+    .why-us-sub {
+        margin: 0;
+        background-color: rgb(131, 131, 131);
+        color: green;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 1.55;
+    }
+
+    @media (max-width: 640px) {
+        .why-us-item {
+            padding: 18px;
+        }
+
+        .why-us-icon {
+            width: 38px;
+            height: 38px;
+
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% include 'components/floating-navbar.html' %}
+
+<!-- =========================================================
+     FOR YOUR STAY IN <CITY>
+     Hotel recommendation carousel — now with real photo thumbnails
+     ========================================================= -->
+<section class="py-8 bg-background" aria-label="Recommended hotels for your stay">
+    <!-- =========================================================
+     EXPLORE MORE
+     ========================================================= -->
+<section class="py-4 bg-background" aria-label="Explore more">
+
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+
+        <div
+            class="relative overflow-hidden rounded-[20px]
+                   border border-teal-100/70
+                   bg-gradient-to-br from-white via-slate-50 to-teal-50/50
+                   shadow-[0_8px_30px_rgba(15,23,42,0.05)]">
+
+            <!-- Soft background decoration -->
+            <div
+                class="pointer-events-none absolute -right-20 -top-20
+                       h-44 w-44 rounded-full
+                       bg-cyan-200/20 blur-3xl">
+            </div>
+
+            <div
+                class="pointer-events-none absolute -bottom-20 -left-20
+                       h-44 w-44 rounded-full
+                       bg-teal-200/20 blur-3xl">
+            </div>
+
+
+            <!-- ================= HEADER ================= -->
+
+
+
+            <!-- ================= ITEMS ================= -->
+
+            <!-- <div class="relative p-2 sm:p-3">
+
+                <ul
+                    class="grid grid-cols-1
+                           gap-1.5
+                           sm:grid-cols-2
+                           lg:grid-cols-5">
+
+
+                    WHERE2GO
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="group flex min-h-[68px]
+                                   items-center gap-3
+                                   rounded-[14px]
+                                   border border-transparent
+                                   bg-white/40
+                                   px-3 py-2.5
+                                   transition-all duration-300
+                                   hover:-translate-y-0.5
+                                   hover:border-teal-100
+                                   hover:bg-white
+                                   hover:shadow-[0_8px_20px_rgba(15,118,110,0.08)]">
+
+                            Icon
+                            <span
+                                class="flex h-10 w-10 shrink-0
+                                       items-center justify-center
+                                       rounded-[11px]
+                                       border border-teal-100
+                                       bg-gradient-to-br
+                                       from-teal-50 to-cyan-50
+                                       shadow-sm
+                                       transition-all duration-300
+                                       group-hover:scale-105
+                                       group-hover:shadow-md">
+
+                                <img
+                                    src="https://promos.seaofseats.com/appfest/1x/ic_home_tertiary_where2go.png"
+                                    alt="Where2Go"
+                                    class="h-7 w-7 object-contain
+                                           transition-transform duration-300
+                                           group-hover:scale-110"
+                                >
+
+                            </span>
+
+
+                            Content
+                            <span class="min-w-0">
+
+                                <span
+                                    class="block truncate
+                                           text-[11px]
+                                           font-extrabold
+                                           text-slate-700">
+
+                                    Where2Go
+
+                                </span>
+
+                                <span
+                                    class="mt-1 block truncate
+                                           text-[9px]
+                                           font-medium
+                                           text-slate-400">
+
+                                    Discover destinations
+
+                                </span>
+
+                            </span>
+
+
+                            Arrow
+                            <span
+                                class="ml-auto flex h-6 w-6 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-teal-50
+                                       text-teal-500
+                                       opacity-0
+                                       transition-all duration-300
+                                       group-hover:translate-x-0.5
+                                       group-hover:opacity-100">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[8px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    HOW2GO
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="group flex min-h-[68px]
+                                   items-center gap-3
+                                   rounded-[14px]
+                                   border border-transparent
+                                   bg-white/40
+                                   px-3 py-2.5
+                                   transition-all duration-300
+                                   hover:-translate-y-0.5
+                                   hover:border-cyan-100
+                                   hover:bg-white
+                                   hover:shadow-[0_8px_20px_rgba(8,145,178,0.08)]">
+
+                            <span
+                                class="flex h-10 w-10 shrink-0
+                                       items-center justify-center
+                                       rounded-[11px]
+                                       border border-cyan-100
+                                       bg-gradient-to-br
+                                       from-cyan-50 to-sky-50
+                                       shadow-sm
+                                       transition-all duration-300
+                                       group-hover:scale-105
+                                       group-hover:shadow-md">
+
+                                <img
+                                    src="https://promos.seaofseats.com/appfest/1x/ic_home_tertiary_howtogo.png"
+                                    alt="How2Go"
+                                    class="h-7 w-7 object-contain
+                                           transition-transform duration-300
+                                           group-hover:scale-110"
+                                >
+
+                            </span>
+
+
+                            <span class="min-w-0">
+
+                                <span
+                                    class="flex items-center gap-1.5
+                                           text-[11px]
+                                           font-extrabold
+                                           text-slate-700">
+
+                                    How2Go
+
+                                    <span
+                                        class="rounded-full
+                                               bg-gradient-to-r
+                                               from-teal-500 to-cyan-500
+                                               px-1.5 py-0.5
+                                               text-[6px]
+                                               font-extrabold
+                                               uppercase
+                                               tracking-wide
+                                               text-white
+                                               shadow-sm">
+
+                                        New
+
+                                    </span>
+
+                                </span>
+
+                                <span
+                                    class="mt-1 block truncate
+                                           text-[9px]
+                                           font-medium
+                                           text-slate-400">
+
+                                    Find routes to anywhere
+
+                                </span>
+
+                            </span>
+
+
+                            <span
+                                class="ml-auto flex h-6 w-6 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-cyan-50
+                                       text-cyan-500
+                                       opacity-0
+                                       transition-all duration-300
+                                       group-hover:translate-x-0.5
+                                       group-hover:opacity-100">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[8px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    TRAVEL CARD
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="group flex min-h-[68px]
+                                   items-center gap-3
+                                   rounded-[14px]
+                                   border border-transparent
+                                   bg-white/40
+                                   px-3 py-2.5
+                                   transition-all duration-300
+                                   hover:-translate-y-0.5
+                                   hover:border-violet-100
+                                   hover:bg-white
+                                   hover:shadow-[0_8px_20px_rgba(124,58,237,0.07)]">
+
+                            <span
+                                class="flex h-10 w-10 shrink-0
+                                       items-center justify-center
+                                       rounded-[11px]
+                                       border border-violet-100
+                                       bg-gradient-to-br
+                                       from-violet-50 to-fuchsia-50
+                                       shadow-sm
+                                       transition-all duration-300
+                                       group-hover:scale-105
+                                       group-hover:shadow-md">
+
+                                <img
+                                    src="https://promos.seaofseats.com/appfest/1x/ic_home_tertiary_travelcard.png"
+                                    alt="Travel Card"
+                                    class="h-7 w-7 object-contain
+                                           transition-transform duration-300
+                                           group-hover:scale-110"
+                                >
+
+                            </span>
+
+
+                            <span class="min-w-0">
+
+                                <span
+                                    class="block truncate
+                                           text-[11px]
+                                           font-extrabold
+                                           text-slate-700">
+
+                                    seaofseats ICICI Credit Card
+
+                                </span>
+
+                                <span
+                                    class="mt-1 block truncate
+                                           text-[9px]
+                                           font-medium
+                                           text-slate-400">
+
+                                    Rewards &amp; travel benefits
+
+                                </span>
+
+                            </span>
+
+
+                            <span
+                                class="ml-auto flex h-6 w-6 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-violet-50
+                                       text-violet-500
+                                       opacity-0
+                                       transition-all duration-300
+                                       group-hover:translate-x-0.5
+                                       group-hover:opacity-100">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[8px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    MICE
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="group flex min-h-[68px]
+                                   items-center gap-3
+                                   rounded-[14px]
+                                   border border-transparent
+                                   bg-white/40
+                                   px-3 py-2.5
+                                   transition-all duration-300
+                                   hover:-translate-y-0.5
+                                   hover:border-amber-100
+                                   hover:bg-white
+                                   hover:shadow-[0_8px_20px_rgba(217,119,6,0.08)]">
+
+                            <span
+                                class="flex h-10 w-10 shrink-0
+                                       items-center justify-center
+                                       rounded-[11px]
+                                       border border-amber-100
+                                       bg-gradient-to-br
+                                       from-amber-50 to-orange-50
+                                       shadow-sm
+                                       transition-all duration-300
+                                       group-hover:scale-105
+                                       group-hover:shadow-md">
+
+                                <img
+                                    src="https://promos.seaofseats.com/appfest/1x/ic_home_tertiary_mice.png"
+                                    alt="MICE"
+                                    class="h-7 w-7 object-contain
+                                           transition-transform duration-300
+                                           group-hover:scale-110"
+                                >
+
+                            </span>
+
+
+                            <span class="min-w-0">
+
+                                <span
+                                    class="block truncate
+                                           text-[11px]
+                                           font-extrabold
+                                           text-slate-700">
+
+                                    MICE
+
+                                </span>
+
+                                <span
+                                    class="mt-1 block truncate
+                                           text-[9px]
+                                           font-medium
+                                           text-slate-400">
+
+                                    Offsites, events &amp; meetings
+
+                                </span>
+
+                            </span>
+
+
+                            <span
+                                class="ml-auto flex h-6 w-6 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-amber-50
+                                       text-amber-500
+                                       opacity-0
+                                       transition-all duration-300
+                                       group-hover:translate-x-0.5
+                                       group-hover:opacity-100">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[8px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    GIFT CARDS
+
+                    <li>
+
+                        <a
+                            href="#"
+                            class="group flex min-h-[68px]
+                                   items-center gap-3
+                                   rounded-[14px]
+                                   border border-transparent
+                                   bg-white/40
+                                   px-3 py-2.5
+                                   transition-all duration-300
+                                   hover:-translate-y-0.5
+                                   hover:border-rose-100
+                                   hover:bg-white
+                                   hover:shadow-[0_8px_20px_rgba(225,29,72,0.07)]">
+
+                            <span
+                                class="flex h-10 w-10 shrink-0
+                                       items-center justify-center
+                                       rounded-[11px]
+                                       border border-rose-100
+                                       bg-gradient-to-br
+                                       from-rose-50 to-pink-50
+                                       shadow-sm
+                                       transition-all duration-300
+                                       group-hover:scale-105
+                                       group-hover:shadow-md">
+
+                                <img
+                                    src="https://promos.seaofseats.com/appfest/1x/ic_home_tertiary_giftcards.png"
+                                    alt="Gift Cards"
+                                    class="h-7 w-7 object-contain
+                                           transition-transform duration-300
+                                           group-hover:scale-110"
+                                >
+
+                            </span>
+
+
+                            <span class="min-w-0">
+
+                                <span
+                                    class="block truncate
+                                           text-[11px]
+                                           font-extrabold
+                                           text-slate-700">
+
+                                    Gift Cards
+
+                                </span>
+
+                                <span
+                                    class="mt-1 block truncate
+                                           text-[9px]
+                                           font-medium
+                                           text-slate-400">
+
+                                    Give the gift of travel
+
+                                </span>
+
+                            </span>
+
+
+                            <span
+                                class="ml-auto flex h-6 w-6 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-rose-50
+                                       text-rose-500
+                                       opacity-0
+                                       transition-all duration-300
+                                       group-hover:translate-x-0.5
+                                       group-hover:opacity-100">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[8px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div> -->
+
+        </div>
+
+    </div>
+
+</section>
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div class="bg-surface rounded-card shadow-sm border border-border p-5 sm:p-7">
+            <div class="flex items-start justify-between gap-4 mb-5">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-text-primary">For your stay in Bangalore</h2>
+                    <p class="text-text-secondary text-sm mt-1">Fri, 28 Aug 26 - Mon, 31 Aug 26</p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <a
+                        href="/hotels/bangalore"
+                        class="hidden sm:inline-flex items-center gap-1.5 text-primary text-sm font-bold tracking-wide hover:text-primary-hover transition-base">
+                        VIEW ALL <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <button type="button" class="carousel-nav-btn" data-carousel="stay-carousel" data-dir="-1" aria-label="Scroll left">
+                            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="carousel-nav-btn" data-carousel="stay-carousel" data-dir="1" aria-label="Scroll right">
+                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="stay-carousel" class="carousel-track">
+                <a href="#" class="stay-card">
+                    <div
+                        class="stay-card-img"
+                        style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,exterior?lock=1&quot;)">
+                        <span class="stay-card-rating">3.9/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹6,200 <span>per night</span></p>
+                        <p class="stay-card-name">Ibis Bengaluru City Centre - An Accor Brand</p>
+                        <p class="stay-card-loc">Sampangi Rama Nagara</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="stay-card">
+                    <div class="stay-card-img" style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,room?lock=2&quot;)">
+                        <span class="stay-card-rating">4.5/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹2,475 <span>per night</span></p>
+                        <p class="stay-card-name">U by Z Hotels, Seshadripuram - HZ Bangalore Stories</p>
+                        <p class="stay-card-loc">Seshadripuram</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="stay-card">
+                    <div
+                        class="stay-card-img"
+                        style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,lobby?lock=3&quot;)">
+                        <span class="stay-card-rating">4.1/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹5,000 <span>per night</span></p>
+                        <p class="stay-card-name">The Chancery Pavilion</p>
+                        <p class="stay-card-loc">Ashok Nagar</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="stay-card">
+                    <div
+                        class="stay-card-img"
+                        style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,suite?lock=4&quot;)">
+                        <span class="stay-card-rating">3.5/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹4,792 <span>per night</span></p>
+                        <p class="stay-card-name">Howard Johnson by Wyndham, Hebbal</p>
+                        <p class="stay-card-loc">Nagavara</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="stay-card">
+                    <div class="stay-card-img" style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,pool?lock=5&quot;)">
+                        <span class="stay-card-rating">4.6/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹7,150 <span>per night</span></p>
+                        <p class="stay-card-name">The Park Bangalore, MG Road</p>
+                        <p class="stay-card-loc">Yellappa Chetty Layout</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="stay-card">
+                    <div
+                        class="stay-card-img"
+                        style="background-image: url(&quot;https://loremflickr.com/400/300/hotel,bedroom?lock=6&quot;)">
+                        <span class="stay-card-rating">4.3/5</span>
+                    </div>
+                    <div class="stay-card-body">
+                        <p class="stay-card-price">₹3,899 <span>per night</span></p>
+                        <p class="stay-card-name">Fairfield by Marriott, Whitefield</p>
+                        <p class="stay-card-loc">Whitefield</p>
+                        <div class="stay-card-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <a href="/hotels/bangalore" class="sm:hidden mt-4 inline-flex items-center gap-1.5 text-primary text-sm font-bold">
+                VIEW ALL <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- =========================================================
+     AIRLINE PARTNERS
+     ========================================================= -->
+<section class="airline-partners-section py-5 bg-background" aria-label="Airline partners">
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div class="airline-partners">
+            <!-- Section Header -->
+            <div class="airline-partners-header">
+                <div>
+                    <span class="airline-eyebrow">
+                        <i class="fa-solid fa-plane" aria-hidden="true"></i>
+                        FLY WITH CONFIDENCE
+                    </span>
+
+                    <h2 class="airline-title">
+                        Experience Flying with our
+                        <span>Airline Partners</span>
+                    </h2>
+
+                    <p class="airline-subtitle">Discover great journeys with trusted airlines around the world.</p>
+                </div>
+
+                <a href="#" class="airline-view-all">
+                    View all
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <!-- Airline Cards -->
+            <div class="airline-grid">
+                <!-- AIR INDIA -->
+                <a href="#" class="airline-card airline-air-india">
+                    <div class="airline-bg"></div>
+                    <div class="airline-overlay"></div>
+
+                    <div class="airline-content">
+                        <span class="airline-label"> NATIONAL CARRIER </span>
+
+                        <h3>Air India</h3>
+
+                        <p>Fly across India &amp; beyond</p>
+
+                        <span class="airline-explore">
+                            Explore flights
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                    <div class="airline-plane">
+                        <img
+                            src="https://www.kindpng.com/picc/m/133-1330822_air-india-aircraft-png-transparent-png.png"
+                            alt="Air India aircraft" />
+                    </div>
+                </a>
+
+                <!-- ETIHAD -->
+                <a href="#" class="airline-card airline-etihad">
+                    <div class="airline-bg"></div>
+                    <div class="airline-overlay"></div>
+
+                    <div class="airline-content">
+                        <span class="airline-label"> PREMIUM INTERNATIONAL </span>
+
+                        <h3>Etihad Airways</h3>
+
+                        <p>Fly in luxury across the world</p>
+
+                        <span class="airline-explore">
+                            Explore flights
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                    <div class="airline-plane">
+                        <img
+                            src="https://www.kindpng.com/picc/m/467-4676146_etihad-plane-png-transparent-png.png"
+                            alt="Etihad Airways aircraft" />
+                    </div>
+                </a>
+
+                <!-- EMIRATES -->
+                <a href="#" class="airline-card airline-emirates">
+                    <div class="airline-bg"></div>
+                    <div class="airline-overlay"></div>
+
+                    <div class="airline-content">
+                        <span class="airline-label"> GLOBAL PREMIUM </span>
+
+                        <h3>Emirates</h3>
+
+                        <p>Fly better to the world</p>
+
+                        <span class="airline-explore">
+                            Explore flights
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                    <div class="airline-plane">
+                        <img
+                            src="https://www.kindpng.com/picc/m/76-767433_emirates-transparent-emirates-plane-png-png-download.png"
+                            alt="Emirates aircraft" />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXCLUSIVE OFFERS — photo backgrounds instead of flat gradients -->
+<!-- <section class="py-4 bg-background" aria-label="Exclusive offers">
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div class="bg-surface rounded-card shadow-sm border border-border p-5 sm:p-7">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-text-primary">Exclusive Offers For You</h2>
+                <a
+                    href="/offers"
+                    class="hidden sm:inline-flex items-center gap-1.5 text-primary text-sm font-bold tracking-wide hover:text-primary-hover transition-base">
+                    VIEW ALL <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div
+                    class="offer-card"
+                    style="background-image: url(&quot;https://loremflickr.com/500/300/creditcard,payment?lock=31&quot;)">
+                    <span class="offer-card-scrim"></span>
+                    <span class="offer-card-tag">BANK OFFER</span>
+                    <p class="offer-card-title">Flat 12% Instant Discount</p>
+                    <p class="offer-card-sub">On HDFC Bank Credit &amp; Debit Cards</p>
+                    <span class="offer-card-cta">Book Now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="offer-card" style="background-image: url(&quot;https://loremflickr.com/500/300/hotel,resort?lock=32&quot;)">
+                    <span class="offer-card-scrim"></span>
+                    <span class="offer-card-tag">HOTEL DEAL</span>
+                    <p class="offer-card-title">Up to 40% Off on Hotels</p>
+                    <p class="offer-card-sub">Free breakfast &amp; late checkout included</p>
+                    <span class="offer-card-cta">Explore <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="offer-card" style="background-image: url(&quot;https://loremflickr.com/500/300/bali,temple?lock=33&quot;)">
+                    <span class="offer-card-scrim"></span>
+                    <span class="offer-card-tag">HOLIDAY PACKAGE</span>
+                    <p class="offer-card-title">Bali from ₹34,999</p>
+                    <p class="offer-card-sub">Flights + 4N stay + visa assistance</p>
+                    <span class="offer-card-cta">View Package <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- WHY CHOOSE US -->
+<section class="py-5 sm:py-6 bg-background" aria-label="Why choose us">
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+
+        <!-- Main Section -->
+        <div
+            class="relative overflow-hidden rounded-[26px] border border-slate-200/70
+                   bg-gradient-to-br from-white via-slate-50/90 to-cyan-50/40
+                   p-5 sm:p-7
+                   shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+
+            <!-- Decorative Background -->
+            <div
+                class="pointer-events-none absolute -right-24 -top-24
+                       h-64 w-64 rounded-full
+                       bg-cyan-300/10 blur-3xl">
+            </div>
+
+            <div
+                class="pointer-events-none absolute -bottom-28 -left-24
+                       h-64 w-64 rounded-full
+                       bg-teal-300/10 blur-3xl">
+            </div>
+
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="relative z-10 mb-6">
+
+                <div class="flex items-center gap-2 mb-2">
+
+                    <span
+                        class="flex h-6 w-6 items-center justify-center
+                               rounded-full
+                               bg-gradient-to-br from-teal-500 to-cyan-500
+                               text-white
+                               shadow-sm">
+
+                        <i
+                            class="fa-solid fa-plane text-[9px]"
+                            aria-hidden="true">
+                        </i>
+
+                    </span>
+
+                    <span
+                        class="text-[9px] font-extrabold uppercase
+                               tracking-[0.18em] text-teal-600">
+                        Why travellers choose us
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="flex flex-col gap-2
+                           sm:flex-row sm:items-end sm:justify-between">
+
+                    <div>
+
+                        <h2
+                            class="text-xl sm:text-2xl
+                                   font-extrabold tracking-tight
+                                   text-slate-900">
+                            Why Book With Us
+                        </h2>
+
+                        <p
+                            class="mt-1.5 max-w-2xl
+                                   text-[11px] leading-relaxed
+                                   text-slate-500">
+                            Better prices, reliable support and a smoother
+                            experience from booking to boarding.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Small trust indicator -->
+
+                    <div
+                        class="hidden sm:flex items-center gap-2
+                               rounded-full
+                               border border-teal-100
+                               bg-white/80
+                               px-3 py-1.5
+                               shadow-sm">
+
+                        <span
+                            class="flex h-5 w-5 items-center justify-center
+                                   rounded-full bg-emerald-50
+                                   text-emerald-600">
+
+                            <i
+                                class="fa-solid fa-check text-[8px]"
+                                aria-hidden="true">
+                            </i>
+
+                        </span>
+
+                        <span
+                            class="text-[9px] font-bold text-slate-600">
+                            Trusted travel experience
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FEATURE GRID ================= -->
+
+            <div
+                class="relative z-10 grid grid-cols-1
+                       gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+
+
+                <!-- =================================================
+                     LOWEST PRICE
+                     ================================================= -->
+
+                <div
+                    class="group relative min-h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/60
+                           bg-slate-900
+                           shadow-[0_8px_25px_rgba(15,23,42,0.10)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,23,42,0.17)]">
+
+                    <!-- Image -->
+
+                    <div
+                        class="absolute inset-0 bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-110"
+                        style="background-image:url('https://loremflickr.com/700/500/discount,pricetag?lock=51');">
+                    </div>
+
+
+                    <!-- Image Overlay -->
+
+<div
+    class="absolute inset-0
+           bg-gradient-to-br
+           from-white/55
+           via-white/25
+           to-teal-100/20">
+</div>
+
+
+                    <!-- Bottom Gradient -->
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-36
+                               bg-gradient-to-t
+                               from-slate-950/90
+                               via-slate-950/35
+                               to-transparent">
+                    </div>
+
+
+                    <!-- Content -->
+
+                    <div
+                        class="relative z-10 flex h-full
+                               min-h-[205px] flex-col p-5">
+
+                        <!-- Icon -->
+
+                        <div
+                            class="flex h-11 w-11 items-center justify-center
+                                   rounded-[14px]
+                                   border border-white/20
+                                   bg-white/15
+                                   text-cyan-200
+                                   backdrop-blur-md
+                                   transition-all duration-300
+                                   group-hover:scale-105
+                                   group-hover:bg-white/20">
+
+                            <i
+                                class="fa-solid fa-tags text-sm"
+                                aria-hidden="true">
+                            </i>
+
+                        </div>
+
+
+                        <!-- Text -->
+
+                        <div class="mt-auto">
+
+                            <div class="mb-2 flex items-center gap-2">
+
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-cyan-300">
+                                </span>
+
+                                <span
+                                    class="text-[8px] font-bold uppercase
+                                           tracking-[0.12em]
+                                           text-white/60">
+                                    Save more
+                                </span>
+
+                            </div>
+
+
+                            <p
+                                class="text-[15px] font-extrabold
+                                       tracking-tight text-white">
+                                Lowest Price Guarantee
+                            </p>
+
+                            <p
+                                class="mt-1.5 max-w-[245px]
+                                       text-[10.5px] leading-[1.55]
+                                       text-white/75">
+                                We match any lower fare you find within
+                                24 hours of booking.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     24/7 SUPPORT
+                     ================================================= -->
+
+                <div
+                    class="group relative min-h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/60
+                           bg-slate-900
+                           shadow-[0_8px_25px_rgba(15,23,42,0.10)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,23,42,0.17)]">
+
+                    <div
+                        class="absolute inset-0 bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-110"
+                        style="background-image:url('https://loremflickr.com/700/500/callcenter,support?lock=52');">
+                    </div>
+
+<div
+    class="absolute inset-0
+           bg-gradient-to-br
+           from-white/55
+           via-white/25
+           to-teal-100/20">
+</div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-36
+                               bg-gradient-to-t
+                               from-slate-950/90
+                               via-slate-950/35
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full
+                               min-h-[205px] flex-col p-5">
+
+                        <div
+                            class="flex h-11 w-11 items-center justify-center
+                                   rounded-[14px]
+                                   border border-white/20
+                                   bg-white/15
+                                   text-cyan-200
+                                   shadow-[0_8px_20px_rgba(0,0,0,0.12)]
+                                   backdrop-blur-md
+                                   transition-all duration-300
+                                   group-hover:scale-105
+                                   group-hover:bg-white/20">
+
+                            <i
+                                class="fa-solid fa-headset text-sm"
+                                aria-hidden="true">
+                            </i>
+
+                        </div>
+
+
+                        <div class="mt-auto">
+
+                            <div class="mb-2 flex items-center gap-2">
+
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-cyan-300">
+                                </span>
+
+                                <span
+                                    class="text-[8px] font-bold uppercase
+                                           tracking-[0.12em]
+                                           text-white/60">
+                                    Always here
+                                </span>
+
+                            </div>
+
+                            <p
+                                class="text-[15px] font-extrabold
+                                       tracking-tight text-white">
+                                24/7 Travel Support
+                            </p>
+
+                            <p
+                                class="mt-1.5 max-w-[245px]
+                                       text-[10.5px] leading-[1.55]
+                                       text-white/75">
+                                Real humans on call and chat,
+                                any time zone, any day.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FREE CANCELLATION
+                     ================================================= -->
+
+                <div
+                    class="group relative min-h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/60
+                           bg-slate-900
+                           shadow-[0_8px_25px_rgba(15,23,42,0.10)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,23,42,0.17)]">
+
+                    <div
+                        class="absolute inset-0 bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-110"
+                        style="background-image:url('https://loremflickr.com/700/500/calendar,travel?lock=53');">
+                    </div>
+
+<div
+    class="absolute inset-0
+           bg-gradient-to-br
+           from-white/55
+           via-white/25
+           to-teal-100/20">
+</div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-36
+                               bg-gradient-to-t
+                               from-slate-950/90
+                               via-slate-950/35
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full
+                               min-h-[205px] flex-col p-5">
+
+                        <div
+                            class="flex h-11 w-11 items-center justify-center
+                                   rounded-[14px]
+                                   border border-white/20
+                                   bg-white/15
+                                   text-indigo-200
+                                   shadow-[0_8px_20px_rgba(0,0,0,0.12)]
+                                   backdrop-blur-md
+                                   transition-all duration-300
+                                   group-hover:scale-105
+                                   group-hover:bg-white/20">
+
+                            <i
+                                class="fa-solid fa-rotate-left text-sm"
+                                aria-hidden="true">
+                            </i>
+
+                        </div>
+
+
+                        <div class="mt-auto">
+
+                            <div class="mb-2 flex items-center gap-2">
+
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-indigo-300">
+                                </span>
+
+                                <span
+                                    class="text-[8px] font-bold uppercase
+                                           tracking-[0.12em]
+                                           text-white/60">
+                                    Flexible plans
+                                </span>
+
+                            </div>
+
+                            <p
+                                class="text-[15px] font-extrabold
+                                       tracking-tight text-white">
+                                Free Cancellation
+                            </p>
+
+                            <p
+                                class="mt-1.5 max-w-[245px]
+                                       text-[10.5px] leading-[1.55]
+                                       text-white/75">
+                                Plans change — cancel most bookings
+                                without penalty.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SECURE PAYMENTS
+                     ================================================= -->
+
+                <div
+                    class="group relative min-h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/60
+                           bg-slate-900
+                           shadow-[0_8px_25px_rgba(15,23,42,0.10)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,23,42,0.17)]">
+
+                    <div
+                        class="absolute inset-0 bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-110"
+                        style="background-image:url('https://loremflickr.com/700/500/security,padlock?lock=54');">
+                    </div>
+
+<div
+    class="absolute inset-0
+           bg-gradient-to-br
+           from-white/55
+           via-white/25
+           to-teal-100/20">
+</div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-36
+                               bg-gradient-to-t
+                               from-slate-950/90
+                               via-slate-950/35
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full
+                               min-h-[205px] flex-col p-5">
+
+                        <div
+                            class="flex h-11 w-11 items-center justify-center
+                                   rounded-[14px]
+                                   border border-white/20
+                                   bg-white/15
+                                   text-emerald-200
+                                   shadow-[0_8px_20px_rgba(0,0,0,0.12)]
+                                   backdrop-blur-md
+                                   transition-all duration-300
+                                   group-hover:scale-105
+                                   group-hover:bg-white/20">
+
+                            <i
+                                class="fa-solid fa-shield-halved text-sm"
+                                aria-hidden="true">
+                            </i>
+
+                        </div>
+
+
+                        <div class="mt-auto">
+
+                            <div class="mb-2 flex items-center gap-2">
+
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-emerald-300">
+                                </span>
+
+                                <span
+                                    class="text-[8px] font-bold uppercase
+                                           tracking-[0.12em]
+                                           text-white/60">
+                                    Safe &amp; secure
+                                </span>
+
+                            </div>
+
+                            <p
+                                class="text-[15px] font-extrabold
+                                       tracking-tight text-white">
+                                Secure Payments
+                            </p>
+
+                            <p
+                                class="mt-1.5 max-w-[245px]
+                                       text-[10.5px] leading-[1.55]
+                                       text-white/75">
+                                Bank-grade encryption on every transaction,
+                                every time.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= BOTTOM TRUST STRIP ================= -->
+
+            <div
+                class="relative z-10 mt-4
+                       flex flex-wrap items-center
+                       justify-center gap-x-5 gap-y-2
+                       border-t border-slate-200/70
+                       pt-4">
+
+                <div class="flex items-center gap-2">
+
+                    <i
+                        class="fa-solid fa-circle-check text-[11px]
+                               text-emerald-500"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        Transparent pricing
+                    </span>
+
+                </div>
+
+
+                <span class="hidden h-3 w-px bg-slate-200 sm:block"></span>
+
+
+                <div class="flex items-center gap-2">
+
+                    <i
+                        class="fa-solid fa-headset text-[11px]
+                               text-cyan-600"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        Human support
+                    </span>
+
+                </div>
+
+
+                <span class="hidden h-3 w-px bg-slate-200 sm:block"></span>
+
+
+                <div class="flex items-center gap-2">
+
+                    <i
+                        class="fa-solid fa-lock text-[10px]
+                               text-teal-600"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        Secure booking
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================
+     POPULAR FLIGHT ROUTES
+     ========================================================= -->
+<!-- =========================================================
+     POPULAR FLIGHT ROUTES
+     ========================================================= -->
+<section class="py-5 sm:py-6 bg-background" aria-label="Popular flight routes">
+
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+
+        <div
+            class="relative overflow-hidden rounded-[26px]
+                   border border-slate-200/70
+                   bg-gradient-to-br from-white via-slate-50 to-teal-50/40
+                   p-5 sm:p-7
+                   shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+
+            <!-- Soft decorative glow -->
+            <div
+                class="pointer-events-none absolute -right-24 -top-24
+                       h-56 w-56 rounded-full
+                       bg-teal-300/10 blur-3xl">
+            </div>
+
+            <div
+                class="pointer-events-none absolute -bottom-24 -left-20
+                       h-56 w-56 rounded-full
+                       bg-cyan-300/10 blur-3xl">
+            </div>
+
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="relative z-10 mb-6">
+
+                <div class="mb-2.5 flex items-center gap-2">
+
+                    <span
+                        class="flex h-7 w-7 items-center justify-center
+                               rounded-full
+                               bg-teal-50
+                               text-teal-500
+                               ring-1 ring-teal-100">
+
+                        <i
+                            class="fa-solid fa-route text-[9px]"
+                            aria-hidden="true">
+                        </i>
+
+                    </span>
+
+                    <span
+                        class="text-[9px]
+                               font-semibold
+                               uppercase
+                               tracking-[0.16em]
+                               text-teal-500">
+
+                        Popular journeys
+
+                    </span>
+
+                </div>
+
+                <div
+                    class="flex flex-col gap-3
+                           sm:flex-row
+                           sm:items-end
+                           sm:justify-between">
+
+                    <div>
+
+                        <h2
+                            class="text-xl sm:text-2xl
+                                   font-extrabold
+                                   tracking-tight
+                                   text-slate-700">
+
+                            Popular Flight Routes
+
+                        </h2>
+
+                        <p
+                            class="mt-1.5 max-w-2xl
+                                   text-[11px]
+                                   leading-relaxed
+                                   text-slate-400">
+
+                            Discover popular destinations and plan your next
+                            journey at great fares.
+
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="hidden sm:flex
+                               items-center gap-2
+                               rounded-full
+                               border border-teal-100
+                               bg-white/90
+                               px-3 py-1.5
+                               shadow-sm">
+
+                        <span
+                            class="flex h-5 w-5 items-center justify-center
+                                   rounded-full
+                                   bg-teal-50
+                                   text-teal-500">
+
+                            <i
+                                class="fa-solid fa-plane-departure text-[8px]"
+                                aria-hidden="true">
+                            </i>
+
+                        </span>
+
+                        <span
+                            class="text-[9px]
+                                   font-semibold
+                                   text-teal-600">
+
+                            Explore popular destinations
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ROUTES ================= -->
+
+            <div
+                class="relative z-10
+                       grid grid-cols-1
+                       gap-4
+                       sm:grid-cols-2
+                       lg:grid-cols-4">
+
+
+                <!-- =================================================
+                     DELHI → DUBAI
+                     ================================================= -->
+
+                <a
+                    href="#"
+                    class="group relative h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/80
+                           bg-slate-100
+                           shadow-[0_8px_24px_rgba(15,23,42,0.08)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,118,110,0.16)]">
+
+                    <!-- Clear Image -->
+                    <div
+                        class="absolute inset-0
+                               bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-105"
+                        style="background-image:url('https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1000&q=90');">
+                    </div>
+
+                    <!-- Very subtle color tint -->
+                    <div
+                        class="absolute inset-0
+                               bg-gradient-to-br
+                               from-white/15
+                               via-transparent
+                               to-teal-950/20">
+                    </div>
+
+                    <!-- Bottom readability gradient -->
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-[105px]
+                               bg-gradient-to-t
+                               from-slate-950/75
+                               via-slate-950/30
+                               to-transparent">
+                    </div>
+
+
+                    <!-- Content -->
+                    <div
+                        class="relative z-10 flex h-full flex-col
+                               justify-between p-4">
+
+                        <!-- Route -->
+                        <div class="flex items-center justify-between">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    From
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           tracking-tight
+                                           text-white
+                                           drop-shadow-sm">
+
+                                    Delhi
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-9 w-9 items-center justify-center
+                                       rounded-full
+                                       border border-white/40
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-md
+                                       shadow-lg
+                                       transition-all duration-300
+                                       group-hover:scale-110
+                                       group-hover:bg-white
+                                       group-hover:text-teal-600">
+
+                                <i
+                                    class="fa-solid fa-plane text-[10px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                            <div class="text-right">
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    To
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           tracking-tight
+                                           text-white
+                                           drop-shadow-sm">
+
+                                    Dubai
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Bottom information -->
+                        <div
+                            class="flex items-end justify-between
+                                   border-t border-white/20
+                                   pt-3">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           font-medium
+                                           text-white/65">
+
+                                    Starting from
+
+                                </span>
+
+                                <span
+                                    class="text-[14px]
+                                           font-extrabold
+                                           text-white">
+
+                                    ₹14,299
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-7 w-7
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-sm
+                                       transition-all duration-300
+                                       group-hover:bg-teal-500">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[9px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+                <!-- =================================================
+                     MUMBAI → BANGKOK
+                     ================================================= -->
+
+                <a
+                    href="#"
+                    class="group relative h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/80
+                           bg-slate-100
+                           shadow-[0_8px_24px_rgba(15,23,42,0.08)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,118,110,0.16)]">
+
+                    <div
+                        class="absolute inset-0
+                               bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-105"
+                        style="background-image:url('https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1000&q=90');">
+                    </div>
+
+                    <div
+                        class="absolute inset-0
+                               bg-gradient-to-br
+                               from-white/10
+                               via-transparent
+                               to-teal-950/20">
+                    </div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-[105px]
+                               bg-gradient-to-t
+                               from-slate-950/75
+                               via-slate-950/30
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full flex-col
+                               justify-between p-4">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    From
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    Mumbai
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-9 w-9 items-center justify-center
+                                       rounded-full
+                                       border border-white/40
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-md
+                                       shadow-lg
+                                       transition-all duration-300
+                                       group-hover:scale-110
+                                       group-hover:bg-white
+                                       group-hover:text-teal-600">
+
+                                <i
+                                    class="fa-solid fa-plane text-[10px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                            <div class="text-right">
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    To
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    Bangkok
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="flex items-end justify-between
+                                   border-t border-white/20
+                                   pt-3">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           text-white/65">
+
+                                    Starting from
+
+                                </span>
+
+                                <span
+                                    class="text-[14px]
+                                           font-extrabold
+                                           text-white">
+
+                                    ₹16,850
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-7 w-7
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-sm
+                                       transition-all duration-300
+                                       group-hover:bg-teal-500">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[9px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+                <!-- =================================================
+                     BENGALURU → SINGAPORE
+                     ================================================= -->
+
+                <a
+                    href="#"
+                    class="group relative h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/80
+                           bg-slate-100
+                           shadow-[0_8px_24px_rgba(15,23,42,0.08)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,118,110,0.16)]">
+
+                    <div
+                        class="absolute inset-0
+                               bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-105"
+                        style="background-image:url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=90');">
+                    </div>
+
+                    <div
+                        class="absolute inset-0
+                               bg-gradient-to-br
+                               from-white/10
+                               via-transparent
+                               to-teal-950/20">
+                    </div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-[105px]
+                               bg-gradient-to-t
+                               from-slate-950/75
+                               via-slate-950/30
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full flex-col
+                               justify-between p-4">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    From
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    Bengaluru
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-9 w-9 items-center justify-center
+                                       rounded-full
+                                       border border-white/40
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-md
+                                       shadow-lg
+                                       transition-all duration-300
+                                       group-hover:scale-110
+                                       group-hover:bg-white
+                                       group-hover:text-teal-600">
+
+                                <i
+                                    class="fa-solid fa-plane text-[10px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                            <div class="text-right">
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    To
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    Singapore
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="flex items-end justify-between
+                                   border-t border-white/20
+                                   pt-3">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           text-white/65">
+
+                                    Starting from
+
+                                </span>
+
+                                <span
+                                    class="text-[14px]
+                                           font-extrabold
+                                           text-white">
+
+                                    ₹19,420
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-7 w-7
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-sm
+                                       transition-all duration-300
+                                       group-hover:bg-teal-500">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[9px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+                <!-- =================================================
+                     DELHI → LONDON
+                     ================================================= -->
+
+                <a
+                    href="#"
+                    class="group relative h-[205px]
+                           overflow-hidden rounded-[20px]
+                           border border-white/80
+                           bg-slate-100
+                           shadow-[0_8px_24px_rgba(15,23,42,0.08)]
+                           transition-all duration-500
+                           hover:-translate-y-1
+                           hover:shadow-[0_18px_38px_rgba(15,118,110,0.16)]">
+
+                    <div
+                        class="absolute inset-0
+                               bg-cover bg-center
+                               transition-transform duration-700
+                               ease-out
+                               group-hover:scale-105"
+                        style="background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1000&q=90');">
+                    </div>
+
+                    <div
+                        class="absolute inset-0
+                               bg-gradient-to-br
+                               from-white/10
+                               via-transparent
+                               to-teal-950/20">
+                    </div>
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-[105px]
+                               bg-gradient-to-t
+                               from-slate-950/75
+                               via-slate-950/30
+                               to-transparent">
+                    </div>
+
+
+                    <div
+                        class="relative z-10 flex h-full flex-col
+                               justify-between p-4">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    From
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    Delhi
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-9 w-9 items-center justify-center
+                                       rounded-full
+                                       border border-white/40
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-md
+                                       shadow-lg
+                                       transition-all duration-300
+                                       group-hover:scale-110
+                                       group-hover:bg-white
+                                       group-hover:text-teal-600">
+
+                                <i
+                                    class="fa-solid fa-plane text-[10px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                            <div class="text-right">
+
+                                <span
+                                    class="block text-[8px]
+                                           font-bold uppercase
+                                           tracking-[0.14em]
+                                           text-white/75">
+
+                                    To
+
+                                </span>
+
+                                <span
+                                    class="mt-0.5 block text-[16px]
+                                           font-extrabold
+                                           text-white">
+
+                                    London
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="flex items-end justify-between
+                                   border-t border-white/20
+                                   pt-3">
+
+                            <div>
+
+                                <span
+                                    class="block text-[8px]
+                                           text-white/65">
+
+                                    Starting from
+
+                                </span>
+
+                                <span
+                                    class="text-[14px]
+                                           font-extrabold
+                                           text-white">
+
+                                    ₹42,100
+
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="flex h-7 w-7
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-white/20
+                                       text-white
+                                       backdrop-blur-sm
+                                       transition-all duration-300
+                                       group-hover:bg-teal-500">
+
+                                <i
+                                    class="fa-solid fa-arrow-right text-[9px]"
+                                    aria-hidden="true">
+                                </i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CUSTOMER TESTIMONIALS
+     ========================================================= -->
+<section
+    class="py-5 sm:py-7 bg-background"
+    aria-label="Customer testimonials">
+
+    <div class="container-2xl mx-auto max-w-[1440px] px-4 sm:px-6">
+
+        <div
+            class="relative overflow-hidden rounded-[26px]
+                   border border-slate-200/70
+                   bg-gradient-to-br from-white via-slate-50
+                   to-teal-50/40
+                   p-5 sm:p-7
+                   shadow-[0_12px_40px_rgba(15,23,42,0.06)]">
+
+
+            <!-- Decorative glow -->
+
+            <div
+                class="pointer-events-none absolute -left-20 -top-20
+                       h-56 w-56 rounded-full
+                       bg-teal-300/10 blur-3xl">
+            </div>
+
+            <div
+                class="pointer-events-none absolute -right-20 -bottom-24
+                       h-60 w-60 rounded-full
+                       bg-cyan-300/10 blur-3xl">
+            </div>
+
+
+            <!-- ================= HEADER ================= -->
+
+            <div
+                class="relative z-10 mb-6
+                       flex flex-col gap-4
+                       md:flex-row md:items-end md:justify-between">
+
+
+                <div>
+
+                    <div class="mb-2 flex items-center gap-2">
+
+                        <span
+                            class="flex h-6 w-6 items-center justify-center
+                                   rounded-full
+                                   bg-gradient-to-br
+                                   from-rose-400 to-pink-500
+                                   text-white shadow-sm">
+
+                            <i
+                                class="fa-solid fa-heart text-[9px]"
+                                aria-hidden="true">
+                            </i>
+
+                        </span>
+
+                        <span
+                            class="text-[9px] font-extrabold uppercase
+                                   tracking-[0.18em] text-teal-600">
+                            Traveller Reviews
+                        </span>
+
+                    </div>
+
+
+                    <h2
+                        class="text-xl sm:text-2xl
+                               font-extrabold tracking-tight
+                               text-slate-900">
+                        What Our Travellers Say
+                    </h2>
+
+
+                    <p
+                        class="mt-1.5 max-w-xl
+                               text-[11px] leading-relaxed
+                               text-slate-500">
+                        Real experiences from travellers who booked
+                        their journeys with us.
+                    </p>
+
+                </div>
+
+
+                <!-- Rating -->
+
+                <div
+                    class="flex w-fit items-center gap-3
+                           rounded-[16px]
+                           border border-amber-100
+                           bg-white/85
+                           px-4 py-2.5
+                           shadow-[0_5px_18px_rgba(15,23,42,0.05)]">
+
+                    <div
+                        class="flex h-10 w-10 items-center justify-center
+                               rounded-[12px]
+                               bg-gradient-to-br
+                               from-amber-50 to-orange-50
+                               text-[15px] font-extrabold
+                               text-slate-900">
+
+                        4.8
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="flex items-center gap-0.5
+                                   text-[10px] text-amber-400">
+
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+
+                        </div>
+
+                        <span
+                            class="mt-0.5 block text-[9px]
+                                   font-semibold text-slate-500">
+                            2,500+ traveller reviews
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= REVIEWS ================= -->
+
+            <div
+                class="relative z-10 grid grid-cols-1
+                       gap-4 lg:grid-cols-3">
+
+
+                <!-- REVIEW 1 -->
+
+                <article
+                    class="group relative overflow-hidden
+                           rounded-[20px]
+                           border border-slate-200/80
+                           bg-white
+                           p-5
+                           shadow-[0_6px_22px_rgba(15,23,42,0.05)]
+                           transition-all duration-300
+                           hover:-translate-y-1
+                           hover:border-teal-200
+                           hover:shadow-[0_16px_32px_rgba(15,118,110,0.10)]">
+
+                    <!-- Top accent -->
+
+                    <div
+                        class="absolute left-0 top-0 h-1 w-full
+                               bg-gradient-to-r
+                               from-teal-400 via-cyan-400 to-transparent">
+                    </div>
+
+
+                    <div class="flex items-start justify-between gap-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-11 w-11 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-gradient-to-br
+                                       from-teal-500 to-cyan-500
+                                       text-[11px] font-extrabold
+                                       text-white
+                                       shadow-[0_6px_15px_rgba(20,184,166,0.22)]">
+
+                                AR
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="flex flex-wrap items-center gap-1.5">
+
+                                    <h3
+                                        class="text-[13px] font-extrabold
+                                               text-slate-900">
+                                        Ananya Rao
+                                    </h3>
+
+                                    <span
+                                        class="flex items-center gap-1
+                                               rounded-full
+                                               bg-emerald-50
+                                               px-1.5 py-0.5
+                                               text-[7px] font-bold
+                                               text-emerald-600">
+
+                                        <i
+                                            class="fa-solid fa-circle-check
+                                                   text-[7px]"
+                                            aria-hidden="true">
+                                        </i>
+
+                                        Verified
+
+                                    </span>
+
+                                </div>
+
+
+                                <p
+                                    class="mt-0.5 text-[9px]
+                                           text-slate-400">
+                                    Verified traveller
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="flex gap-0.5 text-[9px]
+                                   text-amber-400">
+
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Quote -->
+
+                    <div class="relative mt-5">
+
+                        <span
+                            class="absolute -top-2 -left-1
+                                   text-3xl font-serif
+                                   leading-none text-teal-100">
+                            “
+                        </span>
+
+                        <p
+                            class="relative pl-5
+                                   text-[11px] leading-[1.7]
+                                   text-slate-600">
+                            Rebooked our Dubai flight twice through the app
+                            and support sorted it out in minutes both times.
+                            Genuinely painless.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Footer -->
+
+                    <div
+                        class="mt-5 flex items-center justify-between
+                               border-t border-slate-100 pt-3">
+
+                        <div
+                            class="flex items-center gap-1.5
+                                   text-[9px] font-semibold
+                                   text-slate-400">
+
+                            <i
+                                class="fa-solid fa-location-dot
+                                       text-teal-500"
+                                aria-hidden="true">
+                            </i>
+
+                            Bengaluru
+
+                        </div>
+
+
+                        <span
+                            class="rounded-full
+                                   bg-teal-50
+                                   px-2.5 py-1
+                                   text-[8px] font-bold
+                                   text-teal-600">
+
+                            Dubai Trip
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- REVIEW 2 -->
+
+                <article
+                    class="group relative overflow-hidden
+                           rounded-[20px]
+                           border border-slate-200/80
+                           bg-white
+                           p-5
+                           shadow-[0_6px_22px_rgba(15,23,42,0.05)]
+                           transition-all duration-300
+                           hover:-translate-y-1
+                           hover:border-cyan-200
+                           hover:shadow-[0_16px_32px_rgba(8,145,178,0.10)]">
+
+                    <div
+                        class="absolute left-0 top-0 h-1 w-full
+                               bg-gradient-to-r
+                               from-cyan-400 via-sky-400 to-transparent">
+                    </div>
+
+
+                    <div class="flex items-start justify-between gap-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-11 w-11 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-gradient-to-br
+                                       from-cyan-500 to-sky-500
+                                       text-[11px] font-extrabold
+                                       text-white
+                                       shadow-[0_6px_15px_rgba(6,182,212,0.22)]">
+
+                                RM
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="flex flex-wrap items-center gap-1.5">
+
+                                    <h3
+                                        class="text-[13px] font-extrabold
+                                               text-slate-900">
+                                        Rohit Malhotra
+                                    </h3>
+
+                                    <span
+                                        class="flex items-center gap-1
+                                               rounded-full
+                                               bg-emerald-50
+                                               px-1.5 py-0.5
+                                               text-[7px] font-bold
+                                               text-emerald-600">
+
+                                        <i
+                                            class="fa-solid fa-circle-check
+                                                   text-[7px]"
+                                            aria-hidden="true">
+                                        </i>
+
+                                        Verified
+
+                                    </span>
+
+                                </div>
+
+
+                                <p
+                                    class="mt-0.5 text-[9px]
+                                           text-slate-400">
+                                    Verified traveller
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="flex gap-0.5 text-[9px]
+                                   text-amber-400">
+
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star text-slate-200"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="relative mt-5">
+
+                        <span
+                            class="absolute -top-2 -left-1
+                                   text-3xl font-serif
+                                   leading-none text-cyan-100">
+                            “
+                        </span>
+
+                        <p
+                            class="relative pl-5
+                                   text-[11px] leading-[1.7]
+                                   text-slate-600">
+                            Booked a last-minute Goa package for four and
+                            the price drop refund actually landed in my
+                            account. Wasn't expecting that.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="mt-5 flex items-center justify-between
+                               border-t border-slate-100 pt-3">
+
+                        <div
+                            class="flex items-center gap-1.5
+                                   text-[9px] font-semibold
+                                   text-slate-400">
+
+                            <i
+                                class="fa-solid fa-location-dot
+                                       text-cyan-500"
+                                aria-hidden="true">
+                            </i>
+
+                            Delhi
+
+                        </div>
+
+
+                        <span
+                            class="rounded-full
+                                   bg-cyan-50
+                                   px-2.5 py-1
+                                   text-[8px] font-bold
+                                   text-cyan-600">
+
+                            Goa Getaway
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- REVIEW 3 -->
+
+                <article
+                    class="group relative overflow-hidden
+                           rounded-[20px]
+                           border border-slate-200/80
+                           bg-white
+                           p-5
+                           shadow-[0_6px_22px_rgba(15,23,42,0.05)]
+                           transition-all duration-300
+                           hover:-translate-y-1
+                           hover:border-indigo-200
+                           hover:shadow-[0_16px_32px_rgba(79,70,229,0.10)]">
+
+                    <div
+                        class="absolute left-0 top-0 h-1 w-full
+                               bg-gradient-to-r
+                               from-indigo-400 via-violet-400
+                               to-transparent">
+                    </div>
+
+
+                    <div class="flex items-start justify-between gap-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-11 w-11 shrink-0
+                                       items-center justify-center
+                                       rounded-full
+                                       bg-gradient-to-br
+                                       from-indigo-500 to-violet-500
+                                       text-[11px] font-extrabold
+                                       text-white
+                                       shadow-[0_6px_15px_rgba(99,102,241,0.22)]">
+
+                                FS
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="flex flex-wrap items-center gap-1.5">
+
+                                    <h3
+                                        class="text-[13px] font-extrabold
+                                               text-slate-900">
+                                        Fatima Sheikh
+                                    </h3>
+
+                                    <span
+                                        class="flex items-center gap-1
+                                               rounded-full
+                                               bg-emerald-50
+                                               px-1.5 py-0.5
+                                               text-[7px] font-bold
+                                               text-emerald-600">
+
+                                        <i
+                                            class="fa-solid fa-circle-check
+                                                   text-[7px]"
+                                            aria-hidden="true">
+                                        </i>
+
+                                        Verified
+
+                                    </span>
+
+                                </div>
+
+
+                                <p
+                                    class="mt-0.5 text-[9px]
+                                           text-slate-400">
+                                    Verified traveller
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="flex gap-0.5 text-[9px]
+                                   text-amber-400">
+
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="relative mt-5">
+
+                        <span
+                            class="absolute -top-2 -left-1
+                                   text-3xl font-serif
+                                   leading-none text-indigo-100">
+                            “
+                        </span>
+
+                        <p
+                            class="relative pl-5
+                                   text-[11px] leading-[1.7]
+                                   text-slate-600">
+                            The visa assistance for our Schengen trip saved
+                            us weeks of back and forth. Everything tracked
+                            in one place.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="mt-5 flex items-center justify-between
+                               border-t border-slate-100 pt-3">
+
+                        <div
+                            class="flex items-center gap-1.5
+                                   text-[9px] font-semibold
+                                   text-slate-400">
+
+                            <i
+                                class="fa-solid fa-location-dot
+                                       text-indigo-500"
+                                aria-hidden="true">
+                            </i>
+
+                            Hyderabad
+
+                        </div>
+
+
+                        <span
+                            class="rounded-full
+                                   bg-indigo-50
+                                   px-2.5 py-1
+                                   text-[8px] font-bold
+                                   text-indigo-600">
+
+                            Schengen Trip
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- Bottom trust line -->
+
+            <div
+                class="relative z-10 mt-5 flex flex-wrap
+                       items-center justify-center gap-x-5 gap-y-2
+                       border-t border-slate-200/70 pt-4">
+
+                <div class="flex items-center gap-1.5">
+
+                    <i
+                        class="fa-solid fa-circle-check
+                               text-[10px] text-emerald-500"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        Verified traveller experiences
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="hidden h-3 w-px bg-slate-200 sm:block">
+                </span>
+
+
+                <div class="flex items-center gap-1.5">
+
+                    <i
+                        class="fa-solid fa-star
+                               text-[10px] text-amber-400"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        4.8 average rating
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="hidden h-3 w-px bg-slate-200 sm:block">
+                </span>
+
+
+                <div class="flex items-center gap-1.5">
+
+                    <i
+                        class="fa-solid fa-plane
+                               text-[10px] text-teal-500"
+                        aria-hidden="true">
+                    </i>
+
+                    <span
+                        class="text-[9px] font-semibold text-slate-500">
+                        Journeys made easier
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% block extraJs %}
+<script src="{% static 'js/hero.js' %}"></script>
+{% endblock %}

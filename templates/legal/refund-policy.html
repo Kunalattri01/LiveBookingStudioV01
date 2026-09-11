@@ -1,0 +1,1357 @@
+{% extends 'base/public_base.html' %} {% block extraCSS %}
+<style>
+    /* =========================================================
+       LEGAL HERO
+       ========================================================= */
+
+    .legal-hero {
+        background: linear-gradient(135deg, #0f172a 0%, #164e4c 55%, #0f766e 100%) !important;
+
+        position: relative;
+        overflow: hidden;
+    }
+
+    .legal-hero::before {
+        content: "";
+
+        position: absolute;
+
+        width: 520px;
+        height: 520px;
+
+        right: -180px;
+        top: -280px;
+
+        border-radius: 50%;
+
+        background: rgba(20, 184, 166, 0.14) !important;
+
+        pointer-events: none;
+    }
+
+    .legal-hero::after {
+        content: "";
+
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        left: -150px;
+        bottom: -200px;
+
+        border-radius: 50%;
+
+        background: rgba(45, 212, 191, 0.08) !important;
+
+        pointer-events: none;
+    }
+
+    /* =========================================================
+       HERO CONTENT
+       ========================================================= */
+
+    .legal-hero-content {
+        position: relative;
+        z-index: 5;
+    }
+
+    .legal-hero-label {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        color: #5eead4 !important;
+
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+
+        letter-spacing: 0.04em !important;
+
+        margin-bottom: 12px !important;
+    }
+
+    .legal-hero-label i {
+        color: #5eead4 !important;
+        font-size: 0.9rem !important;
+    }
+
+    .legal-hero h1 {
+        color: #ffffff !important;
+    }
+
+    .legal-hero-description {
+        color: #d1fae5 !important;
+    }
+
+    .legal-hero-date {
+        color: #99f6e4 !important;
+    }
+
+    /* =========================================================
+       LEGAL CARD
+       ========================================================= */
+
+    .legal-card {
+        background: #ffffff !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 18px !important;
+
+        box-shadow:
+            0 8px 25px rgba(15, 23, 42, 0.05),
+            0 2px 6px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+    .legal-sidebar {
+        overflow: hidden !important;
+    }
+
+    .legal-sidebar-title {
+        padding: 10px 12px !important;
+
+        color: #94a3b8 !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        letter-spacing: 0.08em !important;
+
+        text-transform: uppercase !important;
+    }
+
+    .legal-sidebar a {
+        display: block !important;
+
+        padding: 11px 13px !important;
+
+        margin: 2px 0 !important;
+
+        border-radius: 10px !important;
+
+        color: #64748b !important;
+
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+
+        text-decoration: none !important;
+
+        transition:
+            color 180ms ease,
+            background 180ms ease,
+            transform 180ms ease !important;
+    }
+
+    .legal-sidebar a:hover {
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        color: #0f766e !important;
+
+        transform: translateX(2px) !important;
+    }
+
+    .legal-sidebar a.active {
+        background: rgba(20, 184, 166, 0.12) !important;
+
+        color: #0ea5a4 !important;
+
+        font-weight: 700 !important;
+    }
+
+    .legal-sidebar a.active::before {
+        content: "";
+
+        display: inline-block;
+
+        width: 4px;
+        height: 16px;
+
+        margin-right: 8px;
+
+        vertical-align: -3px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    /* =========================================================
+       LEGAL CONTENT
+       ========================================================= */
+
+    .legal-content {
+        color: #475569 !important;
+
+        min-width: 0;
+    }
+
+    /* =========================================================
+       INTRO / INFORMATION BOX
+       ========================================================= */
+
+    .legal-note {
+        display: flex !important;
+
+        gap: 12px !important;
+
+        align-items: flex-start !important;
+
+        background: rgba(20, 184, 166, 0.07) !important;
+
+        border: 1px solid rgba(20, 184, 166, 0.22) !important;
+
+        border-left: 4px solid #0ea5a4 !important;
+
+        border-radius: 12px !important;
+
+        padding: 1rem !important;
+
+        margin-bottom: 2rem !important;
+    }
+
+    .legal-note i {
+        flex-shrink: 0;
+
+        color: #0ea5a4 !important;
+
+        margin-top: 3px;
+    }
+
+    .legal-note p {
+        margin: 0 !important;
+
+        color: #475569 !important;
+
+        font-size: 0.875rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    /* =========================================================
+       SECTION HEADINGS
+       ========================================================= */
+
+    .legal-content h2 {
+        display: flex !important;
+
+        align-items: flex-start !important;
+
+        font-size: 1.3rem !important;
+
+        line-height: 1.45 !important;
+
+        font-weight: 800 !important;
+
+        color: #0f172a !important;
+
+        margin: 2.25rem 0 0.8rem !important;
+
+        letter-spacing: -0.015em !important;
+    }
+
+    .legal-content h2:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    .legal-content h2::before {
+        content: "";
+
+        flex: 0 0 auto;
+
+        width: 4px;
+        height: 24px;
+
+        margin-right: 10px;
+        margin-top: 2px;
+
+        background: #0ea5a4 !important;
+
+        border-radius: 999px;
+    }
+
+    /* =========================================================
+       SUB HEADINGS
+       ========================================================= */
+
+    .legal-content h3 {
+        font-size: 1rem !important;
+
+        line-height: 1.5 !important;
+
+        font-weight: 700 !important;
+
+        color: #0f172a !important;
+
+        margin: 1.35rem 0 0.5rem !important;
+    }
+
+    /* =========================================================
+       PARAGRAPHS
+       ========================================================= */
+
+    .legal-content p {
+        font-size: 0.9rem !important;
+
+        line-height: 1.85 !important;
+
+        color: #475569 !important;
+
+        margin: 0 0 0.85rem !important;
+    }
+
+    /* =========================================================
+       LISTS
+       ========================================================= */
+
+    .legal-content ul,
+    .legal-content ol {
+        margin: 0.55rem 0 1rem !important;
+
+        padding-left: 1.45rem !important;
+    }
+
+    .legal-content li {
+        font-size: 0.9rem !important;
+
+        line-height: 1.8 !important;
+
+        color: #475569 !important;
+
+        margin: 0.35rem 0 !important;
+
+        padding-left: 3px !important;
+    }
+
+    .legal-content ul li::marker {
+        color: #0ea5a4 !important;
+    }
+
+    .legal-content ol li::marker {
+        color: #0ea5a4 !important;
+        font-weight: 700 !important;
+    }
+
+    /* =========================================================
+       QUOTED / SPECIAL TEXT
+       ========================================================= */
+
+    .legal-quoted {
+        display: inline-block;
+
+        margin: 0.3rem 0;
+
+        padding: 6px 10px;
+
+        background: #f8fafc !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 7px;
+
+        color: #0f172a !important;
+
+        font-weight: 700 !important;
+    }
+
+    /* =========================================================
+       CONTACT DETAILS
+       ========================================================= */
+
+    .legal-contact {
+        background: #f8fafc !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        border-radius: 14px !important;
+
+        padding: 1.25rem !important;
+
+        margin-top: 1rem !important;
+    }
+
+    .legal-contact p {
+        margin-bottom: 0.45rem !important;
+    }
+
+    .legal-contact p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .legal-contact strong {
+        color: #0f172a !important;
+    }
+
+    /* =========================================================
+       ACKNOWLEDGEMENT BOX
+       ========================================================= */
+
+    .legal-acknowledgement {
+        margin-top: 2.5rem !important;
+
+        padding: 1.35rem !important;
+
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.07), rgba(20, 184, 166, 0.025)) !important;
+
+        border: 1px solid rgba(20, 184, 166, 0.2) !important;
+
+        border-radius: 14px !important;
+    }
+
+    .legal-acknowledgement-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-bottom: 0.85rem;
+
+        color: #0f172a !important;
+
+        font-size: 1.05rem !important;
+
+        font-weight: 800 !important;
+    }
+
+    .legal-acknowledgement-title i {
+        color: #0ea5a4 !important;
+    }
+
+    /* =========================================================
+       FOOTER NOTE
+       ========================================================= */
+
+    .legal-footer-note {
+        margin-top: 2.5rem !important;
+
+        padding-top: 1.5rem !important;
+
+        border-top: 1px solid #e2e8f0 !important;
+    }
+
+    .legal-footer-note p {
+        color: #94a3b8 !important;
+
+        font-size: 0.78rem !important;
+
+        line-height: 1.7 !important;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1023px) {
+        .legal-sidebar {
+            position: static !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .legal-hero {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .legal-hero h1 {
+            font-size: 2rem !important;
+        }
+
+        .legal-hero-description {
+            font-size: 0.875rem !important;
+        }
+
+        .legal-content {
+            padding: 1.35rem !important;
+        }
+
+        .legal-content h2 {
+            font-size: 1.15rem !important;
+
+            margin-top: 1.8rem !important;
+        }
+
+        .legal-content h2::before {
+            width: 3px !important;
+
+            height: 20px !important;
+
+            margin-right: 8px !important;
+        }
+
+        .legal-content p,
+        .legal-content li {
+            font-size: 0.875rem !important;
+
+            line-height: 1.78 !important;
+        }
+
+        .legal-card {
+            border-radius: 14px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .legal-hero h1 {
+            font-size: 1.75rem !important;
+        }
+
+        .legal-sidebar a {
+            font-size: 0.82rem !important;
+
+            padding: 10px 11px !important;
+        }
+
+        .legal-note {
+            padding: 0.85rem !important;
+        }
+    }
+</style>
+{% endblock %} {% block content %}
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="legal-hero text-white py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 legal-hero-content">
+        <div class="legal-hero-label">
+            <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+
+            <span> LEGAL &amp; POLICIES </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Cancellation &amp; Refund Policy</h1>
+
+        <p class="legal-hero-description mt-3 max-w-3xl text-sm sm:text-base">
+            Our policy covering cancellations, refunds, credits, payment reversals and other remedies for bookings made through Sea of
+            Seats.
+        </p>
+
+        <p class="legal-hero-date mt-5 text-xs">Last updated: 31 August 2026</p>
+    </div>
+</section>
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+
+<section class="py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[230px_minmax(0,1fr)] gap-7 items-start">
+            <!-- =================================================
+                 SIDEBAR
+                 ================================================= -->
+
+            <aside class="legal-sidebar legal-card p-3 lg:sticky lg:top-24">
+                <div class="legal-sidebar-title">Legal Centre</div>
+
+                <a href="{% url 'PrivacyPolicyPage' %}"> Privacy Policy </a>
+
+                <a href="{% url 'TermsConditionPage' %}"> Terms &amp; Conditions </a>
+
+                <a href="{% url 'RefundPolicyPage' %}" class="active"> Refund &amp; Cancellation </a>
+
+                <a href="{% url 'UserAgreementPage' %}"> User Agreement </a>
+            </aside>
+
+            <!-- =================================================
+                 POLICY CONTENT
+                 ================================================= -->
+
+            <article class="legal-card p-6 sm:p-9 lg:p-10 legal-content">
+                <!-- INTRODUCTION -->
+
+                <div class="legal-note">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+
+                    <p>
+                        This Cancellation &amp; Refund Policy explains the circumstances in which cancellations, refunds, credits, reversals
+                        or other remedies may be available for bookings made through the Sea of Seats website, mobile application or other
+                        authorised booking channels.
+                    </p>
+                </div>
+
+                <p>
+                    Sea of Seats operates as an online booking and ticketing platform and may facilitate bookings for movies, concerts,
+                    events, sports, entertainment, travel, hotels, transportation and other services provided by third-party organisers,
+                    venues, operators and service providers.
+                </p>
+
+                <p>
+                    By making a booking through Sea of Seats, you acknowledge and agree to this Refund Policy together with our Terms &amp;
+                    Conditions and any booking-specific cancellation conditions displayed before payment.
+                </p>
+
+                <!-- 1 -->
+
+                <h2>1. General Refund Principle</h2>
+
+                <p>
+                    Refund eligibility depends on the type of booking, the applicable Service Provider's cancellation rules, the timing of
+                    cancellation and the circumstances resulting in cancellation.
+                </p>
+
+                <p>Not every ticket or booking is refundable.</p>
+
+                <p>Before completing a transaction, Customers should carefully review:</p>
+
+                <ul>
+                    <li>Cancellation conditions;</li>
+                    <li>Refund eligibility;</li>
+                    <li>Cancellation charges;</li>
+                    <li>Booking/convenience fees;</li>
+                    <li>Applicable taxes;</li>
+                    <li>Event or service-specific restrictions;</li>
+                    <li>Any other conditions displayed during checkout.</li>
+                </ul>
+
+                <p>
+                    The cancellation and refund terms specifically displayed for a particular booking shall generally apply to that booking,
+                    subject to applicable law.
+                </p>
+
+                <!-- 2 -->
+
+                <h2>2. Customer-Initiated Cancellation</h2>
+
+                <p>
+                    Where cancellation is permitted, the Customer may request cancellation through the available Sea of Seats cancellation
+                    mechanism or by contacting Customer Support.
+                </p>
+
+                <p>The refund amount, if any, will depend on the cancellation rules applicable to the relevant booking.</p>
+
+                <p>The following may be deducted where applicable:</p>
+
+                <ul>
+                    <li>Cancellation charges;</li>
+                    <li>Service charges;</li>
+                    <li>Convenience fees;</li>
+                    <li>Processing charges;</li>
+                    <li>Payment gateway charges;</li>
+                    <li>Supplier-imposed charges;</li>
+                    <li>Other non-refundable amounts expressly disclosed during booking.</li>
+                </ul>
+
+                <p>
+                    Where a booking is expressly identified as non-cancellable or non-refundable, no refund shall ordinarily be available
+                    unless otherwise required by applicable law or the relevant Service Provider agrees to an exception.
+                </p>
+
+                <!-- 3 -->
+
+                <h2>3. Event or Service Cancellation by Organiser</h2>
+
+                <p>
+                    If an event, show, match, movie, travel service, hotel reservation or other service is cancelled by the relevant
+                    organiser or Service Provider, Sea of Seats will make reasonable efforts to notify affected Customers.
+                </p>
+
+                <p>Depending on the instructions received from the relevant Service Provider, Customers may receive:</p>
+
+                <ul>
+                    <li>A full refund;</li>
+                    <li>A partial refund;</li>
+                    <li>A replacement booking;</li>
+                    <li>Rescheduled booking;</li>
+                    <li>Credit or voucher;</li>
+                    <li>Another remedy offered by the Service Provider.</li>
+                </ul>
+
+                <p>
+                    Where a full refund is authorised, Sea of Seats will process the eligible amount in accordance with the applicable
+                    payment and refund procedures.
+                </p>
+
+                <!-- 4 -->
+
+                <h2>4. Postponement or Rescheduling</h2>
+
+                <p>An event or service may be postponed or rescheduled rather than cancelled.</p>
+
+                <p>
+                    In such circumstances, the original ticket may remain valid for the revised date or time, subject to the organiser's
+                    terms.
+                </p>
+
+                <p>
+                    Where the organiser permits cancellation because of a postponement, Customers may be given the opportunity to request a
+                    refund within the period specified by the organiser.
+                </p>
+
+                <p>
+                    If the Customer chooses to attend the rescheduled event or use the rescheduled service, the booking may not subsequently
+                    qualify for cancellation unless specifically permitted.
+                </p>
+
+                <!-- 5 -->
+
+                <h2>5. Change in Venue, Timing or Programme</h2>
+
+                <p>An organiser or Service Provider may change:</p>
+
+                <ul>
+                    <li>Venue;</li>
+                    <li>Date;</li>
+                    <li>Time;</li>
+                    <li>Seating configuration;</li>
+                    <li>Performer;</li>
+                    <li>Line-up;</li>
+                    <li>Match schedule;</li>
+                    <li>Route;</li>
+                    <li>Flight schedule;</li>
+                    <li>Hotel arrangements;</li>
+                    <li>Other service details.</li>
+                </ul>
+
+                <p>Where such changes occur, Sea of Seats will communicate material changes when information is made available to us.</p>
+
+                <p>Refund rights, if any, will depend on the policy established by the relevant Service Provider and applicable law.</p>
+
+                <!-- 6 -->
+
+                <h2>6. Movie Ticket Cancellation</h2>
+
+                <p>Movie-ticket cancellation may be available only where the relevant cinema or booking partner permits cancellation.</p>
+
+                <p>The applicable cancellation deadline and charges, if any, will be displayed during booking.</p>
+
+                <p>Once the permitted cancellation period has expired, the ticket may become non-refundable.</p>
+
+                <p>
+                    If a cinema cancels a show or is unable to provide the booked screening, Sea of Seats will process the remedy
+                    communicated by the relevant cinema or Service Provider.
+                </p>
+
+                <!-- 7 -->
+
+                <h2>7. Event Tickets</h2>
+
+                <p>Concerts, festivals, comedy shows, exhibitions, parties and other events may have event-specific refund conditions.</p>
+
+                <p>Unless expressly stated otherwise, event tickets may be non-refundable once issued.</p>
+
+                <p>Where an event organiser cancels the event, the organiser's approved refund process will apply.</p>
+
+                <p>
+                    Sea of Seats will communicate the available refund or alternative arrangement to affected Customers once the relevant
+                    information is received.
+                </p>
+
+                <!-- 8 -->
+
+                <h2>8. Sports Bookings</h2>
+
+                <p>
+                    Sports events may be subject to changes caused by weather, venue conditions, league decisions, governing bodies,
+                    broadcasters or other circumstances.
+                </p>
+
+                <p>A match or sporting event being postponed does not automatically mean that a ticket is refundable.</p>
+
+                <p>
+                    Refund eligibility will depend on the policy announced by the relevant organiser, league, venue or ticketing authority.
+                </p>
+
+                <p>If the event is officially cancelled and a refund is authorised, Sea of Seats will process the applicable refund.</p>
+
+                <!-- 9 -->
+
+                <h2>9. Travel Bookings</h2>
+
+                <p>
+                    Flights, railway tickets, bus tickets, metro tickets and other transportation bookings may be subject to the
+                    cancellation and refund rules of the relevant operator.
+                </p>
+
+                <p>Airline or transportation cancellations may include:</p>
+
+                <ul>
+                    <li>Operator cancellation fees;</li>
+                    <li>Fare restrictions;</li>
+                    <li>Administrative charges;</li>
+                    <li>Taxes;</li>
+                    <li>Payment-related charges;</li>
+                    <li>Other applicable deductions.</li>
+                </ul>
+
+                <p>
+                    Sea of Seats will not be responsible for refund amounts that a transportation operator lawfully withholds under its
+                    applicable fare or cancellation conditions.
+                </p>
+
+                <!-- 10 -->
+
+                <h2>10. Hotel Bookings</h2>
+
+                <p>
+                    Hotel cancellations are governed by the cancellation conditions applicable to the particular property and rate selected
+                    at the time of booking.
+                </p>
+
+                <p>Some hotel rates may be:</p>
+
+                <ul>
+                    <li>Fully refundable;</li>
+                    <li>Partially refundable;</li>
+                    <li>Refundable until a specified deadline;</li>
+                    <li>Completely non-refundable.</li>
+                </ul>
+
+                <p>Any applicable cancellation deadline and charges will be displayed during the booking process wherever available.</p>
+
+                <p>
+                    Failure to check in ("No-Show") may result in forfeiture of the booking amount in accordance with the applicable hotel's
+                    policy.
+                </p>
+
+                <!-- 11 -->
+
+                <h2>11. Non-Refundable Bookings</h2>
+
+                <p>
+                    Certain bookings may be specifically marked as
+                    <span class="legal-quoted">"Non-Refundable"</span>
+                    or may carry equivalent restrictions.
+                </p>
+
+                <p>Examples may include:</p>
+
+                <ul>
+                    <li>Promotional tickets;</li>
+                    <li>Discounted fares;</li>
+                    <li>Special hotel rates;</li>
+                    <li>Certain event tickets;</li>
+                    <li>Certain travel bookings;</li>
+                    <li>Last-minute bookings;</li>
+                    <li>Supplier-restricted inventory.</li>
+                </ul>
+
+                <p>
+                    For such bookings, cancellation may not result in a refund unless expressly permitted by the Service Provider or
+                    required by applicable law.
+                </p>
+
+                <!-- 12 -->
+
+                <h2>12. Convenience and Service Fees</h2>
+
+                <p>A booking may include a convenience fee, service fee, platform fee or other applicable charge.</p>
+
+                <p>
+                    Unless specifically stated otherwise, such charges may be non-refundable even when the underlying ticket amount is
+                    refunded.
+                </p>
+
+                <p>
+                    Where a refund is initiated because Sea of Seats or a Service Provider is responsible for an error, applicable charges
+                    will be handled in accordance with applicable law and the circumstances of the transaction.
+                </p>
+
+                <!-- 13 -->
+
+                <h2>13. Payment Gateway and Processing Charges</h2>
+
+                <p>Payments may be processed through banks, payment gateways, card networks and other payment service providers.</p>
+
+                <p>
+                    Where permitted by law and disclosed to the Customer, payment-processing or transaction-related charges may be
+                    non-refundable.
+                </p>
+
+                <p>
+                    Any charges independently imposed by the Customer's bank, card issuer or financial institution are generally outside Sea
+                    of Seats' control.
+                </p>
+
+                <!-- 14 -->
+
+                <h2>14. Failed Transactions</h2>
+
+                <p>
+                    If money has been debited from the Customer's bank account or payment instrument but the booking is not successfully
+                    confirmed, Sea of Seats will investigate the transaction.
+                </p>
+
+                <p>
+                    Where the booking has not been confirmed and the payment has been successfully received, the eligible amount will
+                    generally be reversed or refunded to the original payment method.
+                </p>
+
+                <p>
+                    The time taken for the amount to appear in the Customer's account may depend on the relevant bank, card issuer or
+                    payment service provider.
+                </p>
+
+                <p>Customers should retain their transaction reference or payment confirmation when contacting support.</p>
+
+                <!-- 15 -->
+
+                <h2>15. Duplicate Payment</h2>
+
+                <p>
+                    If a Customer is charged more than once for the same booking due to a technical or payment-processing issue, Sea of
+                    Seats will investigate the duplicate transaction.
+                </p>
+
+                <p>
+                    Where a duplicate payment is confirmed and no corresponding booking has been created for the additional payment, the
+                    eligible excess amount will be refunded or reversed.
+                </p>
+
+                <!-- 16 -->
+
+                <h2>16. Refund Method</h2>
+
+                <p>Where possible, refunds will be processed to the original payment method used for the booking.</p>
+
+                <p>For example:</p>
+
+                <ul>
+                    <li>Card payment → refund to the applicable card/payment account;</li>
+                    <li>UPI payment → refund through the applicable payment mechanism;</li>
+                    <li>Net banking → refund through the relevant payment channel;</li>
+                    <li>Wallet → refund according to the applicable wallet/payment rules.</li>
+                </ul>
+
+                <p>Sea of Seats may require additional information where necessary to process a refund securely.</p>
+
+                <!-- 17 -->
+
+                <h2>17. Refund Processing Time</h2>
+
+                <p>
+                    After a refund has been approved or initiated, the time required for the funds to become available may vary depending
+                    on:
+                </p>
+
+                <ul>
+                    <li>Payment method;</li>
+                    <li>Bank;</li>
+                    <li>Card issuer;</li>
+                    <li>Payment gateway;</li>
+                    <li>International payment network;</li>
+                    <li>Currency conversion;</li>
+                    <li>Service Provider;</li>
+                    <li>Other financial intermediaries.</li>
+                </ul>
+
+                <p>Sea of Seats will generally initiate an eligible refund within the applicable operational timeframe after approval.</p>
+
+                <p>The actual credit date may be determined by the bank or payment provider.</p>
+
+                <!-- 18 -->
+
+                <h2>18. International Transactions</h2>
+
+                <p>
+                    Customers making payments from outside India may receive refunds subject to the original payment method, applicable
+                    foreign-exchange regulations and payment-network procedures.
+                </p>
+
+                <p>The amount ultimately received by an international Customer may differ from the original amount due to:</p>
+
+                <ul>
+                    <li>Currency fluctuations;</li>
+                    <li>Foreign-exchange conversion;</li>
+                    <li>Bank charges;</li>
+                    <li>Card issuer charges;</li>
+                    <li>International transaction fees;</li>
+                    <li>Other charges imposed by financial institutions.</li>
+                </ul>
+
+                <p>Sea of Seats cannot control charges independently imposed by a Customer's bank or card issuer.</p>
+
+                <!-- 19 -->
+
+                <h2>19. Partial Refunds</h2>
+
+                <p>In certain situations, only part of a booking may be eligible for cancellation or refund.</p>
+
+                <p>Examples may include:</p>
+
+                <ul>
+                    <li>Partial cancellation of passengers;</li>
+                    <li>Cancellation of selected seats;</li>
+                    <li>Cancellation of some tickets within a larger order;</li>
+                    <li>Partial service failure;</li>
+                    <li>Refunds authorised by the Service Provider.</li>
+                </ul>
+
+                <p>The applicable refund will be calculated according to the relevant booking terms.</p>
+
+                <!-- 20 -->
+
+                <h2>20. No-Shows</h2>
+
+                <p>
+                    If a Customer fails to attend an event, cinema screening, hotel stay, flight, train, bus or other booked service without
+                    completing a permitted cancellation, the booking may be treated as a No-Show.
+                </p>
+
+                <p>
+                    No refund may be available for a No-Show unless the applicable Service Provider's terms specifically provide otherwise.
+                </p>
+
+                <!-- 21 -->
+
+                <h2>21. Customer's Failure to Meet Entry Conditions</h2>
+
+                <p>A refund may not be available where the Customer is refused entry or service because the Customer:</p>
+
+                <ul>
+                    <li>Does not carry required identification;</li>
+                    <li>Does not satisfy age restrictions;</li>
+                    <li>Violates venue rules;</li>
+                    <li>Arrives after the permitted entry time;</li>
+                    <li>Presents an invalid, altered or duplicated ticket;</li>
+                    <li>Fails to satisfy travel-document requirements;</li>
+                    <li>Otherwise fails to comply with applicable admission or service conditions.</li>
+                </ul>
+
+                <p>
+                    The Customer is responsible for checking applicable entry and identification requirements before attending or using a
+                    booked service.
+                </p>
+
+                <!-- 22 -->
+
+                <h2>22. Fraudulent or Unauthorised Transactions</h2>
+
+                <p>
+                    Where Sea of Seats reasonably suspects fraud, misuse, unauthorised payment activity or violation of applicable law, the
+                    transaction may be placed on hold, cancelled or subjected to verification.
+                </p>
+
+                <p>
+                    Refunds relating to suspicious transactions may be processed only after appropriate verification and in accordance with
+                    applicable law.
+                </p>
+
+                <!-- 23 -->
+
+                <h2>23. Chargebacks</h2>
+
+                <p>
+                    Customers should contact Sea of Seats Customer Support before initiating a payment dispute or chargeback where the issue
+                    concerns a booking, refund or service.
+                </p>
+
+                <p>
+                    If a Customer initiates a chargeback, Sea of Seats may provide relevant transaction records to the payment provider,
+                    bank or card network for investigation.
+                </p>
+
+                <p>Nothing in this section limits any rights available to Customers under applicable law or payment-network rules.</p>
+
+                <!-- 24 -->
+
+                <h2>24. Vouchers, Credits and Promotional Balances</h2>
+
+                <p>Where a refund is provided in the form of a voucher, credit or promotional balance, its:</p>
+
+                <ul>
+                    <li>Validity;</li>
+                    <li>Usage conditions;</li>
+                    <li>Transferability;</li>
+                    <li>Expiry;</li>
+                    <li>Restrictions;</li>
+                    <li>Refundability.</li>
+                </ul>
+
+                <p>Shall be governed by the terms communicated with the voucher or credit.</p>
+
+                <p>Unless specifically stated otherwise, promotional credits may not be exchangeable for cash.</p>
+
+                <!-- 25 -->
+
+                <h2>25. Cancellation by Sea of Seats</h2>
+
+                <p>Sea of Seats may cancel a booking where reasonably necessary because of:</p>
+
+                <ul>
+                    <li>Payment failure;</li>
+                    <li>Suspected fraud;</li>
+                    <li>Incorrect pricing;</li>
+                    <li>Technical error;</li>
+                    <li>Unavailability;</li>
+                    <li>Duplicate booking;</li>
+                    <li>Service Provider instruction;</li>
+                    <li>Violation of booking conditions;</li>
+                    <li>Legal or regulatory requirements;</li>
+                    <li>Circumstances beyond reasonable control.</li>
+                </ul>
+
+                <p>
+                    Where a booking is cancelled by Sea of Seats for reasons attributable to Sea of Seats, the applicable refund will be
+                    processed in accordance with applicable law and the circumstances of the cancellation.
+                </p>
+
+                <!-- 26 -->
+
+                <h2>26. Force Majeure</h2>
+
+                <p>
+                    No refund shall automatically become due solely because a service is affected by circumstances beyond the control of Sea
+                    of Seats.
+                </p>
+
+                <p>Such circumstances may include:</p>
+
+                <ul>
+                    <li>Natural disasters;</li>
+                    <li>Severe weather;</li>
+                    <li>War;</li>
+                    <li>Terrorism;</li>
+                    <li>Civil disturbances;</li>
+                    <li>Government restrictions;</li>
+                    <li>Pandemics;</li>
+                    <li>Strikes;</li>
+                    <li>Technical infrastructure failures;</li>
+                    <li>Transport disruptions;</li>
+                    <li>Other extraordinary events.</li>
+                </ul>
+
+                <p>
+                    Where a Service Provider establishes a refund, rescheduling or alternative arrangement, Sea of Seats will communicate
+                    the applicable option to Customers where reasonably practicable.
+                </p>
+
+                <!-- 27 -->
+
+                <h2>27. How to Request a Refund</h2>
+
+                <p>Customers may submit a cancellation or refund request through:</p>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>Website:</strong>
+                        www.seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Customer Support:</strong>
+                        [Phone Number]
+                    </p>
+                </div>
+
+                <p class="mt-5">The Customer should provide:</p>
+
+                <ul>
+                    <li>Booking ID;</li>
+                    <li>Registered mobile number;</li>
+                    <li>Registered email address;</li>
+                    <li>Transaction reference, where applicable;</li>
+                    <li>Reason for cancellation/refund;</li>
+                    <li>Any supporting information requested by Sea of Seats.</li>
+                </ul>
+
+                <!-- 28 -->
+
+                <h2>28. Refund Status</h2>
+
+                <p>Customers may contact Sea of Seats to obtain an update regarding the status of an eligible refund.</p>
+
+                <p>Customers should retain:</p>
+
+                <ul>
+                    <li>Booking confirmation;</li>
+                    <li>Payment receipt;</li>
+                    <li>Transaction reference;</li>
+                    <li>Cancellation confirmation;</li>
+                    <li>Refund reference number.</li>
+                </ul>
+
+                <p>These records should be retained until the refund has been successfully credited.</p>
+
+                <!-- 29 -->
+
+                <h2>29. Disputes Regarding Refunds</h2>
+
+                <p>
+                    If a Customer believes that a refund has been incorrectly calculated, denied or delayed, the Customer may contact Sea of
+                    Seats Customer Support.
+                </p>
+
+                <p>
+                    If the issue is not resolved, the Customer may escalate the matter through the grievance-redressal mechanism provided by
+                    Sea of Seats.
+                </p>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>Grievance Officer:</strong>
+                        [Name]
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        [Phone Number]
+                    </p>
+
+                    <p>
+                        <strong>Address:</strong>
+                        [Complete Registered Office Address]
+                    </p>
+                </div>
+
+                <p>Nothing in this policy limits any statutory consumer rights or remedies available under applicable law.</p>
+
+                <!-- 30 -->
+
+                <h2>30. Policy for Third-Party Bookings</h2>
+
+                <p>
+                    Where Sea of Seats facilitates a booking on behalf of an independent Service Provider, the Service Provider's
+                    cancellation and refund conditions may apply.
+                </p>
+
+                <p>Customers acknowledge that Sea of Seats may have limited authority to alter or waive such conditions.</p>
+
+                <p>
+                    Sea of Seats will communicate available options based on the instructions, policies and refund amounts provided by the
+                    relevant Service Provider.
+                </p>
+
+                <!-- 31 -->
+
+                <h2>31. Refund Limitation</h2>
+
+                <p>
+                    Except where otherwise required by applicable law, Sea of Seats' refund obligation shall generally be limited to the
+                    amount actually received by Sea of Seats for the affected booking and refundable under the applicable booking
+                    conditions.
+                </p>
+
+                <p>Sea of Seats shall not be responsible for losses arising from:</p>
+
+                <ul>
+                    <li>Travel expenses;</li>
+                    <li>Accommodation booked separately;</li>
+                    <li>Missed transportation;</li>
+                    <li>Loss of business;</li>
+                    <li>Loss of opportunity;</li>
+                    <li>Foreign-exchange fluctuations;</li>
+                    <li>Bank charges;</li>
+                    <li>Other indirect expenses.</li>
+                </ul>
+
+                <p>Except where such exclusion is prohibited by applicable law.</p>
+
+                <!-- 32 -->
+
+                <h2>32. Modification of this Policy</h2>
+
+                <p>Sea of Seats may update this Refund Policy from time to time.</p>
+
+                <p>The revised policy will be published on the Platform with an updated effective date.</p>
+
+                <p>
+                    The policy applicable to a booking will generally be the policy and booking conditions presented to the Customer at the
+                    time of booking, subject to applicable law.
+                </p>
+
+                <!-- 33 -->
+
+                <h2>33. Governing Law</h2>
+
+                <p>This Refund Policy shall be governed by the laws of India.</p>
+
+                <p>Nothing contained in this policy shall limit any mandatory rights available to consumers under applicable law.</p>
+
+                <!-- 34 -->
+
+                <h2>34. Jurisdiction</h2>
+
+                <p>
+                    Subject to applicable law and mandatory consumer rights, disputes relating to this Refund Policy shall be subject to the
+                    jurisdiction of the competent courts at:
+                </p>
+
+                <div class="legal-quoted">[City, State, India]</div>
+
+                <!-- 35 -->
+
+                <h2>35. Contact Details</h2>
+
+                <div class="legal-contact">
+                    <p>
+                        <strong>SEA OF SEATS</strong>
+                    </p>
+
+                    <p>
+                        <strong>Legal Entity Name:</strong>
+                        Booking Studio Pvt Ltd
+                    </p>
+
+                    <p>
+                        <strong>Brand:</strong>
+                        Sea of Seats
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        info@seaofseats.com
+                    </p>
+
+                    <p>
+                        <strong>Website:</strong>
+                        www.seaofseats.com
+                    </p>
+                </div>
+
+                <!-- LAST UPDATED -->
+
+                <div class="legal-footer-note">
+                    <p>Last Updated: 31 August 2026</p>
+                </div>
+
+                <!-- CUSTOMER ACKNOWLEDGEMENT -->
+
+                <div class="legal-acknowledgement">
+                    <div class="legal-acknowledgement-title">
+                        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+
+                        <span> Customer Acknowledgement </span>
+                    </div>
+
+                    <p>By completing a booking through Sea of Seats, the Customer acknowledges that:</p>
+
+                    <ol>
+                        <li>The booking may be subject to the cancellation conditions of the relevant Service Provider.</li>
+
+                        <li>Certain bookings may be non-refundable.</li>
+
+                        <li>Convenience, service, processing and other charges may be non-refundable where permitted and disclosed.</li>
+
+                        <li>Refund processing times may depend on banks and payment providers.</li>
+
+                        <li>International transactions may be affected by currency conversion and banking charges.</li>
+
+                        <li>Event, travel, cinema, hotel and sports bookings may have different cancellation conditions.</li>
+
+                        <li>The Customer should review the applicable booking conditions before making payment.</li>
+                    </ol>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block extraCSS %}
+<link rel="stylesheet" href="{% static 'css/flight-seat-selection.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="seat-page">
+    <div class="seat-shell">
+        <header class="seat-header">
+            <div>
+                <p class="eyebrow">FLIGHT BOOKING &middot; STEP 5</p>
+                <h1>Review your booking</h1>
+                <p class="seat-intro">Check everything below before moving on. Nothing has been booked or charged yet.</p>
+            </div>
+        </header>
+
+        <section class="seat-summary-card">
+            <div>
+                <span class="summary-label">Route</span>
+                <strong id="review-route">&mdash;</strong>
+            </div>
+            <div class="summary-metrics">
+                <div><span>Total fare</span><strong id="review-total-fare">&mdash;</strong></div>
+            </div>
+        </section>
+
+        <section class="seat-layout-card">
+            <span class="summary-label">Travellers</span>
+            <div id="review-traveller-list" style="margin-top:8px; font-size:12px; color:#455468;"></div>
+        </section>
+
+        <section class="seat-layout-card" style="margin-top:12px;">
+            <span class="summary-label">Seats</span>
+            <div id="review-seat-list" style="margin-top:8px; font-size:12px; color:#455468;"></div>
+        </section>
+
+        <aside class="seat-selection-bar">
+            <div>
+                <span class="summary-label">What happens next</span>
+                <p style="margin:0; font-size:11px; color:#718096; max-width:520px;">
+                    Payment and final ticketing aren't connected yet, so there's nothing to
+                    click here for real - this page is just showing you what would go
+                    forward once that step is built.
+                </p>
+            </div>
+            <div class="seat-selection-actions">
+                <button type="button" disabled title="Payment isn't built yet">Continue to payment</button>
+            </div>
+        </aside>
+    </div>
+</main>
+<script>
+window.__FLIGHT_REVIEW__ = {{ review_json|safe }};
+window.__FLIGHT_SEARCH_REQUEST__ = {{ search_request_json|safe }};
+window.__FLIGHT_TRAVELLERS__ = {{ travellers_json|safe }};
+window.__FLIGHT_SEAT_MAP__ = {{ seat_map_json|safe }};
+window.__FLIGHT_SELECTED_SEATS__ = {{ selected_seats_json|safe }};
+</script>
+<script src="{% static 'js/flight-booking-review.js' %}"></script>
+{% endblock %}
