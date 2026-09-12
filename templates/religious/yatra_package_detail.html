@@ -1,0 +1,1494 @@
+{% extends "base/public_base.html" %}
+{% load static %}
+
+{% block extraCSS %}
+    <link rel="stylesheet" href="{% static 'css/yatra-package-detail.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="yatra-page">
+    
+    <!-- HERO -->
+    <section class="yatra-hero">
+
+        <div class="yatra-hero-media">
+
+            {% if hero_image %}
+
+                <img
+                    src="{{ hero_image.image_url }}"
+                    alt="{{ hero_image.alt_text|default:package.title }}"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+
+            {% elif package.hero_image_url %}
+
+                <img
+                    src="{{ package.hero_image_url }}"
+                    alt="{{ package.title }}"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+
+            {% endif %}
+
+        </div>
+
+        <div class="yatra-hero-overlay"></div>
+
+        <div class="yatra-hero-content">
+
+            <div class="yatra-hero-eyebrow">
+                <span></span>
+                {{ package.get_package_type_display }}
+            </div>
+
+            <h1 class="yatra-hero-title">
+                {{ package.title }}
+            </h1>
+
+            {% if package.subtitle %}
+
+                <p class="yatra-hero-subtitle">
+                    {{ package.subtitle }}
+                </p>
+
+            {% endif %}
+
+            <div class="yatra-hero-meta">
+
+                {% if package.duration_days %}
+                    <span class="yatra-hero-meta-item">
+                        {{ package.duration_days }} Days
+                    </span>
+                {% endif %}
+
+                {% if package.duration_nights %}
+                    <span class="yatra-hero-meta-item">
+                        {{ package.duration_nights }} Nights
+                    </span>
+                {% endif %}
+
+                {% if package.season_year %}
+                    <span class="yatra-hero-meta-item">
+                        {{ package.season_year }}
+                    </span>
+                {% endif %}
+
+                {% if package.departure_location %}
+                    <span class="yatra-hero-meta-item">
+                        {{ package.departure_location }}
+                    </span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+    
+    <!-- INTRO -->
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-intro-grid">
+
+                <div class="yatra-intro-copy">
+
+                    <div class="yatra-eyebrow">
+                        The Journey
+                    </div>
+
+                    <h2 class="yatra-heading">
+                        A carefully planned pilgrimage experience.
+                    </h2>
+
+                    <p>
+                        {{ package.description|linebreaksbr }}
+                    </p>
+
+                    <div class="yatra-facts">
+
+                        {% if package.route %}
+
+                            <div class="yatra-fact">
+                                <div class="yatra-fact-label">
+                                    Route
+                                </div>
+
+                                <div class="yatra-fact-value">
+                                    {{ package.route }}
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if package.departure_location %}
+
+                            <div class="yatra-fact">
+                                <div class="yatra-fact-label">
+                                    Departure
+                                </div>
+
+                                <div class="yatra-fact-value">
+                                    {{ package.departure_location }}
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if package.operator_name %}
+
+                            <div class="yatra-fact">
+                                <div class="yatra-fact-label">
+                                    Operator
+                                </div>
+
+                                <div class="yatra-fact-value">
+                                    {{ package.operator_name }}
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if package.season_year %}
+
+                            <div class="yatra-fact">
+                                <div class="yatra-fact-label">
+                                    Season
+                                </div>
+
+                                <div class="yatra-fact-value">
+                                    {{ package.season_year }}
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                {% for image in experience_images %}
+
+                    {% if forloop.first %}
+
+                        <div class="yatra-intro-image">
+
+                            <img
+                                src="{{ image.image_url }}"
+                                alt="{{ image.alt_text|default:package.title }}"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                            {% if image.caption %}
+
+                                <div class="yatra-image-caption">
+                                    {{ image.caption }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+    
+    <!-- FEATURES -->
+    {% if features %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Highlights
+            </div>
+
+            <h2 class="yatra-heading">
+                Everything arranged around your journey.
+            </h2>
+
+            <div class="yatra-feature-grid">
+
+                {% for feature in features %}
+
+                    <article class="yatra-feature-card">
+
+                        <div class="yatra-feature-number">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </div>
+
+                        <h3>
+                            {{ feature.title }}
+                        </h3>
+
+                        {% if feature.description %}
+
+                            <p>
+                                {{ feature.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- EXPERIENCE IMAGES -->
+    {% if experience_images|length > 1 %}
+    <section class="yatra-section yatra-section--soft">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Experience
+            </div>
+
+            <h2 class="yatra-heading">
+                The journey beyond the itinerary.
+            </h2>
+
+            <div class="yatra-visual-strip">
+
+                {% for image in experience_images %}
+
+                    <div class="yatra-visual-card">
+
+                        <img
+                            src="{{ image.image_url }}"
+                            alt="{{ image.alt_text|default:package.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                        {% if image.caption %}
+
+                            <div class="yatra-visual-caption">
+                                {{ image.caption }}
+                            </div>
+
+                        {% elif image.title %}
+
+                            <div class="yatra-visual-caption">
+                                {{ image.title }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+
+    <!-- DESTINATIONS -->
+    {% if destination_images %}
+    <section class="yatra-section yatra-section--white">
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Destinations
+            </div>
+
+            <h2 class="yatra-heading">
+                Sacred places and Himalayan landscapes.
+            </h2>
+
+            <div class="yatra-mosaic">
+
+                <div class="yatra-mosaic-main">
+
+                    {% for image in destination_images %}
+
+                        {% if forloop.first %}
+
+                            <div class="yatra-visual-card">
+
+                                <img
+                                    src="{{ image.image_url }}"
+                                    alt="{{ image.alt_text|default:package.title }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                {% if image.title %}
+
+                                    <div class="yatra-visual-caption">
+                                        {{ image.title }}
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="yatra-mosaic-side">
+
+                    {% for image in destination_images %}
+
+                        {% if not forloop.first and forloop.counter <= 3 %}
+
+                            <div class="yatra-visual-card">
+
+                                <img
+                                    src="{{ image.image_url }}"
+                                    alt="{{ image.alt_text|default:package.title }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                {% if image.title %}
+
+                                    <div class="yatra-visual-caption">
+                                        {{ image.title }}
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <!-- IMPORTANT DETAILS -->
+    {% if pricing_rules %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Important Details
+            </div>
+
+            <h2 class="yatra-heading">
+                A few things worth knowing.
+            </h2>
+
+            <div class="yatra-highlights">
+
+                {% for rule in pricing_rules %}
+
+                    <div class="yatra-highlight">
+
+                        {% if rule.amount %}
+
+                            <div class="yatra-highlight-amount">
+                                {{ rule.currency }} {{ rule.amount }}
+                            </div>
+
+                        {% endif %}
+
+                        <div class="yatra-highlight-title">
+                            {{ rule.title }}
+                        </div>
+
+                        {% if rule.description %}
+
+                            <div class="yatra-highlight-description">
+                                {{ rule.description }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+    
+    <!-- PRICING -->
+    {% if pricing_options %}
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Pricing
+            </div>
+
+            <h2 class="yatra-heading">
+                Package options.
+            </h2>
+
+            <div class="yatra-pricing-grid">
+
+                {% for option in pricing_options %}
+
+                    <article class="yatra-price-card {% if forloop.first %}yatra-price-card--featured{% endif %}">
+
+                        {% if forloop.first %}
+
+                            <div class="yatra-price-badge">
+                                Popular
+                            </div>
+
+                        {% endif %}
+
+                        <div class="yatra-price-name">
+                            {{ option.plan_name }}
+                        </div>
+
+                        {% if option.is_custom_price %}
+
+                            <div class="yatra-price">
+                                Custom
+                            </div>
+
+                        {% elif option.price %}
+
+                            <div class="yatra-price">
+                                {{ option.currency }} {{ option.price }}
+                            </div>
+
+                        {% endif %}
+
+                        {% if option.price_label %}
+
+                            <div class="yatra-price-label">
+                                {{ option.price_label }}
+                            </div>
+
+                        {% endif %}
+
+                        {% if option.description %}
+
+                            <div class="yatra-price-description">
+                                {{ option.description }}
+                            </div>
+
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+    
+    <!-- IMPROVED ITINERARY -->
+    {% if itinerary_days %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Itinerary
+            </div>
+
+            <h2 class="yatra-heading">
+                Your journey, day by day.
+            </h2>
+
+            <p class="yatra-section-intro">
+                Select a day to view the complete schedule without scrolling
+                through the entire itinerary.
+            </p>
+
+
+            <div class="yatra-itinerary-wrapper">
+
+                <!-- DAY TABS -->
+
+                <div class="yatra-day-tabs">
+
+                    {% for day in itinerary_days %}
+
+                        <button
+                            type="button"
+                            class="yatra-day-tab {% if forloop.first %}active{% endif %}"
+                            data-day="{{ forloop.counter }}"
+                        >
+
+                            <span class="yatra-day-tab-small">
+                                Day {{ day.day_number }}
+                            </span>
+
+                            <span class="yatra-day-tab-title">
+                                {{ day.title }}
+                            </span>
+
+                        </button>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- DAY PANELS -->
+
+                {% for day in itinerary_days %}
+
+                    <article
+                        class="yatra-day-panel {% if forloop.first %}active{% endif %}"
+                        data-day-panel="{{ forloop.counter }}"
+                    >
+
+                        <div class="yatra-day-panel-top">
+
+                            <div>
+
+                                <div class="yatra-day-panel-day">
+                                    Day {{ day.day_number }}
+                                </div>
+
+                                <h3>
+                                    {{ day.title }}
+                                </h3>
+
+                            </div>
+
+                            {% if day.route %}
+
+                                <div class="yatra-day-panel-route">
+                                    {{ day.route }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="yatra-day-panel-body">
+
+                            <div>
+
+                                {% if day.overview %}
+
+                                    <div class="yatra-day-overview">
+                                        {{ day.overview|linebreaksbr }}
+                                    </div>
+
+                                {% endif %}
+
+
+                                {% if day.activities %}
+
+                                    <div class="yatra-day-activities">
+
+                                        <div class="yatra-day-activities-title">
+                                            Activities
+                                        </div>
+
+                                        <ul>
+
+                                            {% for activity in day.activities %}
+
+                                                <li>
+                                                    {{ activity }}
+                                                </li>
+
+                                            {% endfor %}
+
+                                        </ul>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="yatra-day-side">
+
+                                {% if day.accommodation %}
+
+                                    <div class="yatra-day-info-box">
+
+                                        <div class="yatra-day-info-label">
+                                            Accommodation
+                                        </div>
+
+                                        <div class="yatra-day-info-value">
+                                            {{ day.accommodation }}
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                {% if day.meal_information %}
+
+                                    <div class="yatra-day-info-box">
+
+                                        <div class="yatra-day-info-label">
+                                            Meals
+                                        </div>
+
+                                        <div class="yatra-day-info-value">
+                                            {{ day.meal_information }}
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+
+    <!-- ITINERARY IMAGES -->
+    {% if itinerary_images %}
+    <section class="yatra-section yatra-section--soft">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Along The Route
+            </div>
+
+            <h2 class="yatra-heading">
+                A glimpse of the route.
+            </h2>
+
+            <div class="yatra-visual-strip">
+
+                {% for image in itinerary_images %}
+
+                    <div class="yatra-visual-card">
+
+                        <img
+                            src="{{ image.image_url }}"
+                            alt="{{ image.alt_text|default:package.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                        {% if image.title %}
+
+                            <div class="yatra-visual-caption">
+                                {{ image.title }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- INCLUSIONS / EXCLUSIONS -->
+    {% if inclusions or exclusions %}
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Package Details
+            </div>
+
+            <h2 class="yatra-heading">
+                What's covered.
+            </h2>
+
+            <div class="yatra-two-column">
+
+                {% if inclusions %}
+
+                    <div class="yatra-list-card">
+
+                        <h3>
+                            Included
+                        </h3>
+
+                        <ul class="yatra-list">
+
+                            {% for item in inclusions %}
+
+                                <li>
+
+                                    <span class="yatra-list-icon">
+                                        ✓
+                                    </span>
+
+                                    <span>
+
+                                        <strong>
+                                            {{ item.title }}
+                                        </strong>
+
+                                        {% if item.description %}
+                                            <br>{{ item.description }}
+                                        {% endif %}
+
+                                    </span>
+
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if exclusions %}
+
+                    <div class="yatra-list-card yatra-list-card--dark">
+
+                        <h3>
+                            Not Included
+                        </h3>
+
+                        <ul class="yatra-list">
+
+                            {% for item in exclusions %}
+
+                                <li>
+
+                                    <span class="yatra-list-icon">
+                                        ×
+                                    </span>
+
+                                    <span>
+
+                                        <strong>
+                                            {{ item.title }}
+                                        </strong>
+
+                                        {% if item.description %}
+                                            <br>{{ item.description }}
+                                        {% endif %}
+
+                                    </span>
+
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+
+    <!-- GUIDELINES -->
+    {% if guidelines %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Guidelines
+            </div>
+
+            <h2 class="yatra-heading">
+                Before you travel.
+            </h2>
+
+            <div class="yatra-guideline-grid">
+
+                {% for guideline in guidelines %}
+
+                    <article class="yatra-guideline">
+
+                        {% if guideline.category %}
+
+                            <div class="yatra-guideline-category">
+                                {{ guideline.category }}
+                            </div>
+
+                        {% endif %}
+
+                        <h3>
+                            {{ guideline.title }}
+                        </h3>
+
+                        {% if guideline.description %}
+
+                            <p>
+                                {{ guideline.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- SAFETY -->
+    {% if safety_guidelines %}
+    <section class="yatra-section yatra-section--dark">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Safety
+            </div>
+
+            <h2 class="yatra-heading">
+                Safety comes first.
+            </h2>
+
+            <p class="yatra-section-intro">
+                Himalayan helicopter operations may change according to
+                weather, government directions and operational conditions.
+            </p>
+
+            <div class="yatra-safety-grid">
+
+                {% for safety in safety_guidelines %}
+
+                    <article class="yatra-safety-card">
+
+                        {% if safety.category %}
+
+                            <div class="yatra-safety-category">
+                                {{ safety.category }}
+                            </div>
+
+                        {% endif %}
+
+                        <h3>
+                            {{ safety.title }}
+                        </h3>
+
+                        {% if safety.description %}
+
+                            <p>
+                                {{ safety.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- BAGGAGE -->
+    {% if baggage_policy %}
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Baggage
+            </div>
+
+            <h2 class="yatra-heading">
+                Baggage information.
+            </h2>
+
+            <div class="yatra-baggage-grid">
+
+                {% if baggage_policy.max_standard_weight_kg %}
+
+                    <div class="yatra-baggage-card">
+
+                        <div class="yatra-baggage-value">
+                            {{ baggage_policy.max_standard_weight_kg }} kg
+                        </div>
+
+                        <div class="yatra-baggage-label">
+                            Standard maximum weight
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if baggage_policy.luggage_limit_kg %}
+
+                    <div class="yatra-baggage-card">
+
+                        <div class="yatra-baggage-value">
+                            {{ baggage_policy.luggage_limit_kg }} kg
+                        </div>
+
+                        <div class="yatra-baggage-label">
+                            Luggage limit
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if baggage_policy.overweight_charge_per_kg %}
+
+                    <div class="yatra-baggage-card">
+
+                        <div class="yatra-baggage-value">
+                            ₹{{ baggage_policy.overweight_charge_per_kg }}
+                        </div>
+
+                        <div class="yatra-baggage-label">
+                            Overweight / kg
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="yatra-baggage-card">
+
+                    <div class="yatra-baggage-value">
+
+                        {% if baggage_policy.soft_bags_only %}
+                            Soft Bags
+                        {% else %}
+                            As advised
+                        {% endif %}
+
+                    </div>
+
+                    <div class="yatra-baggage-label">
+                        Baggage type
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% if baggage_policy.description %}
+
+                <div class="yatra-baggage-description">
+                    {{ baggage_policy.description|linebreaksbr }}
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- CANCELLATION -->
+    {% if cancellation_policy %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Cancellation
+            </div>
+
+            <h2 class="yatra-heading">
+                Cancellation & refund terms.
+            </h2>
+
+            <div class="yatra-cancellation-box">
+
+                <div class="yatra-cancellation-copy">
+
+                    {% if cancellation_policy.cancellation_description %}
+
+                        <div>
+
+                            <h3>
+                                Cancellation
+                            </h3>
+
+                            <p>
+                                {{ cancellation_policy.cancellation_description|linebreaksbr }}
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    {% if cancellation_policy.refund_description %}
+
+                        <div>
+
+                            <h3>
+                                Refund
+                            </h3>
+
+                            <p>
+                                {{ cancellation_policy.refund_description|linebreaksbr }}
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if cancellation_policy.cancellation_must_be_in_writing %}
+
+                    <div class="yatra-policy-note">
+                        Cancellation requests must be submitted in writing.
+                    </div>
+
+                {% endif %}
+
+
+                {% if cancellation_policy.weather_refund_description %}
+
+                    <div class="yatra-policy-note">
+                        <strong>Weather:</strong>
+                        {{ cancellation_policy.weather_refund_description }}
+                    </div>
+
+                {% endif %}
+
+
+                {% if cancellation_policy.rules.all %}
+
+                    <div class="yatra-cancellation-rules">
+
+                        {% for rule in cancellation_policy.rules.all %}
+
+                            <div class="yatra-cancellation-rule">
+
+                                <div class="yatra-rule-days">
+
+                                    {% if rule.min_days and rule.max_days %}
+                                        {{ rule.min_days }}–{{ rule.max_days }} days
+                                    {% elif rule.min_days %}
+                                        {{ rule.min_days }}+ days
+                                    {% elif rule.max_days %}
+                                        Up to {{ rule.max_days }} days
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="yatra-rule-percent">
+                                    {{ rule.cancellation_charge_percent }}%
+                                </div>
+
+                                {% if rule.description %}
+
+                                    <div class="yatra-rule-description">
+                                        {{ rule.description }}
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- HOTELS -->
+    {% if hotels %}
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Accommodation
+            </div>
+
+            <h2 class="yatra-heading">
+                Where you'll stay.
+            </h2>
+
+            <div class="yatra-hotels-grid">
+
+                {% for hotel in hotels %}
+
+                    <article class="yatra-hotel-card">
+
+                        {% if hotel.image_url %}
+
+                            <div class="yatra-hotel-image">
+
+                                <img
+                                    src="{{ hotel.image_url }}"
+                                    alt="{{ hotel.hotel_name }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                            </div>
+
+                        {% endif %}
+
+                        <div class="yatra-hotel-content">
+
+                            {% if hotel.location %}
+
+                                <div class="yatra-hotel-location">
+                                    {{ hotel.location }}
+                                </div>
+
+                            {% elif hotel.destination %}
+
+                                <div class="yatra-hotel-location">
+                                    {{ hotel.destination }}
+                                </div>
+
+                            {% endif %}
+
+                            <h3>
+                                {{ hotel.hotel_name }}
+                            </h3>
+
+                            {% if hotel.hotel_type %}
+
+                                <p>
+                                    {{ hotel.hotel_type }}
+                                </p>
+
+                            {% endif %}
+
+                            {% if hotel.description %}
+
+                                <p>
+                                    {{ hotel.description }}
+                                </p>
+
+                            {% endif %}
+
+                            {% if hotel.alternative_text %}
+
+                                <div class="yatra-hotel-alternative">
+                                    Alternative:
+                                    {{ hotel.alternative_text }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- HOTEL IMAGES -->
+    {% if hotel_images %}
+    <section class="yatra-section yatra-section--soft">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Stay Experience
+            </div>
+
+            <h2 class="yatra-heading">
+                A glimpse of the accommodation.
+            </h2>
+
+            <div class="yatra-visual-strip">
+
+                {% for image in hotel_images %}
+
+                    <div class="yatra-visual-card">
+
+                        <img
+                            src="{{ image.image_url }}"
+                            alt="{{ image.alt_text|default:package.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                        {% if image.title %}
+
+                            <div class="yatra-visual-caption">
+                                {{ image.title }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+
+    <!-- BOOKING -->
+    {% if booking_steps %}
+    <section class="yatra-section">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Booking
+            </div>
+
+            <h2 class="yatra-heading">
+                From enquiry to departure.
+            </h2>
+
+            <div class="yatra-booking-grid">
+
+                {% for step in booking_steps %}
+
+                    <article class="yatra-booking-step">
+
+                        <div class="yatra-booking-number">
+                            {{ step.step_number }}
+                        </div>
+
+                        <h3>
+                            {{ step.title }}
+                        </h3>
+
+                        {% if step.description %}
+
+                            <p>
+                                {{ step.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- GALLERY -->
+    {% if gallery_images %}
+    <section class="yatra-section yatra-section--white">
+
+        <div class="yatra-container">
+
+            <div class="yatra-eyebrow">
+                Gallery
+            </div>
+
+            <h2 class="yatra-heading">
+                A look at the journey.
+            </h2>
+
+            <div class="yatra-gallery">
+
+                {% for image in gallery_images %}
+
+                    <div class="yatra-gallery-item">
+
+                        <img
+                            src="{{ image.image_url }}"
+                            alt="{{ image.alt_text|default:package.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+    {% endif %}
+
+    
+    <!-- CTA -->
+    <section class="yatra-cta">
+
+        <div class="yatra-container">
+
+            <div class="yatra-cta-inner">
+
+                <div>
+
+                    <div class="yatra-eyebrow">
+                        Plan Your Yatra
+                    </div>
+
+                    <h2>
+                        Ready to plan your pilgrimage?
+                    </h2>
+
+                    <p>
+                        Contact SeaOfSeats Aviation for availability,
+                        package details and booking assistance.
+                    </p>
+
+                </div>
+
+                <div class="yatra-cta-actions">
+
+                    <a
+                        href="tel:+919217376601"
+                        class="yatra-btn yatra-btn--primary"
+                    >
+                        Call Us
+                    </a>
+
+                    <a
+                        href="mailto:info@seaofseats.com"
+                        class="yatra-btn yatra-btn--outline"
+                    >
+                        Email Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const tabs = document.querySelectorAll(".yatra-day-tab");
+    const panels = document.querySelectorAll(".yatra-day-panel");
+
+    tabs.forEach(function (tab) {
+
+        tab.addEventListener("click", function () {
+
+            const selectedDay = this.dataset.day;
+
+            tabs.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            panels.forEach(function (panel) {
+                panel.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const selectedPanel = document.querySelector(
+                '[data-day-panel="' + selectedDay + '"]'
+            );
+
+            if (selectedPanel) {
+                selectedPanel.classList.add("active");
+            }
+
+        });
+
+    });
+
+});
+</script>
+{% endblock %}

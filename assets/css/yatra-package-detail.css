@@ -1,0 +1,1382 @@
+/* =========================================================
+   YATRA PACKAGE DETAIL
+   Compact Premium Travel UI
+   HTML + CSS + JS in one file
+   ========================================================= */
+
+:root {
+    --y-bg: #f7f6f3;
+    --y-white: #ffffff;
+    --y-dark: #191919;
+    --y-text: #292929;
+    --y-muted: #77736d;
+    --y-border: #e8e4de;
+    --y-soft: #f1eee8;
+    --y-gold: #a9824b;
+    --y-gold-dark: #866638;
+    --y-radius: 14px;
+    --y-container: 1160px;
+}
+
+.yatra-page {
+    background: var(--y-bg);
+    color: var(--y-text);
+    overflow: hidden;
+}
+
+.yatra-page *,
+.yatra-page *::before,
+.yatra-page *::after {
+    box-sizing: border-box;
+}
+
+.yatra-container {
+    width: min(var(--y-container), calc(100% - 36px));
+    margin: 0 auto;
+}
+
+.yatra-section {
+    padding: 62px 0;
+}
+
+.yatra-section--white {
+    background: var(--y-white);
+}
+
+.yatra-section--soft {
+    background: var(--y-soft);
+}
+
+.yatra-section--dark {
+    background: var(--y-dark);
+    color: #fff;
+}
+
+.yatra-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+    color: var(--y-gold-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+
+.yatra-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: currentColor;
+}
+
+.yatra-section--dark .yatra-eyebrow {
+    color: #d2ae76;
+}
+
+.yatra-heading {
+    max-width: 680px;
+    margin: 0;
+    color: var(--y-dark);
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    font-weight: 600;
+}
+
+.yatra-section--dark .yatra-heading {
+    color: #fff;
+}
+
+.yatra-section-intro {
+    max-width: 650px;
+    margin: 12px 0 0;
+    color: var(--y-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.yatra-section--dark .yatra-section-intro {
+    color: rgba(255,255,255,.62);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.yatra-hero {
+    position: relative;
+    min-height: 570px;
+    display: flex;
+    align-items: flex-end;
+    background: #222;
+    isolation: isolate;
+}
+
+.yatra-hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+}
+
+.yatra-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yatra-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.08) 0%,
+            rgba(0,0,0,.18) 38%,
+            rgba(0,0,0,.76) 100%
+        );
+}
+
+.yatra-hero-content {
+    width: min(var(--y-container), calc(100% - 36px));
+    margin: 0 auto;
+    padding: 100px 0 48px;
+    color: #fff;
+}
+
+.yatra-hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    color: #e1bd83;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.yatra-hero-eyebrow span {
+    width: 22px;
+    height: 1px;
+    background: currentColor;
+}
+
+.yatra-hero-title {
+    max-width: 820px;
+    margin: 0;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1;
+    letter-spacing: -.055em;
+    font-weight: 600;
+}
+
+.yatra-hero-subtitle {
+    max-width: 620px;
+    margin: 15px 0 0;
+    color: rgba(255,255,255,.78);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.yatra-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 22px;
+}
+
+.yatra-hero-meta-item {
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    background: rgba(0,0,0,.15);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,.86);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.yatra-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr .8fr;
+    gap: 52px;
+    align-items: center;
+}
+
+.yatra-intro-copy > p {
+    margin: 17px 0 0;
+    color: #5e5b56;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.yatra-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 26px;
+    border-top: 1px solid var(--y-border);
+    border-left: 1px solid var(--y-border);
+}
+
+.yatra-fact {
+    padding: 14px 16px;
+    border-right: 1px solid var(--y-border);
+    border-bottom: 1px solid var(--y-border);
+}
+
+.yatra-fact-label {
+    margin-bottom: 4px;
+    color: var(--y-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.yatra-fact-value {
+    color: var(--y-dark);
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 600;
+}
+
+.yatra-intro-image {
+    height: 390px;
+    overflow: hidden;
+    border-radius: var(--y-radius);
+    background: #ddd;
+}
+
+.yatra-intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yatra-image-caption {
+    position: relative;
+    margin: -48px 14px 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.yatra-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.yatra-feature-card {
+    padding: 22px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-feature-number {
+    margin-bottom: 17px;
+    color: var(--y-gold);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.yatra-feature-card h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.yatra-feature-card p {
+    margin: 8px 0 0;
+    color: var(--y-muted);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   IMAGE STRIP
+   ========================================================= */
+
+.yatra-visual-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-visual-card {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    border-radius: 11px;
+    background: #ddd;
+}
+
+.yatra-visual-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.yatra-visual-card:hover img {
+    transform: scale(1.04);
+}
+
+.yatra-visual-caption {
+    position: absolute;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    padding: 7px 9px;
+    border-radius: 6px;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(7px);
+    color: #fff;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DESTINATION MOSAIC
+   ========================================================= */
+
+.yatra-mosaic {
+    display: grid;
+    grid-template-columns: 1.4fr .6fr;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-mosaic-main,
+.yatra-mosaic-side {
+    display: grid;
+    gap: 10px;
+}
+
+.yatra-mosaic-main .yatra-visual-card {
+    height: 390px;
+}
+
+.yatra-mosaic-side .yatra-visual-card {
+    height: 190px;
+}
+
+
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
+
+.yatra-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.yatra-highlight {
+    padding: 21px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-highlight-amount {
+    color: var(--y-dark);
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.yatra-highlight-title {
+    margin-top: 5px;
+    color: var(--y-dark);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.yatra-highlight-description {
+    margin-top: 7px;
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+
+.yatra-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.yatra-price-card {
+    position: relative;
+    padding: 24px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-price-card--featured {
+    border-color: var(--y-gold);
+}
+
+.yatra-price-badge {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    padding: 4px 7px;
+    border-radius: 999px;
+    background: #eee5d7;
+    color: var(--y-gold-dark);
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.yatra-price-name {
+    color: var(--y-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.yatra-price {
+    margin-top: 10px;
+    color: var(--y-dark);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -.035em;
+}
+
+.yatra-price-label {
+    margin-top: 4px;
+    color: var(--y-muted);
+    font-size: 10px;
+}
+
+.yatra-price-description {
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid var(--y-border);
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   IMPROVED ITINERARY
+   ========================================================= */
+
+.yatra-itinerary-wrapper {
+    margin-top: 32px;
+}
+
+/* Day selector */
+
+.yatra-day-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 7px;
+    scrollbar-width: thin;
+}
+
+.yatra-day-tab {
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 13px 16px;
+    border: 1px solid var(--y-border);
+    border-radius: 10px;
+    background: var(--y-white);
+    color: var(--y-muted);
+    text-align: left;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.yatra-day-tab:hover {
+    border-color: #cbb38f;
+}
+
+.yatra-day-tab.active {
+    border-color: var(--y-dark);
+    background: var(--y-dark);
+    color: #fff;
+}
+
+.yatra-day-tab-small {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity: .65;
+}
+
+.yatra-day-tab-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+
+/* Active day content */
+
+.yatra-day-panel {
+    display: none;
+    margin-top: 14px;
+    padding: 28px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-day-panel.active {
+    display: block;
+    animation: yatraFade .25s ease;
+}
+
+@keyframes yatraFade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.yatra-day-panel-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--y-border);
+}
+
+.yatra-day-panel-day {
+    color: var(--y-gold-dark);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.yatra-day-panel h3 {
+    margin: 5px 0 0;
+    color: var(--y-dark);
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+.yatra-day-panel-route {
+    max-width: 400px;
+    padding: 8px 11px;
+    border-radius: 7px;
+    background: var(--y-soft);
+    color: var(--y-gold-dark);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: right;
+}
+
+
+/* Day information */
+
+.yatra-day-panel-body {
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 30px;
+    padding-top: 22px;
+}
+
+.yatra-day-overview {
+    color: #5f5b56;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.yatra-day-activities {
+    margin-top: 17px;
+}
+
+.yatra-day-activities-title {
+    margin-bottom: 8px;
+    color: var(--y-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.yatra-day-activities ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.yatra-day-activities li {
+    position: relative;
+    padding: 5px 0 5px 16px;
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.yatra-day-activities li::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: .78em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--y-gold);
+}
+
+
+/* Day details */
+
+.yatra-day-side {
+    display: grid;
+    align-content: start;
+    gap: 9px;
+}
+
+.yatra-day-info-box {
+    padding: 14px;
+    border-radius: 9px;
+    background: var(--y-soft);
+}
+
+.yatra-day-info-label {
+    margin-bottom: 4px;
+    color: var(--y-gold-dark);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.yatra-day-info-value {
+    color: var(--y-dark);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   INCLUDED / EXCLUDED
+   ========================================================= */
+
+.yatra-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.yatra-list-card {
+    padding: 24px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-list-card--dark {
+    background: var(--y-dark);
+    border-color: var(--y-dark);
+}
+
+.yatra-list-card h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 17px;
+}
+
+.yatra-list-card--dark h3 {
+    color: #fff;
+}
+
+.yatra-list {
+    margin: 13px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.yatra-list li {
+    display: flex;
+    gap: 9px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--y-border);
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.yatra-list li:last-child {
+    border-bottom: 0;
+}
+
+.yatra-list-card--dark .yatra-list li {
+    border-color: rgba(255,255,255,.1);
+    color: rgba(255,255,255,.65);
+}
+
+.yatra-list-icon {
+    flex: 0 0 auto;
+    color: var(--y-gold);
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   GUIDELINES
+   ========================================================= */
+
+.yatra-guideline-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-guideline {
+    padding: 18px;
+    border: 1px solid var(--y-border);
+    border-radius: 11px;
+    background: var(--y-white);
+}
+
+.yatra-guideline-category {
+    margin-bottom: 5px;
+    color: var(--y-gold-dark);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.yatra-guideline h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.yatra-guideline p {
+    margin: 7px 0 0;
+    color: var(--y-muted);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SAFETY
+   ========================================================= */
+
+.yatra-safety-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-safety-card {
+    padding: 19px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 11px;
+    background: rgba(255,255,255,.04);
+}
+
+.yatra-safety-category {
+    margin-bottom: 5px;
+    color: #d2ae76;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.yatra-safety-card h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.yatra-safety-card p {
+    margin: 7px 0 0;
+    color: rgba(255,255,255,.58);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BAGGAGE
+   ========================================================= */
+
+.yatra-baggage-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-baggage-card {
+    padding: 20px;
+    border: 1px solid var(--y-border);
+    border-radius: 11px;
+    background: var(--y-white);
+}
+
+.yatra-baggage-value {
+    color: var(--y-dark);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.yatra-baggage-label {
+    margin-top: 4px;
+    color: var(--y-muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.yatra-baggage-description {
+    max-width: 800px;
+    margin-top: 16px;
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CANCELLATION
+   ========================================================= */
+
+.yatra-cancellation-box {
+    margin-top: 30px;
+    padding: 24px;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-cancellation-copy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.yatra-cancellation-copy h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 14px;
+}
+
+.yatra-cancellation-copy p {
+    margin: 7px 0 0;
+    color: var(--y-muted);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.yatra-policy-note {
+    margin-top: 13px;
+    padding: 11px 13px;
+    border-radius: 8px;
+    background: #f4eee4;
+    color: #685536;
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+.yatra-cancellation-rules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    margin-top: 18px;
+}
+
+.yatra-cancellation-rule {
+    padding: 15px;
+    border: 1px solid var(--y-border);
+    border-radius: 9px;
+}
+
+.yatra-rule-days {
+    color: var(--y-gold-dark);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.yatra-rule-percent {
+    margin-top: 5px;
+    color: var(--y-dark);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.yatra-rule-description {
+    margin-top: 4px;
+    color: var(--y-muted);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   HOTELS
+   ========================================================= */
+
+.yatra-hotels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.yatra-hotel-card {
+    overflow: hidden;
+    border: 1px solid var(--y-border);
+    border-radius: var(--y-radius);
+    background: var(--y-white);
+}
+
+.yatra-hotel-image {
+    height: 175px;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.yatra-hotel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yatra-hotel-content {
+    padding: 18px;
+}
+
+.yatra-hotel-location {
+    margin-bottom: 5px;
+    color: var(--y-gold-dark);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.yatra-hotel-content h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.yatra-hotel-content p {
+    margin: 6px 0 0;
+    color: var(--y-muted);
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+.yatra-hotel-alternative {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px solid var(--y-border);
+    color: var(--y-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   BOOKING
+   ========================================================= */
+
+.yatra-booking-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+    margin-top: 30px;
+}
+
+.yatra-booking-step {
+    padding: 18px;
+    border: 1px solid var(--y-border);
+    border-radius: 11px;
+    background: var(--y-white);
+}
+
+.yatra-booking-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    margin-bottom: 13px;
+    border-radius: 50%;
+    background: var(--y-dark);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.yatra-booking-step h3 {
+    margin: 0;
+    color: var(--y-dark);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.yatra-booking-step p {
+    margin: 6px 0 0;
+    color: var(--y-muted);
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.yatra-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.yatra-gallery-item {
+    height: 230px;
+    overflow: hidden;
+    border-radius: 11px;
+    background: #ddd;
+}
+
+.yatra-gallery-item:nth-child(1) {
+    grid-column: span 2;
+}
+
+.yatra-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.yatra-gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.yatra-cta {
+    padding: 55px 0;
+    background: var(--y-dark);
+    color: #fff;
+}
+
+.yatra-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.yatra-cta h2 {
+    max-width: 600px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -.04em;
+    font-weight: 600;
+}
+
+.yatra-cta p {
+    max-width: 550px;
+    margin: 11px 0 0;
+    color: rgba(255,255,255,.58);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.yatra-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.yatra-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 17px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.yatra-btn--primary {
+    background: #fff;
+    color: var(--y-dark);
+}
+
+.yatra-btn--outline {
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+}
+
+.yatra-btn--outline:hover {
+    background: rgba(255,255,255,.07);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .yatra-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .yatra-intro-image {
+        height: 330px;
+    }
+
+    .yatra-feature-grid,
+    .yatra-pricing-grid,
+    .yatra-hotels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .yatra-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .yatra-guideline-grid,
+    .yatra-safety-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .yatra-baggage-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .yatra-booking-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .yatra-day-panel-body {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-day-side {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .yatra-cta-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .yatra-container,
+    .yatra-hero-content {
+        width: calc(100% - 28px);
+    }
+
+    .yatra-section {
+        padding: 48px 0;
+    }
+
+    .yatra-hero {
+        min-height: 500px;
+    }
+
+    .yatra-hero-content {
+        padding: 90px 0 35px;
+    }
+
+    .yatra-hero-title {
+        font-size: 42px;
+    }
+
+    .yatra-hero-subtitle {
+        font-size: 13px;
+    }
+
+    .yatra-feature-grid,
+    .yatra-pricing-grid,
+    .yatra-highlights,
+    .yatra-guideline-grid,
+    .yatra-safety-grid,
+    .yatra-hotels-grid,
+    .yatra-two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-visual-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .yatra-mosaic {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-mosaic-main .yatra-visual-card {
+        height: 280px;
+    }
+
+    .yatra-mosaic-side .yatra-visual-card {
+        height: 190px;
+    }
+
+    .yatra-day-tabs {
+        margin-right: -14px;
+        padding-right: 14px;
+    }
+
+    .yatra-day-tab {
+        min-width: 105px;
+    }
+
+    .yatra-day-panel {
+        padding: 20px;
+    }
+
+    .yatra-day-panel-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .yatra-day-panel-route {
+        max-width: none;
+        text-align: left;
+    }
+
+    .yatra-day-side {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-itinerary-wrapper {
+        margin-top: 25px;
+    }
+
+    .yatra-cancellation-copy {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-cancellation-rules {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-booking-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .yatra-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .yatra-gallery-item {
+        height: 190px;
+    }
+}
+
+
+@media (max-width: 440px) {
+
+    .yatra-hero-title {
+        font-size: 36px;
+    }
+
+    .yatra-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-visual-strip,
+    .yatra-baggage-grid,
+    .yatra-booking-grid,
+    .yatra-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .yatra-gallery-item:nth-child(1) {
+        grid-column: auto;
+    }
+
+    .yatra-gallery-item {
+        height: 220px;
+    }
+
+    .yatra-intro-image {
+        height: 300px;
+    }
+
+    .yatra-price,
+    .yatra-highlight-amount {
+        font-size: 24px;
+    }
+
+    .yatra-day-tab {
+        min-width: 92px;
+        padding: 11px;
+    }
+
+    .yatra-day-panel h3 {
+        font-size: 20px;
+    }
+}

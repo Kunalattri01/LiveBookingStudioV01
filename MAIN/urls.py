@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/v1/', include('hotel.api.urls')),
     path('wishlist/', include('wishlist.urls')),
     path('hotel/', include('hotel.urls')),
+    path('religious/', include('religious.urls')),
     # The shared nav/footer templates link to /hotels (plural); the
     # actual hotel app is mounted at /hotel/ (singular). Redirect
     # rather than rename the route, to avoid touching those shared
