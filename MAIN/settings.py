@@ -102,21 +102,54 @@ WSGI_APPLICATION = 'MAIN.wsgi.application'
 # other DB_* variables in your own .env - nothing here is hardcoded to
 # one person's machine anymore.
 
-DB_ENGINE = os.environ.get('DB_ENGINE', 'sqlite3')
+# DB_ENGINE = os.environ.get('DB_ENGINE', 'sqlite3')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'Booking_Test',
-        # 'HOST': 'DELL\SQLEXPRESS',
-        'HOST': r'DELL\SQLEXPRESS',
-        'PORT': '',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'trusted_connection': 'yes',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'Booking_Test',
+#         # 'HOST': 'DELL\SQLEXPRESS',
+#         'HOST': r'DELL\SQLEXPRESS',
+#         'PORT': '',
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',
+#             'trusted_connection': 'yes',
+#         },
+#     },
+# }
+
+# Database configuration
+DB_ENGINE = os.environ.get("DB_ENGINE", "sqlite3").strip().lower()
+
+if DB_ENGINE == "mssql":
+    DATABASES = {
+        "default": {
+            "ENGINE": "mssql",
+            "NAME": os.environ.get("DB_NAME", ""),
+            "USER": os.environ.get("DB_USER", ""),
+            "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+            "HOST": os.environ.get("DB_HOST", ""),
+            "PORT": os.environ.get("DB_PORT", "1433"),
+            "OPTIONS": {
+                "driver": os.environ.get(
+                    "DB_DRIVER",
+                    "ODBC Driver 17 for SQL Server",
+                ),
+                "Encrypt": os.environ.get("DB_ENCRYPT", "no"),
+                "TrustServerCertificate": os.environ.get(
+                    "DB_TRUST_SERVER_CERTIFICATE",
+                    "yes",
+                ),
+            },
         },
-    },
-}
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+    }
 
 
 # Password validation
